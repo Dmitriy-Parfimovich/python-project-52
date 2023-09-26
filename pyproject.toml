@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = "The task manager"
+authors = ["Dmitriy Parfimovich <dparf@mail.ru>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^4.2.5"
+python-dotenv = "^1.0.0"
+psycopg2-binary = "^2.9.7"
+dj-database-url = "^2.1.0"
+gunicorn = "^21.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
