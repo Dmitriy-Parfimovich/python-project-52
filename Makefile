@@ -40,7 +40,7 @@ setup:
 	make migrate
 
 start:
-	poetry run python manage.py runserver 0.0.0.0:8000
+	poetry run python manage.py runserver 127.0.0.1:8000
 
 check:
 	poetry check
