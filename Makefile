@@ -1,8 +1,8 @@
-requirements.txt: poetry.lock
+requirements: poetry.lock
 	poetry export -f requirements.txt -o requirements.txt
 
 translate:
-	poetry run django-admin makemessages --ignore="static" --ignore=".env"  -l ru
+	django-admin makemessages --ignore="static" --ignore=".env"  -l ru
 
 make compilemessages:
 	django-admin compilemessages
