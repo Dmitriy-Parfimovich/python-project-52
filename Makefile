@@ -1,6 +1,12 @@
 requirements.txt: poetry.lock
 	poetry export -f requirements.txt -o requirements.txt
 
+translate:
+	poetry run django-admin makemessages --ignore="static" --ignore=".env"  -l ru
+
+make compilemessages:
+	django-admin compilemessages
+
 build:
 	poetry install --extras psycopg2-binary
 	poetry run python manage.py migrate
