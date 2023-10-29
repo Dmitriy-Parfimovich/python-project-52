@@ -1,5 +1,5 @@
 dbshell:
-	django-admin dbshell
+	poetry run python manage.py dbshell
 
 shell:
 	django-admin shell
