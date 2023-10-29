@@ -1,10 +1,16 @@
+dbshell:
+	django-admin dbshell
+
+shell:
+	django-admin shell
+
 requirements: poetry.lock
 	poetry export -f requirements.txt -o requirements.txt
 
 translate:
 	django-admin makemessages --ignore="static" --ignore=".env"  -l ru
 
-make compilemessages:
+compilemessages:
 	django-admin compilemessages
 
 build:
