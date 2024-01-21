@@ -1,0 +1,35 @@
+{% extends 'task_manager/index.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
+    <h1 class="my-4">Вход</h1>
+    <div class="my-3" style="color: #dc3545">{{ form.non_field_errors.1 }}</div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3"><label class="form-label" for="id_username">Имя пользователя</label>
+            <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username"
+            maxlength="150"
+            {% if form.non_field_errors %}
+                class="form-control is-valid"
+                value="{{ form.username.value }}"
+            {% else %}
+                class="form-control"
+            {% endif %}                
+                placeholder="Имя пользователя" required id="id_username">
+        </div>
+        <div class="mb-3"><label class="form-label" for="id_password">Пароль</label>
+            <input type="password" name="password" autocomplete="current-password"
+            {% if form.non_field_errors %}
+                class="form-control is-valid"
+            {% else %}
+                class="form-control"
+            {% endif %}
+            placeholder="Пароль" required id="id_password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Войти">
+    </form>
+</div>
+{% endblock maincontent %}

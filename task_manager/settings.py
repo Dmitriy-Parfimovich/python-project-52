@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_bootstrap5",
     "task_manager",
+    "users.apps.UsersConfig"
 ]
 
 MIDDLEWARE = [
@@ -95,6 +96,7 @@ DATABASES = {
 SQLITE_SETTINGS = {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'OPTIONS': {'timeout': 20},
 }
 
 if os.getenv('DB_ENGINE') == 'SQLite':
@@ -121,13 +123,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = "ru"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 

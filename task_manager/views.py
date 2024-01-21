@@ -7,4 +7,4 @@ from django.views import View
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html')
+        return render(request, 'task_manager/index.html')

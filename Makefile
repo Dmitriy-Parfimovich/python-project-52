@@ -2,16 +2,16 @@ dbshell:
 	poetry run python manage.py dbshell
 
 shell:
-	django-admin shell
+	poetry run python manage.py shell
 
 requirements: poetry.lock
 	poetry export -f requirements.txt -o requirements.txt
 
 translate:
-	django-admin makemessages --ignore="static" --ignore=".env"  -l ru
+	poetry run django-admin makemessages --ignore="static" --ignore=".env"  -l ru
 
 compilemessages:
-	django-admin compilemessages
+	poetry run django-admin compilemessages
 
 build:
 	poetry install --extras psycopg2-binary
@@ -20,28 +20,11 @@ build:
 start-deploy:
 	gunicorn task_manager.wsgi
 
-compose-setup: compose-build compose-install
-
-compose-build:
-	docker-compose build
-
-compose-install:
-	docker-compose run app make install
-
-compose-bash:
-	docker-compose run app bash
-
-compose:
-	docker-compose up
-
-compose-lint:
-	docker-compose run app make lint
-
-compose-test:
-	docker-compose run app make test
-
 install:
 	poetry install
+
+migrations:
+	poetry run python manage.py makemigrations
 
 migrate:
 	poetry run python manage.py migrate

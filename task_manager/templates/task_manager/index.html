@@ -1,0 +1,91 @@
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="ru-ru">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block title %}
+    <title>{% translate "Hexlet task manager" %}</title>
+    {% endblock title %}
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    {% block mainmenu %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">{% translate "Task manager" %}</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarToggleExternalContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users_list' %}">{% translate "Users" %}</a>
+                </li>
+            </ul>
+            {% if request.user.is_authenticated %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/statuses/">Статусы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/labels/">Метки</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tasks/">Задачи</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <input class="btn nav-link" type="submit" value="Выход">
+                </form>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">{% translate "Login" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'new_user_reg' %}">{% translate "Registration" %}</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+    {% endblock mainmenu %}
+
+    {% block maincontent %}
+    <div class="container wrapper flex-grow-1">
+        {% bootstrap_messages %}
+        <h1 class="my-4"></h1>
+        <div class="card">
+            <div class="card-body p-5 bg-light">
+                <div class="display-4">{% translate "Hello from Hexlet!" %}</div>
+                <p class="lead">{% translate "Practical programming courses" %}</p>
+                <hr>
+                <a class="btn btn-primary btn-lg" href="https://ru.hexlet.io">{% translate "Learn more" %}</a>
+            </div>
+        </div>
+    </div>
+    {% endblock maincontent %}
+
+    {% block footer %}
+    <footer>
+        <div class="container my-5 pt-4 border-top">
+            <a target="_blank" href="https://ru.hexlet.io">{% translate "The Python-educational project by Hexlet.io"
+                %}</a>
+        </div>
+    </footer>
+    {% endblock footer %}
+
+</body>
+
+</html>
