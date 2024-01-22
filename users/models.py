@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 # Create your models here.
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150, unique=True)
+    username = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
     password = models.CharField(max_length=20)
@@ -24,4 +24,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         return reverse('user_delete', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.name
+        return self.username

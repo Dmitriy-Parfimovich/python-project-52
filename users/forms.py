@@ -40,3 +40,10 @@ class UserRegForm(forms.ModelForm):
             self.errors['password'] = 'Введённый пароль слишком короткий.\
                                         Он должен содержать как минимум 3 символа.'
         return self['password'].value()
+
+
+class UserDeleteForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = []

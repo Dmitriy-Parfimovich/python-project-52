@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
 from users.models import User
-from users.forms import UserRegForm
+from users.forms import UserRegForm, UserDeleteForm
 from django.contrib.auth.views import LoginView, LogoutView
 
 
@@ -55,10 +55,45 @@ class LoginOutView(LogoutView):
 class UserEditView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'users/edit.html', context={'title': 'Изменение пользователя'})
+        if request.user.is_authenticated:
+            user = User.objects.get(pk=self.kwargs['pk'])
+            form = UserRegForm(instance=user)
+            if request.user == user:
+                return render(request, 'users/reg.html', context={'form': form, 'user': user})
+            else:
+                messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+                return redirect('users_list')
+        else:
+            messages.error(request, 'Вы не авторизованы! Пожалуйста, выполните вход.')
+            return redirect('login')
+
+    def post(self, request, *args, **kwargs):
+        form = UserRegForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Пользователь успешно изменен')
+            return redirect('users_list')
+        return render(request, 'users/reg.html', context={'form': form})
 
 
 class UserDeleteView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'users/delete.html', context={'title': 'Удаление пользователя'})
+        if request.user.is_authenticated:
+            delete_form = UserDeleteForm()
+            user = User.objects.get(pk=self.kwargs['pk'])
+            if request.user == user:
+                return render(request, 'users/delete.html',
+                              context={'form': delete_form, 'user': user})
+            else:
+                messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+                return redirect('users_list')
+        else:
+            messages.error(request, 'Вы не авторизованы! Пожалуйста, выполните вход.')
+            return redirect('login')
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user.delete()
+        messages.success(request, 'Пользователь успешно удален')
+        return redirect('users_list')

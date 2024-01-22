@@ -1,7 +1,10 @@
 {% extends 'task_manager/index.html' %}
 
+{% load django_bootstrap5 %}
+
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
     <h1 class="my-4">Пользователи</h1>
 
     <table class="table table-striped">
