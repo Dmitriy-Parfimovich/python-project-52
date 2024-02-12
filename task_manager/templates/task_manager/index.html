@@ -33,19 +33,19 @@
             {% if request.user.is_authenticated %}
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/statuses/">Статусы</a>
+                    <a class="nav-link" href="/statuses/">{% translate "Statuses" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/labels/">Метки</a>
+                    <a class="nav-link" href="/labels/">{% translate "Tags" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/tasks/">Задачи</a>
+                    <a class="nav-link" href="/tasks/">{% translate "Tasks" %}</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
-                    <input class="btn nav-link" type="submit" value="Выход">
+                    <input class="btn nav-link" type="submit" value="{% translate 'Exit' %}">
                 </form>
             </ul>
             {% else %}

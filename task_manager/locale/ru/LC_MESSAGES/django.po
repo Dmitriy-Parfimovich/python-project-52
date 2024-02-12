@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-21 17:28+0300\n"
+"POT-Creation-Date: 2024-02-11 23:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,41 +16,57 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: task_manager/templates/index.html:10
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: task_manager/templates/task_manager/index.html:11
 msgid "Hexlet task manager"
 msgstr "Менеджер задач Hexlet"
 
-#: task_manager/templates/index.html:19
+#: task_manager/templates/task_manager/index.html:23
 msgid "Task manager"
 msgstr "Менеджер задач"
 
-#: task_manager/templates/index.html:26
+#: task_manager/templates/task_manager/index.html:30
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/templates/index.html:33
+#: task_manager/templates/task_manager/index.html:36
+msgid "Statuses"
+msgstr "Статусы"
+
+#: task_manager/templates/task_manager/index.html:39
+msgid "Tags"
+msgstr "Метки"
+
+#: task_manager/templates/task_manager/index.html:42
+msgid "Tasks"
+msgstr "Задачи"
+
+#: task_manager/templates/task_manager/index.html:48
+msgid "Exit"
+msgstr "Выход"
+
+#: task_manager/templates/task_manager/index.html:54
 msgid "Login"
 msgstr "Вход"
 
-#: task_manager/templates/index.html:36
+#: task_manager/templates/task_manager/index.html:57
 msgid "Registration"
 msgstr "Регистрация"
 
-#: task_manager/templates/index.html:54
+#: task_manager/templates/task_manager/index.html:71
 msgid "Hello from Hexlet!"
 msgstr "Привет от Хекслета!"
 
-#: task_manager/templates/index.html:55
+#: task_manager/templates/task_manager/index.html:72
 msgid "Practical programming courses"
 msgstr "Практические курсы по программированию"
 
-#: task_manager/templates/index.html:57
+#: task_manager/templates/task_manager/index.html:74
 msgid "Learn more"
 msgstr "Узнать больше"
 
-#: task_manager/templates/index.html:64
-msgid "The Python-educational project by Hexlet.io"
-msgstr "Учебный Python-проект от Хекслет"
+#~ msgid "The Python-educational project by Hexlet.io"
+#~ msgstr "Учебный Python-проект от Хекслет"
