@@ -30,15 +30,16 @@ class TestUserDeleteView(TestCase):
     
     def test_valid_delete_user(self):
         user = self.user.objects.get(username='zzzxxx')
-        response = self.client.post(reverse('login'), username=user.username, password=user.password, follow=True)
+        #response = self.client.post(reverse('login'), {'username': user.username, 'password': user.password}, follow=True)
+        print(self.client.login(username=user.username, password=user.password), 'hhhhhhhhhhh')
         #users = self.user.objects.all()
         #print(users, 'xxxxxxxxxxxxxxx')
         #deleted_user = {'first_name': 'zzz', 'last_name': 'xxx',
         #               'username': 'zzzxxx', 'password': '123',
         #               'password2': '123'}
-        print(response, 'kkkkkkkkkkkkkkkkkk')
-        #self.assertTrue(user.is_authenticated)
-        response = self.client.post(reverse('user_delete', kwargs={'pk': user.pk}), follow=True)
+        #print(response, 'kkkkkkkkkkkkkkkkkk')
+        self.assertTrue(user.is_authenticated)
+        #response = self.client.post(reverse('user_delete', kwargs={'pk': user.pk}), follow=True)
         #print(self.client.get(reverse('users_list')), 'kkkkkkkkkkkkkkkkkkk')
         #print(response.redirect_chain, 'ccccccccccccccccc')
         #users = self.user.objects.all()
