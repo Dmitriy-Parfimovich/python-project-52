@@ -4,8 +4,31 @@ from users.forms import UserRegForm
 from django.contrib.auth import get_user_model
 
 
+TEST_VALID_USER = {'first_name': 'qqq', 'last_name': 'www',
+                   'username': 'qqqwww', 'password': '123',
+                   'password2': '123'}
+TEST_INVALID_USER = {'first_name': 'qqq', 'last_name': 'www',
+                     'username': '////', 'password': '123',
+                     'password2': '123'}
+TEST_VALID_FORM_DATA = {'first_name': 'aaa', 'last_name': 'sss',
+                        'username': 'aaasss', 'password': '123',
+                        'password2': '123'}
+TEST_INVALID_FORM_DATA_1 = {'first_name': 'aaa', 'last_name': 'sss',
+                            'username': 'aaasss', 'password': '123',
+                            'password2': '321'}
+TEST_INVALID_FORM_DATA_2 = {'first_name': 'aaa', 'last_name': 'sss',
+                            'username': 'aaasss', 'password': '12',
+                            'password2': '12'}
+TEST_INVALID_FORM_DATA_3 = {'first_name': 'aaa', 'last_name': 'sss',
+                            'username': '~~~', 'password': '12',
+                            'password2': '12'}
+TEST_INVALID_FORM_DATA_4 = {'first_name': 'zzz', 'last_name': 'xxx',
+                            'username': 'zzzxxx', 'password': '12',
+                            'password2': '12'}
+
+
 class TestNewUserRegView(TestCase):
-    #Test the methods for the user's registartion view.
+    # Test the methods for the user's registartion view.
     fixtures = ['users.json']
 
     def setUp(self):
@@ -17,7 +40,7 @@ class TestNewUserRegView(TestCase):
         for user in self.user.objects.all():
             user.set_password(user.password)
             user.save()
-    
+
     def test_reg_page_template_used_and_status_code(self):
         # Issue a GET request.
         response = self.client.get(reverse('new_user_reg'))
@@ -25,58 +48,35 @@ class TestNewUserRegView(TestCase):
         self.assertEqual(response.status_code, 200)
         # Check that the template is OK.
         self.assertTemplateUsed(response, 'users/reg.html')
-    
+
     def test_create_valid_user(self):
-        response = self.client.post(reverse('new_user_reg'), {'first_name': 'qqq',
-                                                              'last_name': 'www',
-                                                              'username': 'qqqwww',
-                                                              'password': '123',
-                                                              'password2': '123'},
-                                                              follow=True)
+        response = self.client.post(reverse('new_user_reg'), TEST_VALID_USER,
+                                    follow=True)
         self.assertIn('/users/login/', response.redirect_chain[0])
-    
+
     def test_create_invalid_user(self):
-        response = self.client.post(reverse('new_user_reg'), {'first_name': 'qqq',
-                                                              'last_name': 'www',
-                                                              'username': '////',
-                                                              'password': '123',
-                                                              'password2': '123'})
+        response = self.client.post(reverse('new_user_reg'), TEST_INVALID_USER)
         self.assertEqual(response.status_code, 200)
 
 
 class TestFormNewUserReg(TestCase):
 
     def test_form_new_user_reg_valid(self):
-        form_data = {'first_name': 'aaa', 'last_name': 'sss',
-                     'username': 'aaasss', 'password': '123',
-                     'password2': '123'}
-        form = UserRegForm(data=form_data)
+        form = UserRegForm(data=TEST_VALID_FORM_DATA)
         self.assertTrue(form.is_valid())
 
     def test_form_new_user_reg_invalid_1(self):
-        form_data = {'first_name': 'aaa', 'last_name': 'sss',
-                     'username': 'aaasss', 'password': '123',
-                     'password2': '321'}
-        form = UserRegForm(data=form_data)
+        form = UserRegForm(data=TEST_INVALID_FORM_DATA_1)
         self.assertFalse(form.is_valid())
-    
+
     def test_form_new_user_reg_invalid_2(self):
-        form_data = {'first_name': 'aaa', 'last_name': 'sss',
-                     'username': 'aaasss', 'password': '12',
-                     'password2': '12'}
-        form = UserRegForm(data=form_data)
+        form = UserRegForm(data=TEST_INVALID_FORM_DATA_2)
         self.assertFalse(form.is_valid())
-    
+
     def test_form_new_user_reg_invalid_3(self):
-        form_data = {'first_name': 'aaa', 'last_name': 'sss',
-                     'username': '~~~', 'password': '12',
-                     'password2': '12'}
-        form = UserRegForm(data=form_data)
+        form = UserRegForm(data=TEST_INVALID_FORM_DATA_3)
         self.assertFalse(form.is_valid())
-    
+
     def test_form_new_user_reg_invalid_4(self):
-        form_data = {'first_name': 'zzz', 'last_name': 'xxx',
-                     'username': 'zzzxxx', 'password': '12',
-                     'password2': '12'}
-        form = UserRegForm(data=form_data)
+        form = UserRegForm(data=TEST_INVALID_FORM_DATA_4)
         self.assertFalse(form.is_valid())
