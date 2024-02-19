@@ -5,6 +5,14 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 
 # Create your models here.
+class CustomUserManager(UserManager):
+    def create_user(self, username, password, **extra_fields):
+        return self._create_user(username, password, **extra_fields)
+
+    def create_superuser(self, username, password, **extra_fields):
+        return self._create_user(username, password, **extra_fields)
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=50, blank=True)
@@ -15,7 +23,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
     USERNAME_FIELD = 'username'
 
-    objects = UserManager()
+    objects = CustomUserManager()
 
     def get_absolute_url_edit(self):
         return reverse('user_edit', kwargs={'pk': self.pk})

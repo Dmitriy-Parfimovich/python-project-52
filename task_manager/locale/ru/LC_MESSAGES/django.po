@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-11 23:30+0300\n"
+"POT-Creation-Date: 2024-02-18 12:28+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,5 +68,6 @@ msgstr "Практические курсы по программировани�
 msgid "Learn more"
 msgstr "Узнать больше"
 
-#~ msgid "The Python-educational project by Hexlet.io"
-#~ msgstr "Учебный Python-проект от Хекслет"
+#: task_manager/templates/task_manager/index.html:83
+msgid "The Python-educational project by Hexlet.io"
+msgstr "Учебный Python-проект от Хекслет"

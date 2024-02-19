@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-11 23:47+0300\n"
+"POT-Creation-Date: 2024-02-18 20:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,33 +16,152 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: users/templates/users/delete.html:5
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: users/forms.py:31
+msgid "Correct username please enter"
+msgstr ""
+"Введите правильное имя пользователя. Оно может содержать только буквы, цифры "
+"и знаки @/./+/-/_."
+
+#: users/forms.py:33
+msgid "Already exists"
+msgstr "Пользователь с таким именем уже существует."
+
+#: users/forms.py:38
+msgid "Entered passwords do not match"
+msgstr "Введенные пароли не совпадают."
+
+#: users/forms.py:40
+msgid "Is too short"
+msgstr ""
+"Введённый пароль слишком короткий. Он должен содержать как минимум 3 символа."
+
+#: users/templates/users/delete.html:7
 msgid "Delete user"
 msgstr "Удалить пользователя"
 
-#: users/templates/users/login.html:8
+#: users/templates/users/delete.html:8
+msgid "Are you sure"
+msgstr "Вы уверены, что хотите удалить"
+
+#: users/templates/users/login.html:9
 msgid "login"
 msgstr "Вход"
 
-#: users/templates/users/login.html:12 users/templates/users/login.html:21
+#: users/templates/users/login.html:13 users/templates/users/login.html:22
+#: users/templates/users/reg.html:30 users/templates/users/reg.html:43
+#: users/templates/users/users.html:15
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: users/templates/users/login.html:23 users/templates/users/login.html:30
+#: users/templates/users/login.html:24 users/templates/users/login.html:31
+#: users/templates/users/reg.html:47 users/templates/users/reg.html:51
 msgid "Password"
 msgstr "Пароль"
 
-#: users/templates/users/login.html:32
+#: users/templates/users/login.html:33
 msgid "Sing in"
 msgstr "Войти"
 
-#: users/templates/users/reg.html:6
+#: users/templates/users/reg.html:8
 msgid "Edit user"
 msgstr "Изменить пользователя"
 
-#: users/templates/users/reg.html:8
+#: users/templates/users/reg.html:10
 msgid "Registration"
 msgstr "Регистрация"
+
+#: users/templates/users/reg.html:14 users/templates/users/reg.html:21
+msgid "First name"
+msgstr "Имя"
+
+#: users/templates/users/reg.html:22 users/templates/users/reg.html:29
+msgid "Last name"
+msgstr "Фамилия"
+
+#: users/templates/users/reg.html:45
+msgid "Requried field"
+msgstr ""
+"Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
+"+/-/_."
+
+#: users/templates/users/reg.html:54
+msgid "Your password must contain"
+msgstr "Ваш пароль должен содержать как минимум 3 символа."
+
+#: users/templates/users/reg.html:58 users/templates/users/reg.html:67
+msgid "Password confirmation"
+msgstr "Подтверждение пароля"
+
+#: users/templates/users/reg.html:71
+msgid "Please enter your password again"
+msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
+
+#: users/templates/users/reg.html:73
+msgid "Register"
+msgstr "Зарегистрировать"
+
+#: users/templates/users/users.html:9
+msgid "Users"
+msgstr "Пользователи"
+
+#: users/templates/users/users.html:16
+msgid "Full name"
+msgstr "Полное имя"
+
+#: users/templates/users/users.html:17
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: users/templates/users/users.html:29
+msgid "Edit"
+msgstr "Изменить"
+
+#: users/templates/users/users.html:31
+msgid "Delete"
+msgstr "Удалить"
+
+#: users/views.py:31
+msgid "Usersuccessfullyregistered"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: users/views.py:40
+msgid "Youareloggedin"
+msgstr "Вы залогинены"
+
+#: users/views.py:44
+msgid "Bothfieldscanbecasesensitive"
+msgstr ""
+"Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
+"быть чувствительны к регистру."
+
+#: users/views.py:51
+msgid "Youareloggedout"
+msgstr "Вы разлогинены"
+
+#: users/views.py:64
+msgid "Nothavepermission"
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: users/views.py:67
+msgid "Notauthorized"
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: users/views.py:74
+msgid "Usersuccessfullychanged"
+msgstr "Пользователь успешно изменен"
+
+#: users/views.py:89
+msgid "Notchangeanotheruser"
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: users/views.py:92
+msgid "Notauthorizedplease"
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: users/views.py:98
+msgid "Deletedsuccessfully"
+msgstr "Пользователь успешно удален"

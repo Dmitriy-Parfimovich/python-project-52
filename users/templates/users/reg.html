@@ -11,23 +11,23 @@
     {% endif %}
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3"><label class="form-label" for="id_first_name">Имя</label>
+        <div class="mb-3"><label class="form-label" for="id_first_name">{% trans 'First name' %}</label>
             <input type="text" name="first_name" maxlength="50"
             {% if form.errors %}
                 class="form-control is-valid" value="{{ form.first_name.value }}"
             {% elif user.id %}
                 class="form-control" value="{{ user.first_name }}"
             {% endif %}
-            class="form-control" placeholder="Имя" required id="id_first_name"></div>
-        <div class="mb-3"><label class="form-label" for="id_last_name">Фамилия</label>
+            class="form-control" placeholder="{% trans 'First name' %}" required id="id_first_name"></div>
+        <div class="mb-3"><label class="form-label" for="id_last_name">{% trans 'Last name' %}</label>
             <input type="text" name="last_name" maxlength="50"
             {% if form.errors %}
                 class="form-control is-valid" value="{{ form.last_name.value }}"
             {% elif user.id %}
                 class="form-control" value="{{ user.last_name }}"
             {% endif %}
-            class="form-control" placeholder="Фамилия" required id="id_last_name"></div>
-        <div class="mb-3"><label class="form-label" for="id_username">Имя пользователя</label>
+            class="form-control" placeholder="{% trans 'Last name' %}" required id="id_last_name"></div>
+        <div class="mb-3"><label class="form-label" for="id_username">{% trans 'Username' %}</label>
             <input type="text" name="username" maxlength="150" autofocus
             {% if form.username.errors %}
                 class="form-control is-invalid"
@@ -40,22 +40,22 @@
             {% else %}
                 class="form-control"
             {% endif %}
-            placeholder="Имя пользователя" required id="id_username">
+            placeholder="{% trans 'Username' %}" required id="id_username">
             <div class="invalid-feedback">{{ form.username.errors }}</div>
-            <div class="form-text">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</div>
+            <div class="form-text">{% trans 'Requried field' %}</div>
         </div>
-        <div class="mb-3"><label class="form-label" for="id_password">Пароль</label><input type="password"
+        <div class="mb-3"><label class="form-label" for="id_password">{% trans 'Password' %}</label><input type="password"
             name="password" autocomplete="new-password"
             class="{% if form.username.errors %}
                     form-control is-valid {% endif %} form-control"
-            placeholder="Пароль" required id="id_password1">
+            placeholder="{% trans 'Password' %}" required id="id_password1">
             <div class="form-text">
                 <ul>
-                    <li>Ваш пароль должен содержать как минимум 3 символа.</li>
+                    <li>{% trans 'Your password must contain' %}</li>
                 </ul>
             </div>
         </div>
-        <div class="mb-3"><label class="form-label" for="id_password2">Подтверждение пароля</label>
+        <div class="mb-3"><label class="form-label" for="id_password2">{% trans 'Password confirmation' %}</label>
             <input type="password" name="password2" autocomplete="new-password"
             class="{% if form.password.errors %}
                       form-control is-invalid
@@ -64,13 +64,13 @@
                    {% else %}
                       form-control is-valid
                    {% endif %}"
-            placeholder="Подтверждение пароля" required id="id_password2">
+            placeholder="{% trans 'Password confirmation' %}" required id="id_password2">
             {% if form.password.errors %}
                 <div class="invalid-feedback">{{ form.password.errors }}</div>
             {% endif %}
-            <div class="form-text">Для подтверждения введите, пожалуйста, пароль ещё раз.</div>
+            <div class="form-text">{% trans 'Please enter your password again' %}</div>
         </div>
-        <input class="btn btn-primary" type="submit" value="Зарегистрировать">
+        <input class="btn btn-primary" type="submit" value="{% trans 'Register' %}">
     </form>
 </div>
 {% endblock maincontent %}

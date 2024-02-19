@@ -4,6 +4,7 @@ import re
 from django import forms
 from django.contrib.auth import get_user_model
 from users.models import User
+from django.utils.translation import gettext as _
 
 
 class UserRegForm(forms.ModelForm):
@@ -27,18 +28,16 @@ class UserRegForm(forms.ModelForm):
 
     def clean_username(self):
         if re.search(r'[^\w\-@.+]', self['username'].value()):
-            self.errors['username'] = 'Введите правильное имя пользователя.\
-                                       Оно может содержать только буквы, цифры и знаки @/./+/-/_.'
+            self.errors['username'] = _('Correct username please enter')
         elif User.objects.filter(username=self['username'].value()).exists():
-            self.errors['username'] = 'Пользователь с таким именем уже существует.'
+            self.errors['username'] = _('Already exists')
         return self['username'].value()
 
     def clean_password(self):
         if self['password'].value() != self['password2'].value():
-            self.errors['password'] = 'Введенные пароли не совпадают.'
+            self.errors['password'] = _('Entered passwords do not match')
         elif len(self['password'].value()) <= 2:
-            self.errors['password'] = 'Введённый пароль слишком короткий.\
-                                        Он должен содержать как минимум 3 символа.'
+            self.errors['password'] = _('Is too short')
         return self['password'].value()
 
 

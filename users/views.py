@@ -7,6 +7,7 @@ from django.views import View
 from users.models import User
 from users.forms import UserRegForm, UserDeleteForm
 from django.contrib.auth.views import LoginView, LogoutView
+from django.utils.translation import gettext as _
 
 
 # Create your views here.
@@ -27,7 +28,7 @@ class NewUserRegView(View):
         form = UserRegForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Пользователь успешно зарегистрирован')
+            messages.success(request, _('Usersuccessfullyregistered'))
             return redirect('login')
         return render(request, 'users/reg.html', context={'form': form})
 
@@ -36,19 +37,18 @@ class LoginUserView(LoginView):
     template_name = 'users/login.html'
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, 'Вы залогинены')
+        messages.add_message(self.request, messages.SUCCESS, _('Youareloggedin'))
         return reverse_lazy('home')
 
     def form_invalid(self, form):
-        form.add_error(None, 'Пожалуйста, введите правильные имя пользователя и пароль.\
-                              Оба поля могут быть чувствительны к регистру.')
+        form.add_error(None, _('Bothfieldscanbecasesensitive'))
         return self.render_to_response(self.get_context_data(form=form))
 
 
 class LoginOutView(LogoutView):
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.INFO, 'Вы разлогинены')
+        messages.add_message(self.request, messages.INFO, _('Youareloggedout'))
         return reverse_lazy('home')
 
 
@@ -61,17 +61,17 @@ class UserEditView(View):
             if request.user == user:
                 return render(request, 'users/reg.html', context={'form': form, 'user': user})
             else:
-                messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+                messages.error(request, _('Nothavepermission'))
                 return redirect('users_list')
         else:
-            messages.error(request, 'Вы не авторизованы! Пожалуйста, выполните вход.')
+            messages.error(request, _('Notauthorized'))
             return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = UserRegForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Пользователь успешно изменен')
+            messages.success(request, _('Usersuccessfullychanged'))
             return redirect('users_list')
         return render(request, 'users/reg.html', context={'form': form})
 
@@ -86,14 +86,14 @@ class UserDeleteView(View):
                 return render(request, 'users/delete.html',
                               context={'form': delete_form, 'user': user})
             else:
-                messages.error(request, 'У вас нет прав для изменения другого пользователя.')
+                messages.error(request, _('Notchangeanotheruser'))
                 return redirect('users_list')
         else:
-            messages.error(request, 'Вы не авторизованы! Пожалуйста, выполните вход.')
+            messages.error(request, _('Notauthorizedplease'))
             return redirect('login')
 
     def post(self, request, *args, **kwargs):
         user = request.user
         user.delete()
-        messages.success(request, 'Пользователь успешно удален')
+        messages.success(request, _('Deletedsuccessfully'))
         return redirect('users_list')
