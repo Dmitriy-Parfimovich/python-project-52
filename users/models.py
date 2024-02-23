@@ -1,29 +1,18 @@
 from django.db import models
-from django.contrib.auth.models import UserManager
 from django.urls import reverse
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
 
 
 # Create your models here.
-class CustomUserManager(UserManager):
-    def create_user(self, username, password, **extra_fields):
-        return self._create_user(username, password, **extra_fields)
-
-    def create_superuser(self, username, password, **extra_fields):
-        return self._create_user(username, password, **extra_fields)
-
-
-class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=50, unique=True)
-    first_name = models.CharField(max_length=50, blank=True)
-    last_name = models.CharField(max_length=50, blank=True)
-    password = models.CharField(max_length=20)
-    time_create = models.DateTimeField(auto_now_add=True)
+class User(AbstractUser, PermissionsMixin):
+    username = models.CharField(max_length=50, unique=True, verbose_name='Имя пользователя')
+    first_name = models.CharField(max_length=50, blank=True, verbose_name='Имя')
+    last_name = models.CharField(max_length=50, blank=True, verbose_name='Фамилия')
+    password = models.CharField(max_length=20, verbose_name='Пароль')
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     REQUIRED_FIELDS = []
     USERNAME_FIELD = 'username'
-
-    objects = CustomUserManager()
 
     def get_absolute_url_edit(self):
         return reverse('user_edit', kwargs={'pk': self.pk})
@@ -33,3 +22,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+    class Meta:
+        verbose_name = 'Пользователи'
+        verbose_name_plural = 'Пользователи'
+        ordering = ['time_create', 'username']
