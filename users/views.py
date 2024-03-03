@@ -70,7 +70,12 @@ class UserEditView(View):
     def post(self, request, *args, **kwargs):
         form = UserRegForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = User.objects.get(pk=self.kwargs['pk'])
+            user.username = form.cleaned_data['username']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.set_password(form.cleaned_data['password'])
+            user.save()
             messages.success(request, _('Usersuccessfullychanged'))
             return redirect('users_list')
         return render(request, 'users/reg.html', context={'form': form})

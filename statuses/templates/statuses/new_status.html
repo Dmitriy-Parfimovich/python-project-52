@@ -1,0 +1,31 @@
+{% extends 'task_manager/index.html' %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
+    {% if form.statusname.value %}
+        <h1 class="my-4">{% trans 'Changeofstatus' %}</h1>
+    {% else %}
+        <h1 class="my-4">{% trans 'Statusnamecreate' %}</h1>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3"><label class="form-label" for="id_name">{% trans 'Creationnamestatus' %}</label>
+            <input type="text" name="statusname" maxlength="100" class="form-control"
+            placeholder="{% trans 'Creationnamestatus' %}" required id="id_name"
+            {% if form.statusname.value %}
+                value="{{ form.statusname.value }}"
+            {% endif %}>
+        </div>
+        <input class="btn btn-primary" type="submit"
+        {% if form.statusname.value %}
+            value="{% trans 'Change' %}"
+        {% else %}
+            value="{% trans 'Create_name' %}"
+        {% endif %}>
+    </form>
+</div>
+{% endblock maincontent %}

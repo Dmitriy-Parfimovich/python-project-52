@@ -1,0 +1,36 @@
+{% extends 'task_manager/index.html' %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
+    <h1 class="my-4">{% trans 'Statuses' %}</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'new_status_create' %}">{% trans 'Createstatus' %}</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>{% trans 'Statusname' %}</th>
+                <th>{% trans 'Dateofstatuscreation' %}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for status in statuses %}
+            <tr>
+                <td>{{ status.pk }}</td>
+                <td>{{ status.statusname }}</td>
+                <td>{{ status.time_create|date:'d.m.Y H:i' }}</td>
+                <td>
+                    <a href="{{ status.get_absolute_url_edit }}">{% trans 'Statusedit' %}</a>
+                    <br>
+                    <a href="{{ status.get_absolute_url_delete }}">{% trans 'Statusdelete' %}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock maincontent %}

@@ -4,8 +4,8 @@
 
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate "Delete user" %}</h1>
-    <p>{% trans 'Are you sure' %} {{ user.first_name }} {{ user.last_name }}?</p>
+    <h1 class="my-4">{% translate "Delete status" %}</h1>
+    <p>{% trans 'Are you sure' %} {{ status.statusname }} ?</p>
     <form method="post">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="{% trans 'Yes, delete' %}">

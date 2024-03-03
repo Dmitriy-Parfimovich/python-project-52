@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 20:27+0300\n"
+"POT-Creation-Date: 2024-03-02 18:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,6 +46,10 @@ msgstr "Удалить пользователя"
 #: users/templates/users/delete.html:8
 msgid "Are you sure"
 msgstr "Вы уверены, что хотите удалить"
+
+#: users/templates/users/delete.html:11
+msgid "Yes, delete"
+msgstr "Да, удалить"
 
 #: users/templates/users/login.html:9
 msgid "login"
@@ -150,18 +154,18 @@ msgstr "У вас нет прав для изменения другого по�
 msgid "Notauthorized"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: users/views.py:74
+#: users/views.py:79
 msgid "Usersuccessfullychanged"
 msgstr "Пользователь успешно изменен"
 
-#: users/views.py:89
+#: users/views.py:94
 msgid "Notchangeanotheruser"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:92
+#: users/views.py:97
 msgid "Notauthorizedplease"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: users/views.py:98
+#: users/views.py:103
 msgid "Deletedsuccessfully"
 msgstr "Пользователь успешно удален"
