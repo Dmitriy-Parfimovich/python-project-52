@@ -23,4 +23,5 @@ urlpatterns = [
     path('', IndexView.as_view(), name='home'),
     path('users/', include('users.urls')),
     path('statuses/', include('statuses.urls')),
+    path('tasks/', include('tasks.urls')),
 ]

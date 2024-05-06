@@ -52,13 +52,6 @@ class StatusDeleteView(View):
         if request.user.is_authenticated:
             delete_form = StatusDeleteForm()
             status = Status.objects.get(pk=self.kwargs['pk'])
-            #user = User.objects.get(pk=self.kwargs['pk'])
-            #if request.user == user:
-            #    return render(request, 'users/delete.html',
-            #                  context={'form': delete_form, 'user': user})
-            #else:
-            #    messages.error(request, _('Notchangeanotheruser'))
-            #    return redirect('users_list')
             return render(request, 'statuses/del_status.html',
                           context={'form': delete_form, 'status': status})
 

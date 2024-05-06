@@ -1,0 +1,110 @@
+{% extends 'task_manager/index.html' %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
+    <h1 class="my-4">Задачи</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'new_task_create' %}" role="button">Создать задачу</a>
+    <div class="card mb-3">
+        <div class="card-body bg-light">
+            <form class="form-inline center" method="get">
+                <div class="mb-3">
+                    <label class="form-label" for="id_status">Статус</label>
+                    <select name="status" {% if request_GET %} class="form-select is-valid" {% else %}
+                        class="form-select" {% endif %} id="id_status">
+                        {% if form.status.value %}
+                            <option value="">---------</option>
+                            {% for status in statuses %}
+                                {% with val=status.pk|stringformat:'i' %}
+                                {% if form.status.value == status.pk or form.status.value == val %}
+                                    <option value="{{ status.pk }}" selected>{{ status.statusname }}</option>
+                                {% else %}
+                                    <option value="{{ status.pk }}">{{ status.statusname }}</option>
+                                {% endif %}
+                                {% endwith %}
+                            {% endfor %}
+                        {% else %}
+                            <option value="" selected>---------</option>
+                            {% for status in statuses %}
+                                <option value="{{ status.pk }}">{{ status.statusname }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_executor">Исполнитель</label>
+                    <select name="executor" {% if request_GET %} class="form-select is-valid" {% else %}
+                        class="form-select" {% endif %} id="id_executor">
+                        {% if form.executor.value %}
+                            <option value="">---------</option>
+                            {% for taskexecutor in taskexecutors %}
+                                {% with val=taskexecutor.pk|stringformat:'i' %}
+                                {% if form.executor.value == taskexecutor.pk or form.executor.value == val %}
+                                    <option value="{{ taskexecutor.pk }}" selected>{{ taskexecutor.username }}</option>
+                                {% else %}
+                                    <option value="{{ taskexecutor.pk }}">{{ taskexecutor.username }}</option>
+                                {% endif %}
+                                {% endwith %}
+                            {% endfor %}
+                        {% else %}
+                            <option value="" selected>---------</option>
+                            {% for taskexecutor in taskexecutors %}
+                                <option value="{{ taskexecutor.pk }}">{{ taskexecutor.username }}</option>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_label">Метка</label>
+                    <select name="label" {% if request_GET %} class="form-select is-valid" {% else %}
+                            class="form-select" {% endif %} id="id_label">
+                        <option value="" selected>---------</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" name="self_tasks" {% if request_GET %} class="form-check-input is-valid"
+                            {% else %} class="form-check-input" {% endif %} id="id_self_tasks" {% if self_tasks %}
+                            checked {% endif %}>
+                        <label class="form-check-label" for="id_self_tasks">Только свои задачи</label>
+                    </div>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Показать">
+            </form>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Статус</th>
+                <th>Автор</th>
+                <th>Исполнитель</th>
+                <th>Дата создания</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.pk }}</td>
+                <td><a href="{{ task.get_absolute_url }}">{{ task.taskname }}</a></td>
+                <td>{{ task.status.statusname }}</td>
+                <td>{{ task.taskautor }}</td>
+                <td>{{ task.executor.username }}</td>
+                <td>{{ task.time_create|date:'d.m.Y H:i' }}</td>
+                <td>
+                    <a href="{{ task.get_absolute_url_edit }}">Изменить</a>
+                    <br>
+                    <a href="{{ task.get_absolute_url_delete }}">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock maincontent %}

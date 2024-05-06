@@ -1,0 +1,113 @@
+{% extends 'task_manager/index.html' %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
+    {% if edit_flag %}
+    <h1 class="my-4">Изменение задачи</h1>
+    {% else %}
+    <h1 class="my-4">Создать задачу</h1>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label" for="id_name">Имя</label>
+            <input type="text" name="taskname" maxlength="150"
+            {% if task_error or form.taskname.errors %}
+                class="form-control is-invalid"
+                value="{{ form.taskname.value }}"
+            {% elif form.taskname.value %}
+                class="form-control" value="{{ form.taskname.value }}"
+            {% else %}
+                class="form-control"
+            {% endif %}
+            class="form-control" placeholder="Имя" required id="id_name">
+            {% if task_error or form.taskname.errors %}
+            <div class="invalid-feedback">Task с таким Имя уже существует</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="id_description">Описание</label>
+            <textarea name="taskdescription" cols="40" rows="10"
+            {% if task_error or form.taskname.errors %}
+                class="form-control is-valid"
+            {% else %}
+                class="form-control"
+            {% endif %}
+            placeholder="Описание" id="id_description">{% if form.taskdescription.value %}{{ form.taskdescription.value }}{% endif %}</textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="id_status">Статус</label>
+            <select name="status"
+            {% if task_error or form.taskname.errors %}
+                class="form-select is-valid"
+            {% else %}
+                class="form-select"
+            {% endif %}
+            required id="id_status">
+            {% if form.status.value %}
+            <option value="">---------</option>
+            {% for status in statuses %}
+            {% with val=status.pk|stringformat:'i' %}
+                {% if form.status.value == status.pk or form.status.value == val %}
+                    <option value="{{ status.pk }}" selected>{{ status.statusname }}</option>
+                {% else %}
+                    <option value="{{ status.pk }}">{{ status.statusname }}</option>
+                {% endif %}
+            {% endwith %}
+            {% endfor %}
+            {% else %}
+            <option value="" selected>---------</option>
+            {% for status in statuses %}
+                <option value="{{ status.pk }}">{{ status.statusname }}</option>
+            {% endfor %}
+            {% endif %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="id_executor">Исполнитель</label>
+            <select name="executor"
+            {% if task_error or form.taskname.errors %}
+                class="form-select is-valid"
+            {% else %}
+                class="form-select"
+            {% endif %}
+            id="id_executor">
+            {% if form.executor.value %}
+            <option value="">---------</option>
+            {% for taskexecutor in taskexecutors %}
+            {% with val=taskexecutor.pk|stringformat:'i' %}
+                {% if form.executor.value == taskexecutor.pk or form.executor.value == val %}
+                    <option value="{{ taskexecutor.pk }}" selected>{{ taskexecutor.username }}</option>
+                {% else %}
+                    <option value="{{ taskexecutor.pk }}">{{ taskexecutor.username }}</option>
+                {% endif %}
+            {% endwith %}
+            {% endfor %}
+            {% else %}
+            <option value="" selected>---------</option>
+            {% for taskexecutor in taskexecutors %}
+                <option value="{{ taskexecutor.pk }}">{{ taskexecutor.username }}</option>
+            {% endfor %}
+            {% endif %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="id_labels">Метки</label>
+            <select name="labels"
+            {% if task_error or form.taskname.errors %}
+                class="form-select is-valid"
+            {% else %}
+                class="form-select"
+            {% endif %}
+            id="id_labels" multiple>
+                <option value="1"></option>
+            </select>
+        </div>
+        <input class="btn btn-primary" type="submit" {% if edit_flag %} value="Изменить" {% else %} value="Создать" {% endif %}>
+    </form>
+</div>
+{% endblock maincontent %}

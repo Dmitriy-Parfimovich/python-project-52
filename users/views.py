@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
 from users.models import User
+from tasks.models import Task
 from users.forms import UserRegForm, UserDeleteForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.utils.translation import gettext as _
@@ -99,6 +100,9 @@ class UserDeleteView(View):
 
     def post(self, request, *args, **kwargs):
         user = request.user
-        user.delete()
-        messages.success(request, _('Deletedsuccessfully'))
+        if Task.objects.filter(executor__username=user.username).exists():
+            messages.error(request, 'Невозможно удалить пользователя, потому что он используется')
+        else:
+            user.delete()
+            messages.success(request, _('Deletedsuccessfully'))
         return redirect('users_list')
