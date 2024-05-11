@@ -42,7 +42,7 @@
             {% endif %}
             placeholder="{% trans 'Username' %}" required id="id_username">
             <div class="invalid-feedback">{{ form.username.errors }}</div>
-            <div class="form-text">{% trans 'Requried field' %}</div>
+            <div class="form-text">{% trans 'Required field. Maximum 150 characters. Only letters, numbers and symbols @/./+/-/_.' %}</div>
         </div>
         <div class="mb-3"><label class="form-label" for="id_password">{% trans 'Password' %}</label><input type="password"
             name="password" autocomplete="new-password"
@@ -51,7 +51,7 @@
             placeholder="{% trans 'Password' %}" required id="id_password1">
             <div class="form-text">
                 <ul>
-                    <li>{% trans 'Your password must contain' %}</li>
+                    <li>{% trans 'Your password must contain at least 3 characters.' %}</li>
                 </ul>
             </div>
         </div>
@@ -68,7 +68,7 @@
             {% if form.password.errors %}
                 <div class="invalid-feedback">{{ form.password.errors }}</div>
             {% endif %}
-            <div class="form-text">{% trans 'Please enter your password again' %}</div>
+            <div class="form-text">{% trans 'To confirm, please enter your password again.' %}</div>
         </div>
         <input class="btn btn-primary" type="submit" value="{% trans 'Register' %}">
     </form>

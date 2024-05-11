@@ -26,7 +26,7 @@ class NewStatusView(View):
         form = NewStatusForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, _('Statussuccessfullycreated'))
+            messages.success(request, _('Status successfully created'))
             return redirect('statuses_list')
 
 
@@ -42,7 +42,7 @@ class StatusEditView(View):
         form = NewStatusForm(request.POST)
         if form.is_valid():
             Status.objects.filter(pk=self.kwargs['pk']).update(**form.cleaned_data)
-            messages.success(request, _('Statuschangedsuccessfully'))
+            messages.success(request, _('Status changed successfully'))
             return redirect('statuses_list')
 
 
@@ -58,5 +58,5 @@ class StatusDeleteView(View):
     def post(self, request, *args, **kwargs):
         status = Status.objects.get(pk=self.kwargs['pk'])
         status.delete()
-        messages.success(request, _('Statusdeletedsuccessfully'))
+        messages.success(request, _('Status deleted successfully'))
         return redirect('statuses_list')

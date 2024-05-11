@@ -6,13 +6,13 @@
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
-    <h1 class="my-4">Задачи</h1>
-    <a class="btn btn-primary mb-3" href="{% url 'new_task_create' %}" role="button">Создать задачу</a>
+    <h1 class="my-4">{% trans 'Tasks' %}</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'new_task_create' %}" role="button">{% trans 'Create a task' %}</a>
     <div class="card mb-3">
         <div class="card-body bg-light">
             <form class="form-inline center" method="get">
                 <div class="mb-3">
-                    <label class="form-label" for="id_status">Статус</label>
+                    <label class="form-label" for="id_status">{% trans 'Status' %}</label>
                     <select name="status" {% if request_GET %} class="form-select is-valid" {% else %}
                         class="form-select" {% endif %} id="id_status">
                         {% if form.status.value %}
@@ -35,7 +35,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="id_executor">Исполнитель</label>
+                    <label class="form-label" for="id_executor">{% trans 'Executor' %}</label>
                     <select name="executor" {% if request_GET %} class="form-select is-valid" {% else %}
                         class="form-select" {% endif %} id="id_executor">
                         {% if form.executor.value %}
@@ -58,7 +58,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="id_label">Метка</label>
+                    <label class="form-label" for="id_label">{% trans 'Tag' %}</label>
                     <select name="label" {% if request_GET %} class="form-select is-valid" {% else %}
                             class="form-select" {% endif %} id="id_label">
                         <option value="" selected>---------</option>
@@ -69,10 +69,10 @@
                         <input type="checkbox" name="self_tasks" {% if request_GET %} class="form-check-input is-valid"
                             {% else %} class="form-check-input" {% endif %} id="id_self_tasks" {% if self_tasks %}
                             checked {% endif %}>
-                        <label class="form-check-label" for="id_self_tasks">Только свои задачи</label>
+                        <label class="form-check-label" for="id_self_tasks">{% trans 'Only your tasks' %}</label>
                     </div>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Показать">
+                <input class="btn btn-primary" type="submit" value="{% trans 'Show' %}">
             </form>
         </div>
     </div>
@@ -80,11 +80,11 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Имя</th>
-                <th>Статус</th>
-                <th>Автор</th>
-                <th>Исполнитель</th>
-                <th>Дата создания</th>
+                <th>{% trans 'Taskname' %}</th>
+                <th>{% trans 'Status' %}</th>
+                <th>{% trans 'Autor' %}</th>
+                <th>{% trans 'Executor' %}</th>
+                <th>{% trans 'Date of creation' %}</th>
                 <th></th>
             </tr>
         </thead>
@@ -98,9 +98,9 @@
                 <td>{{ task.executor.username }}</td>
                 <td>{{ task.time_create|date:'d.m.Y H:i' }}</td>
                 <td>
-                    <a href="{{ task.get_absolute_url_edit }}">Изменить</a>
+                    <a href="{{ task.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
                     <br>
-                    <a href="{{ task.get_absolute_url_delete }}">Удалить</a>
+                    <a href="{{ task.get_absolute_url_delete }}">{% trans 'Delete' %}</a>
                 </td>
             </tr>
             {% endfor %}

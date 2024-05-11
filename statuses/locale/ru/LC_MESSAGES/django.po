@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-03 14:30+0300\n"
+"POT-Creation-Date: 2024-05-11 22:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,74 +20,63 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: statuses/templates/statuses/del_status.html:7
+#: templates/statuses/del_status.html:7
 msgid "Delete status"
 msgstr "Удалить статус"
 
-#: statuses/templates/statuses/del_status.html:8
-msgid "Are you sure"
+#: templates/statuses/del_status.html:8
+msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
 
-#: statuses/templates/statuses/del_status.html:11
+#: templates/statuses/del_status.html:11
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
-#: statuses/templates/statuses/new_status.html:10
-msgid "Changeofstatus"
+#: templates/statuses/new_status.html:10
+msgid "Change of status"
 msgstr "Изменить статус"
 
-#: statuses/templates/statuses/new_status.html:12
-msgid "Statusnamecreate"
+#: templates/statuses/new_status.html:12 templates/statuses/statuses.html:10
+msgid "Create status"
 msgstr "Создать статус"
 
-#: statuses/templates/statuses/new_status.html:16
-#: statuses/templates/statuses/new_status.html:18
-msgid "Creationnamestatus"
-msgstr "Имя"
-
-#: statuses/templates/statuses/new_status.html:25
-msgid "Change"
-msgstr "Изменить"
-
-#: statuses/templates/statuses/new_status.html:27
-msgid "Create_name"
-msgstr "Создать"
-
-#: statuses/templates/statuses/statuses.html:9
-msgid "Statuses"
-msgstr "Статусы"
-
-#: statuses/templates/statuses/statuses.html:10
-msgid "Createstatus"
-msgstr "Создать статус"
-
-#: statuses/templates/statuses/statuses.html:15
+#: templates/statuses/new_status.html:16 templates/statuses/new_status.html:18
+#: templates/statuses/statuses.html:15
 msgid "Statusname"
 msgstr "Имя"
 
-#: statuses/templates/statuses/statuses.html:16
-msgid "Dateofstatuscreation"
-msgstr "Дата создания"
-
-#: statuses/templates/statuses/statuses.html:27
-msgid "Statusedit"
+#: templates/statuses/new_status.html:25
+msgid "Change"
 msgstr "Изменить"
 
-#: statuses/templates/statuses/statuses.html:29
-msgid "Statusdelete"
-msgstr "Удалить"
+#: templates/statuses/new_status.html:27
+msgid "Create"
+msgstr "Создать"
 
-#: statuses/views.py:29
-msgid "Statussuccessfullycreated"
+#: templates/statuses/statuses.html:9
+msgid "Statuses"
+msgstr "Статусы"
+
+#: templates/statuses/statuses.html:16
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: templates/statuses/statuses.html:27
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/statuses/statuses.html:29
+msgid "Delete"
+msgstr "Удалить статус"
+
+#: views.py:29
+msgid "Status successfully created"
 msgstr "Статус успешно создан"
 
-#: statuses/views.py:45
-msgid "Statuschangedsuccessfully"
+#: views.py:45
+msgid "Status changed successfully"
 msgstr "Статус успешно изменен"
 
-#: statuses/views.py:68
-msgid "Statusdeletedsuccessfully"
+#: views.py:61
+msgid "Status deleted successfully"
 msgstr "Статус успешно удален"
-
-#~ msgid "Создать"
-#~ msgstr "Создать статус"

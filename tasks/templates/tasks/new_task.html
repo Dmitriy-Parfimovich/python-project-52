@@ -7,14 +7,14 @@
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
     {% if edit_flag %}
-    <h1 class="my-4">Изменение задачи</h1>
+    <h1 class="my-4">{% trans 'Changing the task' %}</h1>
     {% else %}
-    <h1 class="my-4">Создать задачу</h1>
+    <h1 class="my-4">{% trans 'Create the task' %}</h1>
     {% endif %}
     <form method="post">
         {% csrf_token %}
         <div class="mb-3">
-            <label class="form-label" for="id_name">Имя</label>
+            <label class="form-label" for="id_name">{% trans 'Taskname' %}</label>
             <input type="text" name="taskname" maxlength="150"
             {% if task_error or form.taskname.errors %}
                 class="form-control is-invalid"
@@ -24,23 +24,23 @@
             {% else %}
                 class="form-control"
             {% endif %}
-            class="form-control" placeholder="Имя" required id="id_name">
+            class="form-control" placeholder="{% trans 'Taskname' %}" required id="id_name">
             {% if task_error or form.taskname.errors %}
-            <div class="invalid-feedback">Task с таким Имя уже существует</div>
+            <div class="invalid-feedback">{% trans 'The task with this name already exists' %}</div>
             {% endif %}
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_description">Описание</label>
+            <label class="form-label" for="id_description">{% trans 'Description' %}</label>
             <textarea name="taskdescription" cols="40" rows="10"
             {% if task_error or form.taskname.errors %}
                 class="form-control is-valid"
             {% else %}
                 class="form-control"
             {% endif %}
-            placeholder="Описание" id="id_description">{% if form.taskdescription.value %}{{ form.taskdescription.value }}{% endif %}</textarea>
+            placeholder="{% trans 'Description' %}" id="id_description">{% if form.taskdescription.value %}{{ form.taskdescription.value }}{% endif %}</textarea>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_status">Статус</label>
+            <label class="form-label" for="id_status">{% trans 'Status' %}</label>
             <select name="status"
             {% if task_error or form.taskname.errors %}
                 class="form-select is-valid"
@@ -68,7 +68,7 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_executor">Исполнитель</label>
+            <label class="form-label" for="id_executor">{% trans 'Executor' %}</label>
             <select name="executor"
             {% if task_error or form.taskname.errors %}
                 class="form-select is-valid"
@@ -96,7 +96,7 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_labels">Метки</label>
+            <label class="form-label" for="id_labels">{% trans 'Tags' %}</label>
             <select name="labels"
             {% if task_error or form.taskname.errors %}
                 class="form-select is-valid"
@@ -107,7 +107,7 @@
                 <option value="1"></option>
             </select>
         </div>
-        <input class="btn btn-primary" type="submit" {% if edit_flag %} value="Изменить" {% else %} value="Создать" {% endif %}>
+        <input class="btn btn-primary" type="submit" {% if edit_flag %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Create' %}" {% endif %}>
     </form>
 </div>
 {% endblock maincontent %}

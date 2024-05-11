@@ -7,13 +7,13 @@
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
     <h1 class="my-4">{% trans 'Statuses' %}</h1>
-    <a class="btn btn-primary mb-3" href="{% url 'new_status_create' %}">{% trans 'Createstatus' %}</a>
+    <a class="btn btn-primary mb-3" href="{% url 'new_status_create' %}">{% trans 'Create status' %}</a>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>{% trans 'Statusname' %}</th>
-                <th>{% trans 'Dateofstatuscreation' %}</th>
+                <th>{% trans 'Date of creation' %}</th>
                 <th></th>
             </tr>
         </thead>
@@ -24,9 +24,9 @@
                 <td>{{ status.statusname }}</td>
                 <td>{{ status.time_create|date:'d.m.Y H:i' }}</td>
                 <td>
-                    <a href="{{ status.get_absolute_url_edit }}">{% trans 'Statusedit' %}</a>
+                    <a href="{{ status.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
                     <br>
-                    <a href="{{ status.get_absolute_url_delete }}">{% trans 'Statusdelete' %}</a>
+                    <a href="{{ status.get_absolute_url_delete }}">{% trans 'Delete' %}</a>
                 </td>
             </tr>
             {% endfor %}

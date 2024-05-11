@@ -7,15 +7,15 @@
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
     {% if form.statusname.value %}
-        <h1 class="my-4">{% trans 'Changeofstatus' %}</h1>
+        <h1 class="my-4">{% trans 'Change of status' %}</h1>
     {% else %}
-        <h1 class="my-4">{% trans 'Statusnamecreate' %}</h1>
+        <h1 class="my-4">{% trans 'Create status' %}</h1>
     {% endif %}
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3"><label class="form-label" for="id_name">{% trans 'Creationnamestatus' %}</label>
+        <div class="mb-3"><label class="form-label" for="id_name">{% trans 'Statusname' %}</label>
             <input type="text" name="statusname" maxlength="100" class="form-control"
-            placeholder="{% trans 'Creationnamestatus' %}" required id="id_name"
+            placeholder="{% trans 'Statusname' %}" required id="id_name"
             {% if form.statusname.value %}
                 value="{{ form.statusname.value }}"
             {% endif %}>
@@ -24,7 +24,7 @@
         {% if form.statusname.value %}
             value="{% trans 'Change' %}"
         {% else %}
-            value="{% trans 'Create_name' %}"
+            value="{% trans 'Create' %}"
         {% endif %}>
     </form>
 </div>

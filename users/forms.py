@@ -28,16 +28,19 @@ class UserRegForm(forms.ModelForm):
 
     def clean_username(self):
         if re.search(r'[^\w\-@.+]', self['username'].value()):
-            self.errors['username'] = _('Correct username please enter')
+            self.errors['username'] = _('Please enter a correct username.\
+                                        It can only contain letters,\
+                                        numbers and symbols @/./+/-/_.')
         elif User.objects.filter(username=self['username'].value()).exists():
-            self.errors['username'] = _('Already exists')
+            self.errors['username'] = _('A user with the same name already exists.')
         return self['username'].value()
 
     def clean_password(self):
         if self['password'].value() != self['password2'].value():
             self.errors['password'] = _('Entered passwords do not match')
         elif len(self['password'].value()) <= 2:
-            self.errors['password'] = _('Is too short')
+            self.errors['password'] = _('The entered password is too short.\
+                                        It must contain at least 3 characters.')
         return self['password'].value()
 
 

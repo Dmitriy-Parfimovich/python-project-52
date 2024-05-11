@@ -58,7 +58,7 @@ class NewTaskView(View):
         if form.is_valid():
             form.cleaned_data['taskautor'] = request.user
             form.save()
-            messages.success(request, 'Задача успешно создана')
+            messages.success(request, _('Task created successfully'))
             return redirect('tasks_list')
         return render(request, 'tasks/new_task.html', context={'form': form,
                                                                'statuses': statuses,
@@ -105,7 +105,7 @@ class TaskEditView(View):
             task.executor = form.cleaned_data['executor']
             task.status = form.cleaned_data['status']
             task.save()
-            messages.success(request, 'Задача успешно изменена')
+            messages.success(request, _('The task was successfully modified'))
             return redirect('tasks_list')
 
 
@@ -118,13 +118,13 @@ class TaskDeleteView(View):
             return render(request, 'tasks/del_task.html',
                           context={'form': delete_form, 'task': task})
         else:
-            messages.error(request, 'Задачу может удалить только ее автор')
+            messages.error(request, _("Only it's author can delete the task"))
             return redirect('tasks_list')
 
     def post(self, request, *args, **kwargs):
         task = Task.objects.get(pk=self.kwargs['pk'])
         task.delete()
-        messages.success(request, 'Задача успешно удалена')
+        messages.success(request, _('The task was successfully deleted'))
         return redirect('tasks_list')
 
 

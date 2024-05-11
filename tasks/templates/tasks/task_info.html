@@ -6,7 +6,7 @@
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
-    <h1 class="my-4">Просмотр задачи</h1>
+    <h1 class="my-4">{% trans 'View the task' %}</h1>
     <div class="card">
         <div class="card-header bg-secondary text-white"><h2>{{ task.taskname }}</h2></div>
         <div class="card-body bg-light">
@@ -14,24 +14,24 @@
             <hr>
             <div class="container">
                 <div class="row p-1">
-                    <div class="col">Автор</div>
+                    <div class="col">{% trans 'Autor' %}</div>
                     <div class="col">{{ task.taskautor }}</div>
                 </div>
                 <div class="row p-1">
-                    <div class="col">Исполнитель</div>
+                    <div class="col">{% trans 'Executor' %}</div>
                     <div class="col">{{ task.executor }}</div>
                 </div>
                 <div class="row p-1">
-                    <div class="col">Статус</div>
+                    <div class="col">{% trans 'Status' %}</div>
                     <div class="col">{{ task.status }}</div>
                 </div>
                 <div class="row p-1">
-                    <div class="col">Дата создания</div>
+                    <div class="col">{% trans 'Date of creation' %}</div>
                     <div class="col">{{ task.time_create }}</div>
                 </div>
                 <div class="row p-1">
                     <div class="col">
-                        <h6>Метки:</h6>
+                        <h6>{% trans 'Tags' %}:</h6>
                         <ul>
 
                         </ul>
@@ -39,9 +39,9 @@
                 </div>
                 <div class="row p-1">
                     <div class="col">
-                        <a href="{{ task.get_absolute_url_edit }}">Изменить</a>
+                        <a href="{{ task.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
                         <br>
-                        <a href="{{ task.get_absolute_url_delete }}">Удалить</a>
+                        <a href="{{ task.get_absolute_url_delete }}">{% trans 'Delete' %}</a>
                     </div>
                 </div>
             </div>

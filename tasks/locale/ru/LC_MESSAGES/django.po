@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-11 22:35+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: templates/tasks/del_task.html:7
+msgid "Deleting the task"
+msgstr "Удаление задачи"
+
+#: templates/tasks/del_task.html:8
+msgid "Are you sure, you want to delete"
+msgstr "Вы уверены, что хотите удалить"
+
+#: templates/tasks/del_task.html:11
+msgid "Yes, delete the task"
+msgstr "Да, удалить"
+
+#: templates/tasks/new_task.html:10
+msgid "Changing the task"
+msgstr "Изменение задачи"
+
+#: templates/tasks/new_task.html:12
+msgid "Create the task"
+msgstr "Создать задачу"
+
+#: templates/tasks/new_task.html:17 templates/tasks/new_task.html:27
+#: templates/tasks/tasks.html:83
+msgid "Taskname"
+msgstr "Имя"
+
+#: templates/tasks/new_task.html:29
+msgid "The task with this name already exists"
+msgstr "Task с таким Имя уже существует"
+
+#: templates/tasks/new_task.html:33 templates/tasks/new_task.html:40
+msgid "Description"
+msgstr "Описание"
+
+#: templates/tasks/new_task.html:43 templates/tasks/task_info.html:25
+#: templates/tasks/tasks.html:15 templates/tasks/tasks.html:84
+msgid "Status"
+msgstr "Статус"
+
+#: templates/tasks/new_task.html:71 templates/tasks/task_info.html:21
+#: templates/tasks/tasks.html:38 templates/tasks/tasks.html:86
+msgid "Executor"
+msgstr "Исполнитель"
+
+#: templates/tasks/new_task.html:99 templates/tasks/task_info.html:34
+msgid "Tags"
+msgstr "Метки"
+
+#: templates/tasks/new_task.html:110 templates/tasks/task_info.html:42
+#: templates/tasks/tasks.html:101
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/tasks/new_task.html:110
+msgid "Create"
+msgstr "Создать задачу"
+
+#: templates/tasks/task_info.html:9
+msgid "View the task"
+msgstr "Просмотр задачи"
+
+#: templates/tasks/task_info.html:17 templates/tasks/tasks.html:85
+msgid "Autor"
+msgstr "Автор"
+
+#: templates/tasks/task_info.html:29 templates/tasks/tasks.html:87
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: templates/tasks/task_info.html:44 templates/tasks/tasks.html:103
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/tasks/tasks.html:9
+msgid "Tasks"
+msgstr "Задачи"
+
+#: templates/tasks/tasks.html:10
+msgid "Create a task"
+msgstr "Создать задачу"
+
+#: templates/tasks/tasks.html:61
+msgid "Tag"
+msgstr "Метка"
+
+#: templates/tasks/tasks.html:72
+msgid "Only your tasks"
+msgstr "Только свои задачи"
+
+#: templates/tasks/tasks.html:75
+msgid "Show"
+msgstr "Показать"
+
+#: views.py:61
+msgid "Task created successfully"
+msgstr "Задача успешно создана"
+
+#: views.py:108
+msgid "The task was successfully modified"
+msgstr "Задача успешно изменена"
+
+#: views.py:121
+msgid "Only it's author can delete the task"
+msgstr "Задачу может удалить только ее автор"
+
+#: views.py:127
+msgid "The task was successfully deleted"
+msgstr "Задача успешно удалена"

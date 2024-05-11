@@ -29,7 +29,7 @@ class NewUserRegView(View):
         form = UserRegForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, _('Usersuccessfullyregistered'))
+            messages.success(request, _('User successfully registered'))
             return redirect('login')
         return render(request, 'users/reg.html', context={'form': form})
 
@@ -38,18 +38,19 @@ class LoginUserView(LoginView):
     template_name = 'users/login.html'
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, _('Youareloggedin'))
+        messages.add_message(self.request, messages.SUCCESS, _('You are logged in'))
         return reverse_lazy('home')
 
     def form_invalid(self, form):
-        form.add_error(None, _('Bothfieldscanbecasesensitive'))
+        form.add_error(None, _('Please enter the correct username and password.\
+                               Both fields can be case sensitive.'))
         return self.render_to_response(self.get_context_data(form=form))
 
 
 class LoginOutView(LogoutView):
 
     def get_success_url(self):
-        messages.add_message(self.request, messages.INFO, _('Youareloggedout'))
+        messages.add_message(self.request, messages.INFO, _('You are logged out'))
         return reverse_lazy('home')
 
 
@@ -62,10 +63,11 @@ class UserEditView(View):
             if request.user == user:
                 return render(request, 'users/reg.html', context={'form': form, 'user': user})
             else:
-                messages.error(request, _('Nothavepermission'))
+                messages.error(request, _('You do not have permission to change\
+                                          another user.'))
                 return redirect('users_list')
         else:
-            messages.error(request, _('Notauthorized'))
+            messages.error(request, _('You are not authorized! Please log in.'))
             return redirect('login')
 
     def post(self, request, *args, **kwargs):
@@ -77,7 +79,7 @@ class UserEditView(View):
             user.last_name = form.cleaned_data['last_name']
             user.set_password(form.cleaned_data['password'])
             user.save()
-            messages.success(request, _('Usersuccessfullychanged'))
+            messages.success(request, _('User successfully changed'))
             return redirect('users_list')
         return render(request, 'users/reg.html', context={'form': form})
 
@@ -92,17 +94,18 @@ class UserDeleteView(View):
                 return render(request, 'users/delete.html',
                               context={'form': delete_form, 'user': user})
             else:
-                messages.error(request, _('Notchangeanotheruser'))
+                messages.error(request, _('You do not have permission\
+                                          to change another user.'))
                 return redirect('users_list')
         else:
-            messages.error(request, _('Notauthorizedplease'))
+            messages.error(request, _('You are not authorized! Please log in.'))
             return redirect('login')
 
     def post(self, request, *args, **kwargs):
         user = request.user
         if Task.objects.filter(executor__username=user.username).exists():
-            messages.error(request, 'Невозможно удалить пользователя, потому что он используется')
+            messages.error(request, _('Cannot delete user because it is in use'))
         else:
             user.delete()
-            messages.success(request, _('Deletedsuccessfully'))
+            messages.success(request, _('User deleted successfully'))
         return redirect('users_list')
