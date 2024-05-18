@@ -30,7 +30,7 @@ class TestNewStatusView(TestCase):
         self.assertIn('/statuses/', response.redirect_chain[0])
 
 
-class TestFormNewUserReg(TestCase):
+class TestFormNewStatusCreate(TestCase):
 
     def test_form_new_status_valid(self):
         form = NewStatusForm(data=TEST_STATUS)
