@@ -1,0 +1,14 @@
+{% extends 'task_manager/index.html' %}
+
+{% load i18n %}
+
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate "Deleting a label" %}</h1>
+    <p>{% trans 'Are you sure, you want to delete' %} {{ label.labelname }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="{% trans 'Yes, delete' %}">
+    </form>
+</div>
+{% endblock maincontent %}

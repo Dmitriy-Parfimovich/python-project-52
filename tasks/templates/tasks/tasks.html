@@ -58,10 +58,26 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="id_label">{% trans 'Tag' %}</label>
+                    <label class="form-label" for="id_label">{% trans 'Label' %}</label>
                     <select name="label" {% if request_GET %} class="form-select is-valid" {% else %}
                             class="form-select" {% endif %} id="id_label">
-                        <option value="" selected>---------</option>
+                            {% if form.label.value %}
+                            <option value="">---------</option>
+                            {% for label in labels %}
+                                {% with val=label.pk|stringformat:'i' %}
+                                {% if form.label.value == label.pk or form.label.value == val %}
+                                    <option value="{{ label.pk }}" selected>{{ label.labelname }}</option>
+                                {% else %}
+                                    <option value="{{ label.pk }}">{{ label.labelname }}</option>
+                                {% endif %}
+                                {% endwith %}
+                            {% endfor %}
+                        {% else %}
+                            <option value="" selected>---------</option>
+                            {% for label in labels %}
+                                <option value="{{ label.pk }}">{{ label.labelname }}</option>
+                            {% endfor %}
+                        {% endif %}
                     </select>
                 </div>
                 <div class="mb-3">

@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Task",
+            name="Label",
             fields=[
                 (
                     "id",
@@ -23,14 +23,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "taskname",
-                    models.CharField(max_length=50, unique=True, verbose_name="Задача"),
+                    "labelname",
+                    models.CharField(max_length=50, unique=True, verbose_name="Метка"),
                 ),
-                (
-                    "taskdescription",
-                    models.TextField(blank=True, null=True, verbose_name="Описание"),
-                ),
-                ("taskautor", models.CharField(max_length=50, verbose_name="Автор")),
                 (
                     "time_create",
                     models.DateTimeField(
@@ -39,9 +34,9 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name": "Задачи",
-                "verbose_name_plural": "Задачи",
-                "ordering": ["taskname"],
+                "verbose_name": "Метки",
+                "verbose_name_plural": "Метки",
+                "ordering": ["time_create", "labelname"],
             },
         ),
     ]

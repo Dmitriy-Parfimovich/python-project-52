@@ -8,17 +8,20 @@ class NewTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['taskname', 'taskdescription', 'status', 'executor']
+        fields = ['taskname', 'taskdescription', 'status', 'executor', 'labels']
 
     def save(self):
         self.clean()
+        labels = self.cleaned_data['labels']
         task = self.Meta.model(taskname=self.cleaned_data['taskname'],
                                taskdescription=self.cleaned_data['taskdescription'],
                                status=self.cleaned_data['status'],
                                executor=self.cleaned_data['executor'],
-                               taskautor=self.cleaned_data['taskautor']
+                               taskautor=self.cleaned_data['taskautor'],
                                )
         task.save()
+        labels = self.cleaned_data['labels']
+        task.labels.set(labels)
         return task
 
     def clean_taskname(self):
@@ -29,7 +32,7 @@ class FilterTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['status', 'executor']
+        fields = ['status', 'executor', 'labels']
 
 
 class TaskDeleteForm(forms.ModelForm):

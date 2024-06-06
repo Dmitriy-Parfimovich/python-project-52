@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-06 18:56+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: templates/labels/del_label.html:7
+msgid "Deleting a label"
+msgstr "Удаление метки"
+
+#: templates/labels/del_label.html:8
+msgid "Are you sure, you want to delete"
+msgstr "Вы уверены, что хотите удалить"
+
+#: templates/labels/del_label.html:11
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: templates/labels/labels.html:9
+msgid "Labels"
+msgstr "Метки"
+
+#: templates/labels/labels.html:10 templates/labels/new_label.html:12
+msgid "Create a label"
+msgstr "Создать метку"
+
+#: templates/labels/labels.html:15 templates/labels/new_label.html:16
+#: templates/labels/new_label.html:18
+msgid "Labelname"
+msgstr "Имя"
+
+#: templates/labels/labels.html:16
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: templates/labels/labels.html:27
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/labels/labels.html:29
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/labels/new_label.html:10
+msgid "Changing the label"
+msgstr "Изменение метки"
+
+#: templates/labels/new_label.html:25
+msgid "Change"
+msgstr "Изменить"
+
+#: templates/labels/new_label.html:27
+msgid "Create"
+msgstr "Создать"
+
+#: views.py:29
+msgid "Label successfully created"
+msgstr "Метка успешно создана"
+
+#: views.py:45
+msgid "Label changed successfully"
+msgstr "Метка успешно изменена"
+
+#: views.py:58
+msgid "Can't remove the label because it's in use"
+msgstr "Невозможно удалить метку, потому что она используется"
+
+#: views.py:64
+msgid "Label deleted successfully"
+msgstr "Метка успешно удалена"

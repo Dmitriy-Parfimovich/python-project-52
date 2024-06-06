@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-11 22:35+0300\n"
+"POT-Creation-Date: 2024-06-06 18:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgid "Create the task"
 msgstr "Создать задачу"
 
 #: templates/tasks/new_task.html:17 templates/tasks/new_task.html:27
-#: templates/tasks/tasks.html:83
+#: templates/tasks/tasks.html:99
 msgid "Taskname"
 msgstr "Имя"
 
@@ -54,25 +54,25 @@ msgid "Description"
 msgstr "Описание"
 
 #: templates/tasks/new_task.html:43 templates/tasks/task_info.html:25
-#: templates/tasks/tasks.html:15 templates/tasks/tasks.html:84
+#: templates/tasks/tasks.html:15 templates/tasks/tasks.html:100
 msgid "Status"
 msgstr "Статус"
 
 #: templates/tasks/new_task.html:71 templates/tasks/task_info.html:21
-#: templates/tasks/tasks.html:38 templates/tasks/tasks.html:86
+#: templates/tasks/tasks.html:38 templates/tasks/tasks.html:102
 msgid "Executor"
 msgstr "Исполнитель"
 
 #: templates/tasks/new_task.html:99 templates/tasks/task_info.html:34
-msgid "Tags"
+msgid "Labels"
 msgstr "Метки"
 
-#: templates/tasks/new_task.html:110 templates/tasks/task_info.html:42
-#: templates/tasks/tasks.html:101
+#: templates/tasks/new_task.html:124 templates/tasks/task_info.html:44
+#: templates/tasks/tasks.html:117
 msgid "Edit"
 msgstr "Изменить"
 
-#: templates/tasks/new_task.html:110
+#: templates/tasks/new_task.html:124
 msgid "Create"
 msgstr "Создать задачу"
 
@@ -80,15 +80,15 @@ msgstr "Создать задачу"
 msgid "View the task"
 msgstr "Просмотр задачи"
 
-#: templates/tasks/task_info.html:17 templates/tasks/tasks.html:85
+#: templates/tasks/task_info.html:17 templates/tasks/tasks.html:101
 msgid "Autor"
 msgstr "Автор"
 
-#: templates/tasks/task_info.html:29 templates/tasks/tasks.html:87
+#: templates/tasks/task_info.html:29 templates/tasks/tasks.html:103
 msgid "Date of creation"
 msgstr "Дата создания"
 
-#: templates/tasks/task_info.html:44 templates/tasks/tasks.html:103
+#: templates/tasks/task_info.html:46 templates/tasks/tasks.html:119
 msgid "Delete"
 msgstr "Удалить"
 
@@ -101,29 +101,29 @@ msgid "Create a task"
 msgstr "Создать задачу"
 
 #: templates/tasks/tasks.html:61
-msgid "Tag"
+msgid "Label"
 msgstr "Метка"
 
-#: templates/tasks/tasks.html:72
+#: templates/tasks/tasks.html:88
 msgid "Only your tasks"
 msgstr "Только свои задачи"
 
-#: templates/tasks/tasks.html:75
+#: templates/tasks/tasks.html:91
 msgid "Show"
 msgstr "Показать"
 
-#: views.py:61
+#: views.py:67
 msgid "Task created successfully"
 msgstr "Задача успешно создана"
 
-#: views.py:108
+#: views.py:121
 msgid "The task was successfully modified"
 msgstr "Задача успешно изменена"
 
-#: views.py:121
+#: views.py:134
 msgid "Only it's author can delete the task"
 msgstr "Задачу может удалить только ее автор"
 
-#: views.py:127
+#: views.py:140
 msgid "The task was successfully deleted"
 msgstr "Задача успешно удалена"

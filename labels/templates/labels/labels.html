@@ -1,0 +1,36 @@
+{% extends 'task_manager/index.html' %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
+    <h1 class="my-4">{% trans 'Labels' %}</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'new_label_create' %}">{% trans 'Create a label' %}</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>{% trans 'Labelname' %}</th>
+              <th>{% trans 'Date of creation' %}</th>
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for label in labels %}
+            <tr>
+                <td>{{ label.pk }}</td>
+                <td>{{ label.labelname }}</td>
+                <td>{{ label.time_create|date:'d.m.Y H:i' }}</td>
+                <td>
+                    <a href="{{ label.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
+                    <br>
+                    <a href="{{ label.get_absolute_url_delete }}">{% trans 'Delete' %}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock maincontent %}

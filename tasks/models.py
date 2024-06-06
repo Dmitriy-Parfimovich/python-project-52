@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from users.models import User
 from statuses.models import Status
+from labels.models import Label
 
 
 # Create your models here.
@@ -14,6 +15,7 @@ class Task(models.Model):
                                  null=True,
                                  verbose_name='Исполнитель')
     status = models.ForeignKey(Status, on_delete=models.CASCADE, verbose_name='Статус')
+    labels = models.ManyToManyField(Label)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     def get_absolute_url(self):
