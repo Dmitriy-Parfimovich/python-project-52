@@ -7,7 +7,7 @@ TEST_USER_PASSWORD = '123'
 
 TEST_TASK = 'task1'
 
-TEST_VALID_TASK = {'taskname': 'taskname111', 'executor': 1, 'status': 1}
+TEST_VALID_TASK = {'taskname': 'taskname111', 'executor': 1, 'status': 1, 'labels': [1, 2, 3]}
 
 
 class TestTaskEditView(TestCase):

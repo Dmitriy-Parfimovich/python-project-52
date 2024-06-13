@@ -1,0 +1,29 @@
+[
+    {
+        "model": "labels.label",
+        "pk": 1,
+        "fields": {
+            "labelname": "label1",
+            "time_create": "2024-01-31 00:00"
+        }
+    },
+    {
+        "model": "labels.label",
+        "pk": 2,
+        "fields": {
+            "labelname": "label2",
+            "time_create": "2024-01-31 00:00"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "first_name": "zzz",
+            "last_name": "xxx",
+            "username": "zzzxxx",
+            "password": "123",
+            "time_create": "2024-01-31 00:00"
+        }
+    }
+]

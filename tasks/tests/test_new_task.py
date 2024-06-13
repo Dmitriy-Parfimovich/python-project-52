@@ -3,8 +3,8 @@ from django.urls import reverse
 from tasks.forms import NewTaskForm
 
 
-TEST_TASK = {'taskname': 'taskname111', 'executor': 1, 'status': 1}
-TEST_TASK_VALID_FORM = {'taskname': 'taskname333', 'status': 1}
+TEST_TASK = {'taskname': 'taskname111', 'executor': 1, 'status': 1, 'labels': [3]}
+TEST_TASK_VALID_FORM = {'taskname': 'taskname333', 'status': 1, 'labels': [1, 3]}
 TEST_TASK_INVALID_FORM1 = {'taskname': 'taskname222', 'executor': '1', 'status': ''}
 TEST_TASK_INVALID_FORM2 = {'taskname': 'taskname333'}
 

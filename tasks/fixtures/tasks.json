@@ -8,6 +8,7 @@
             "taskautor": "qqqwww",
             "executor": 2,
             "status": 1,
+            "labels": [1, 2],
             "time_create": "2024-01-31 00:00"
         }
     },
@@ -20,6 +21,7 @@
             "taskautor": "zzzxxx",
             "executor": 1,
             "status": 2,
+            "labels": [2],
             "time_create": "2024-01-31 00:00"
         }
     },
@@ -36,6 +38,30 @@
         "pk": 2,
         "fields": {
             "statusname": "status2",
+            "time_create": "2024-01-31 00:00"
+        }
+    },
+    {
+        "model": "labels.label",
+        "pk": 1,
+        "fields": {
+            "labelname": "label1",
+            "time_create": "2024-01-31 00:00"
+        }
+    },
+    {
+        "model": "labels.label",
+        "pk": 2,
+        "fields": {
+            "labelname": "label2",
+            "time_create": "2024-01-31 00:00"
+        }
+    },
+    {
+        "model": "labels.label",
+        "pk": 3,
+        "fields": {
+            "labelname": "label3",
             "time_create": "2024-01-31 00:00"
         }
     },
