@@ -96,18 +96,18 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="id_labels">{% trans 'Labels' %}</label>
-            <select name="labels"
+            <label class="form-label" for="id_label">{% trans 'Labels' %}</label>
+            <select name="label"
             {% if task_error or form.taskname.errors %}
                 class="form-select is-valid"
             {% else %}
                 class="form-select"
             {% endif %}
-            id="id_labels" multiple>
+            id="id_label" multiple>
             {% if form.label.value %}
             {% for label in labels %}
             {% with val=label.pk|stringformat:'i' %}
-                {% if form.label.value == label.pk or form.label.value == val %}
+                {% if label.pk in form.label.value or val in form.label.value %}
                     <option value="{{ label.pk }}" selected>{{ label.labelname }}</option>
                 {% else %}
                     <option value="{{ label.pk }}">{{ label.labelname }}</option>

@@ -49,14 +49,17 @@ class StatusEditView(View):
 class StatusDeleteView(View):
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            delete_form = StatusDeleteForm()
-            status = Status.objects.get(pk=self.kwargs['pk'])
-            return render(request, 'statuses/del_status.html',
-                          context={'form': delete_form, 'status': status})
+        status = Status.objects.get(pk=self.kwargs['pk'])
+        delete_form = StatusDeleteForm()
+        return render(request, 'statuses/del_status.html',
+                      context={'form': delete_form, 'status': status})
 
     def post(self, request, *args, **kwargs):
         status = Status.objects.get(pk=self.kwargs['pk'])
-        status.delete()
-        messages.success(request, _('Status deleted successfully'))
-        return redirect('statuses_list')
+        if list(status.task_set.all()) == []:
+            status.delete()
+            messages.success(request, _('Status deleted successfully'))
+            return redirect('statuses_list')
+        else:
+            messages.error(request, _("Can't delete a status because it's in use"))
+            return redirect('statuses_list')

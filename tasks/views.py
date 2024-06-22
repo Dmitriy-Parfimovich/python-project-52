@@ -7,40 +7,37 @@ from tasks.models import Task
 from statuses.models import Status
 from users.models import User
 from labels.models import Label
-from tasks.forms import NewTaskForm, TaskDeleteForm, FilterTaskForm
+from tasks.forms import NewTaskForm, TaskDeleteForm
 from django.utils.translation import gettext as _
+from .filters import TaskFilter
 
 
 # Create your views here.
 class TasksListView(View):
 
     def get(self, request, *args, **kwargs):
-        form = FilterTaskForm()
-        tasks = Task.objects.all().order_by('pk')
+        tasks = Task.objects.all()
         request_GET, self_tasks = False, False
         if request.GET:
             request_GET = True
-            form = FilterTaskForm(request.GET)
             if 'self_tasks' in request.GET:
-                tasks = tasks.filter(taskautor=request.user).order_by('pk')
+                tasks = tasks.filter(taskautor=request.user)
                 self_tasks = True
-            if request.GET['status']:
-                status = request.GET['status']
-                tasks = tasks.filter(status=status).order_by('pk')
-            if request.GET['executor']:
-                taskexecutor = request.GET['executor']
-                tasks = tasks.filter(executor=taskexecutor).order_by('pk')
+        myFilter = TaskFilter(request.GET, queryset=tasks)
+        tasks = myFilter.qs.order_by('pk')
         statuses = Status.objects.all().order_by('pk')
         taskexecutors = User.objects.all().order_by('pk')
         labels = Label.objects.all().order_by('pk')
-        return render(request, 'tasks/tasks.html', context={'form': form,
-                                                            'tasks': tasks,
-                                                            'statuses': statuses,
-                                                            'taskexecutors': taskexecutors,
-                                                            'labels': labels,
-                                                            'request_GET': request_GET,
-                                                            'self_tasks': self_tasks,
-                                                            })
+        context = {
+            'form': myFilter.form,
+            'tasks': tasks,
+            'statuses': statuses,
+            'taskexecutors': taskexecutors,
+            'labels': labels,
+            'request_GET': request_GET,
+            'self_tasks': self_tasks,
+        }
+        return render(request, 'tasks/tasks.html', context)
 
 
 class NewTaskView(View):
@@ -116,8 +113,8 @@ class TaskEditView(View):
             task.executor = form.cleaned_data['executor']
             task.status = form.cleaned_data['status']
             task.save()
-            labels = form.cleaned_data['labels']
-            task.labels.set(labels)
+            labels = form.cleaned_data['label']
+            task.label.set(labels)
             messages.success(request, _('The task was successfully modified'))
             return redirect('tasks_list')
 

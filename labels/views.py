@@ -50,16 +50,16 @@ class LabelDeleteView(View):
 
     def get(self, request, *args, **kwargs):
         label = Label.objects.get(pk=self.kwargs['pk'])
-        if list(label.task_set.all()) == []:
-            delete_form = LabelDeleteForm()
-            return render(request, 'labels/del_label.html',
-                          context={'form': delete_form, 'label': label})
-        else:
-            messages.error(request, _("Can't remove the label because it's in use"))
-            return redirect('labels_list')
+        delete_form = LabelDeleteForm()
+        return render(request, 'labels/del_label.html',
+                      context={'form': delete_form, 'label': label})
 
     def post(self, request, *args, **kwargs):
         label = Label.objects.get(pk=self.kwargs['pk'])
-        label.delete()
-        messages.success(request, _('Label deleted successfully'))
-        return redirect('labels_list')
+        if list(label.task_set.all()) == []:
+            label.delete()
+            messages.success(request, _('Label deleted successfully'))
+            return redirect('labels_list')
+        else:
+            messages.error(request, _("Can't remove the label because it's in use"))
+            return redirect('labels_list')

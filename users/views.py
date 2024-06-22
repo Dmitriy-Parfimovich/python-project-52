@@ -74,11 +74,15 @@ class UserEditView(View):
         form = UserRegForm(request.POST)
         if form.is_valid():
             user = User.objects.get(pk=self.kwargs['pk'])
+            tasks_of_old_user = Task.objects.filter(taskautor=user.username)
             user.username = form.cleaned_data['username']
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']
             user.set_password(form.cleaned_data['password'])
             user.save()
+            for task in tasks_of_old_user:
+                task.taskautor = user.username
+                task.save()
             messages.success(request, _('User successfully changed'))
             return redirect('users_list')
         return render(request, 'users/reg.html', context={'form': form})
