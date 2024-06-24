@@ -24,6 +24,9 @@ dj-database-url==2.1.0 ; python_full_version >= "3.8.1" and python_full_version 
 django-bootstrap5==23.3 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0" \
     --hash=sha256:21e1956a8a819370decc5d365ce4f4207761cb065afec5a7df8c4c8c49507f2e \
     --hash=sha256:ca1bb2f40175ed1c1725f52f249a574bf629b33b5a0af3bec0eab1de6d72836c
+django-filter==24.2 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0" \
+    --hash=sha256:48e5fc1da3ccd6ca0d5f9bb550973518ce977a4edde9d2a8a154a7f4f0b9f96e \
+    --hash=sha256:df2ee9857e18d38bed203c8745f62a803fa0f31688c9fe6f8e868120b1848e48
 django==4.2.5 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0" \
     --hash=sha256:5e5c1c9548ffb7796b4a8a4782e9a2e5a3df3615259fc1bfd3ebc73b646146c1 \
     --hash=sha256:b6b2b5cae821077f137dc4dade696a1c2aa292f892eca28fa8d7bfdf2608ddd4
