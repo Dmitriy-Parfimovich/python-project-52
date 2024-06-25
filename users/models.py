@@ -8,7 +8,7 @@ class User(AbstractUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True, verbose_name='Имя пользователя')
     first_name = models.CharField(max_length=50, blank=True, verbose_name='Имя')
     last_name = models.CharField(max_length=50, blank=True, verbose_name='Фамилия')
-    password = models.CharField(max_length=20, verbose_name='Пароль')
+    password = models.CharField(max_length=100, verbose_name='Пароль')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     REQUIRED_FIELDS = []
