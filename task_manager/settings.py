@@ -33,6 +33,8 @@ DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(', ')
 
+POST_SERVER_ITEM_ACCESS_TOKEN = os.getenv('POST_SERVER_ITEM_ACCESS_TOKEN')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -65,7 +67,7 @@ MIDDLEWARE = [
 ]
 
 ROLLBAR = {
-    'access_token': os.getenv('POST_SERVER_ITEM_ACCESS_TOKEN'),
+    'access_token': POST_SERVER_ITEM_ACCESS_TOKEN,
     'environment': 'development' if DEBUG else 'production',
     'code_version': '1.0',
     'root': BASE_DIR,
