@@ -48,8 +48,3 @@ lint:
 
 test:
 	poetry run python manage.py test
-
-test-coverage:
-	poetry run coverage run manage.py test python_django_blog
-	poetry run coverage html
-	poetry run coverage report

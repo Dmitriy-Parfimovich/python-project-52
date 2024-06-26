@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from task_manager.views import IndexView, index
+from task_manager.views import IndexView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,6 +25,4 @@ urlpatterns = [
     path('statuses/', include('statuses.urls')),
     path('tasks/', include('tasks.urls')),
     path('labels/', include('labels.urls')),
-    # Rollbar test
-    path('test/', index),
 ]
