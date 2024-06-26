@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
-ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS').split(', ')]
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
 POST_SERVER_ITEM_ACCESS_TOKEN = os.getenv('POST_SERVER_ITEM_ACCESS_TOKEN')
 
