@@ -14,9 +14,9 @@ The project is based on ***PostgreSQL/Sglite*** database, ***Django***, ***templ
 You can see a deployed application on Render [here](https://python-project-52-qmem.onrender.com)
 
 ## Web application demo
-![Readme_1.jpg](./Readme_1.jpg)
-![Readme_2.jpg](./Readme_2.jpg)
-![Readme_3.jpg](./Readme_3.jpg)
+![Readme_1.JPG](./Readme_1.JPG)
+![Readme_2.JPG](./Readme_2.JPG)
+![Readme_3.JPG](./Readme_3.JPG)
 
 ## Instalation
 
