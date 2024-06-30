@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-11 21:54+0300\n"
+"POT-Creation-Date: 2024-06-30 20:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:31
+#: forms.py:32
 msgid ""
 "Please enter a correct username.                                        It "
 "can only contain letters,                                        numbers and "
@@ -29,15 +29,15 @@ msgstr ""
 "Введите правильное имя пользователя. Оно может содержать только буквы, цифры "
 "и знаки @/./+/-/_."
 
-#: forms.py:35
+#: forms.py:36
 msgid "A user with the same name already exists."
 msgstr "Пользователь с таким именем уже существует."
 
-#: forms.py:40
+#: forms.py:41
 msgid "Entered passwords do not match"
 msgstr "Введенные пароли не совпадают."
 
-#: forms.py:42
+#: forms.py:43
 msgid ""
 "The entered password is too short.                                        It "
 "must contain at least 3 characters."
@@ -111,7 +111,11 @@ msgstr "Подтверждение пароля"
 msgid "To confirm, please enter your password again."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
-#: templates/users/reg.html:73
+#: templates/users/reg.html:75 templates/users/users.html:29
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/users/reg.html:77
 msgid "Register"
 msgstr "Зарегистрировать"
 
@@ -127,58 +131,51 @@ msgstr "Полное имя"
 msgid "Date of creation"
 msgstr "Дата создания"
 
-#: templates/users/users.html:29
-msgid "Edit"
-msgstr "Изменить"
-
 #: templates/users/users.html:31
 msgid "Delete"
 msgstr "Удалить"
 
-#: views.py:32
+#: views.py:30
 msgid "User successfully registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: views.py:41
-msgid "You are logged in"
-msgstr "Вы залогинены"
-
-#: views.py:45
-msgid ""
-"Please enter the correct username and "
-"password.                               Both fields can be case sensitive."
-msgstr ""
-"Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
-"быть чувствительны к регистру."
-
-#: views.py:53
-msgid "You are logged out"
-msgstr "Вы разлогинены"
-
-#: views.py:66
+#: views.py:44
 msgid ""
 "You do not have permission to "
 "change                                          another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: views.py:70 views.py:101
+#: views.py:48 views.py:83
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: views.py:82
+#: views.py:64
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен"
 
-#: views.py:97
+#: views.py:79
 msgid ""
 "You do not have permission                                          to "
 "change another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: views.py:107
+#: views.py:89
 msgid "Cannot delete user because it is in use"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: views.py:110
+#: views.py:92
 msgid "User deleted successfully"
 msgstr "Пользователь успешно удален"
+
+#~ msgid "You are logged in"
+#~ msgstr "Вы залогинены"
+
+#~ msgid ""
+#~ "Please enter the correct username and "
+#~ "password.                               Both fields can be case sensitive."
+#~ msgstr ""
+#~ "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
+#~ "быть чувствительны к регистру."
+
+#~ msgid "You are logged out"
+#~ msgstr "Вы разлогинены"

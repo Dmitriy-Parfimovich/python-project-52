@@ -70,7 +70,12 @@
             {% endif %}
             <div class="form-text">{% trans 'To confirm, please enter your password again.' %}</div>
         </div>
-        <input class="btn btn-primary" type="submit" value="{% trans 'Register' %}">
+        <input class="btn btn-primary" type="submit"
+        {% if user.id %}
+            value="{% trans 'Edit' %}"
+        {% else %}
+            value="{% trans 'Register' %}"
+        {% endif %}>
     </form>
 </div>
 {% endblock maincontent %}
