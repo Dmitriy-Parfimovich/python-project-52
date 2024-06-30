@@ -20,6 +20,8 @@ class UsersListView(View):
 class NewUserRegView(View):
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            request.user = ''
         form = UserRegForm()
         return render(request, 'users/reg.html', context={'form': form})
 
