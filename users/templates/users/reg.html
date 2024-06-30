@@ -12,7 +12,7 @@
     <form method="post">
         {% csrf_token %}
         <div class="mb-3"><label class="form-label" for="id_first_name">{% trans 'First name' %}</label>
-            <input type="text" name="first_name" maxlength="50"
+            <input type="text" name="first_name" maxlength="150"
             {% if form.errors %}
                 class="form-control is-valid" value="{{ form.first_name.value }}"
             {% elif user.id %}
@@ -20,7 +20,7 @@
             {% endif %}
             class="form-control" placeholder="{% trans 'First name' %}" required id="id_first_name"></div>
         <div class="mb-3"><label class="form-label" for="id_last_name">{% trans 'Last name' %}</label>
-            <input type="text" name="last_name" maxlength="50"
+            <input type="text" name="last_name" maxlength="150"
             {% if form.errors %}
                 class="form-control is-valid" value="{{ form.last_name.value }}"
             {% elif user.id %}
@@ -73,12 +73,7 @@
             {% endif %}
             <div class="form-text">{% trans 'To confirm, please enter your password again.' %}</div>
         </div>
-        <input class="btn btn-primary" type="submit"
-        {% if user.id %}
-            value="{% trans 'Edit' %}"
-        {% else %}
-            value="{% trans 'Register' %}"
-        {% endif %}>
+        <input class="btn btn-primary" type="submit" {% if user.id %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Register' %}" {% endif %}>
     </form>
 </div>
 {% endblock maincontent %}
