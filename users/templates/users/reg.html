@@ -41,7 +41,9 @@
                 class="form-control"
             {% endif %}
             placeholder="{% trans 'Username' %}" required id="id_username">
-            <div class="invalid-feedback">{{ form.username.errors }}</div>
+            {% if form.username.errors %}
+                <div class="invalid-feedback">{{ form.username.errors }}</div>
+            {% endif %}
             <div class="form-text">{% trans 'Required field. Maximum 150 characters. Only letters, numbers and symbols @/./+/-/_.' %}</div>
         </div>
         <div class="mb-3"><label class="form-label" for="id_password1">{% trans 'Password' %}</label><input type="password"
