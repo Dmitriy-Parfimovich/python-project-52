@@ -5,25 +5,25 @@ from django.contrib.auth import get_user_model
 
 
 TEST_VALID_USER = {'first_name': 'qqq', 'last_name': 'www',
-                   'username': 'qqqwww', 'password': '123',
+                   'username': 'qqqwww', 'password1': '123',
                    'password2': '123'}
 TEST_INVALID_USER = {'first_name': 'qqq', 'last_name': 'www',
-                     'username': '////', 'password': '123',
+                     'username': '////', 'password1': '123',
                      'password2': '123'}
 TEST_VALID_FORM_DATA = {'first_name': 'aaa', 'last_name': 'sss',
-                        'username': 'aaasss', 'password': '123',
+                        'username': 'aaasss', 'password1': '123',
                         'password2': '123'}
 TEST_INVALID_FORM_DATA_1 = {'first_name': 'aaa', 'last_name': 'sss',
-                            'username': 'aaasss', 'password': '123',
+                            'username': 'aaasss', 'password1': '123',
                             'password2': '321'}
 TEST_INVALID_FORM_DATA_2 = {'first_name': 'aaa', 'last_name': 'sss',
-                            'username': 'aaasss', 'password': '12',
+                            'username': 'aaasss', 'password1': '12',
                             'password2': '12'}
 TEST_INVALID_FORM_DATA_3 = {'first_name': 'aaa', 'last_name': 'sss',
-                            'username': '~~~', 'password': '12',
+                            'username': '~~~', 'password1': '12',
                             'password2': '12'}
 TEST_INVALID_FORM_DATA_4 = {'first_name': 'zzz', 'last_name': 'xxx',
-                            'username': 'zzzxxx', 'password': '12',
+                            'username': 'zzzxxx', 'password1': '12',
                             'password2': '12'}
 
 

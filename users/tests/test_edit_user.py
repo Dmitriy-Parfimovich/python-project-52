@@ -7,10 +7,10 @@ TEST_USER_LOGIN = 'zzzxxx'
 TEST_USER_PASSWORD = '123'
 
 TEST_VALID_USER = {'first_name': 'zzz', 'last_name': 'xxx',
-                   'username': 'mmmmmm', 'password': '123',
+                   'username': 'mmmmmm', 'password1': '123',
                    'password2': '123'}
 TEST_INVALID_USER = {'first_name': 'zzz', 'last_name': 'xxx',
-                     'username': '//////', 'password': '123',
+                     'username': '//////', 'password1': '123',
                      'password2': '123'}
 
 

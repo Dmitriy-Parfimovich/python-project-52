@@ -78,7 +78,7 @@ class UserEditView(View):
             user.username = form.cleaned_data['username']
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']
-            user.set_password(form.cleaned_data['password'])
+            user.set_password(form.cleaned_data['password1'])
             user.save()
             for task in tasks_of_old_user:
                 task.taskautor = user.username

@@ -32,7 +32,7 @@
             {% if form.username.errors %}
                 class="form-control is-invalid"
                 value="{{ form.username.value }}"
-            {% elif form.password.errors and not form.username.errors %}
+            {% elif form.password1.errors and not form.username.errors %}
                 class="form-control is-valid"
                 value="{{ form.username.value }}"
             {% elif user.id %}
@@ -44,8 +44,8 @@
             <div class="invalid-feedback">{{ form.username.errors }}</div>
             <div class="form-text">{% trans 'Required field. Maximum 150 characters. Only letters, numbers and symbols @/./+/-/_.' %}</div>
         </div>
-        <div class="mb-3"><label class="form-label" for="id_password">{% trans 'Password' %}</label><input type="password"
-            name="password" autocomplete="new-password"
+        <div class="mb-3"><label class="form-label" for="id_password1">{% trans 'Password' %}</label><input type="password"
+            name="password1" autocomplete="new-password"
             class="{% if form.username.errors %}
                     form-control is-valid {% endif %} form-control"
             placeholder="{% trans 'Password' %}" required id="id_password1">
@@ -57,7 +57,7 @@
         </div>
         <div class="mb-3"><label class="form-label" for="id_password2">{% trans 'Password confirmation' %}</label>
             <input type="password" name="password2" autocomplete="new-password"
-            class="{% if form.password.errors %}
+            class="{% if form.password1.errors %}
                       form-control is-invalid
                    {% elif not form.errors %}
                       form-control
@@ -65,8 +65,8 @@
                       form-control is-valid
                    {% endif %}"
             placeholder="{% trans 'Password confirmation' %}" required id="id_password2">
-            {% if form.password.errors %}
-                <div class="invalid-feedback">{{ form.password.errors }}</div>
+            {% if form.password1.errors %}
+                <div class="invalid-feedback">{{ form.password1.errors }}</div>
             {% endif %}
             <div class="form-text">{% trans 'To confirm, please enter your password again.' %}</div>
         </div>

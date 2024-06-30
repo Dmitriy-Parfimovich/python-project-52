@@ -9,11 +9,12 @@ from django.utils.translation import gettext as _
 
 class UserRegForm(forms.ModelForm):
 
+    password1 = forms.CharField(max_length=20)
     password2 = forms.CharField(max_length=20)
 
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'username', 'password', 'password2']
+        fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
 
     def save(self):
         self.clean()
@@ -35,13 +36,13 @@ class UserRegForm(forms.ModelForm):
             self.errors['username'] = _('A user with the same name already exists.')
         return self['username'].value()
 
-    def clean_password(self):
-        if self['password'].value() != self['password2'].value():
-            self.errors['password'] = _('Entered passwords do not match')
-        elif len(self['password'].value()) <= 2:
-            self.errors['password'] = _('The entered password is too short.\
+    def clean_password1(self):
+        if self['password1'].value() != self['password2'].value():
+            self.errors['password1'] = _('Entered passwords do not match')
+        elif len(self['password1'].value()) <= 2:
+            self.errors['password1'] = _('The entered password is too short.\
                                         It must contain at least 3 characters.')
-        return self['password'].value()
+        return self['password2'].value()
 
 
 class UserDeleteForm(forms.ModelForm):
