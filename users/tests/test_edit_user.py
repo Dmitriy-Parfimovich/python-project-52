@@ -31,7 +31,7 @@ class TestUserEditView(TestCase):
     def test_not_authorized_user_to_edit(self):
         user = self.user.objects.get(username=TEST_USER_LOGIN)
         response = self.client.get(self.user.get_absolute_url_edit(user), follow=True)
-        self.assertIn('/users/login/', response.redirect_chain[0])
+        self.assertIn('/login/', response.redirect_chain[0])
 
     def test_authorized_user_to_edit(self):
         user = self.user.objects.get(username=TEST_USER_LOGIN)

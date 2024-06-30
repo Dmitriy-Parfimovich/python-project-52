@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 12:28+0300\n"
+"POT-Creation-Date: 2024-06-30 18:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,54 +20,66 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/templates/task_manager/index.html:11
+#: templates/task_manager/index.html:11
 msgid "Hexlet task manager"
 msgstr "Менеджер задач Hexlet"
 
-#: task_manager/templates/task_manager/index.html:23
+#: templates/task_manager/index.html:23
 msgid "Task manager"
 msgstr "Менеджер задач"
 
-#: task_manager/templates/task_manager/index.html:30
+#: templates/task_manager/index.html:30
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/templates/task_manager/index.html:36
+#: templates/task_manager/index.html:36
 msgid "Statuses"
 msgstr "Статусы"
 
-#: task_manager/templates/task_manager/index.html:39
+#: templates/task_manager/index.html:39
 msgid "Tags"
 msgstr "Метки"
 
-#: task_manager/templates/task_manager/index.html:42
+#: templates/task_manager/index.html:42
 msgid "Tasks"
 msgstr "Задачи"
 
-#: task_manager/templates/task_manager/index.html:48
+#: templates/task_manager/index.html:48
 msgid "Exit"
 msgstr "Выход"
 
-#: task_manager/templates/task_manager/index.html:54
+#: templates/task_manager/index.html:54
 msgid "Login"
 msgstr "Вход"
 
-#: task_manager/templates/task_manager/index.html:57
+#: templates/task_manager/index.html:57
 msgid "Registration"
 msgstr "Регистрация"
 
-#: task_manager/templates/task_manager/index.html:71
+#: templates/task_manager/index.html:71
 msgid "Hello from Hexlet!"
 msgstr "Привет от Хекслета!"
 
-#: task_manager/templates/task_manager/index.html:72
+#: templates/task_manager/index.html:72
 msgid "Practical programming courses"
 msgstr "Практические курсы по программированию"
 
-#: task_manager/templates/task_manager/index.html:74
+#: templates/task_manager/index.html:74
 msgid "Learn more"
 msgstr "Узнать больше"
 
-#: task_manager/templates/task_manager/index.html:83
+#: templates/task_manager/index.html:83
 msgid "The Python-educational project by Hexlet.io"
 msgstr "Учебный Python-проект от Хекслет"
+
+#: views.py:21
+msgid "You are logged in"
+msgstr "Вы залогинены"
+
+#: views.py:25
+msgid "Please enter the correct username and password. Both fields can be case sensitive."
+msgstr "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру."
+
+#: views.py:33
+msgid "You are logged out"
+msgstr "Вы разлогинены"

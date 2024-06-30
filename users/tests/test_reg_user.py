@@ -52,7 +52,7 @@ class TestNewUserRegView(TestCase):
     def test_create_valid_user(self):
         response = self.client.post(reverse('new_user_reg'), TEST_VALID_USER,
                                     follow=True)
-        self.assertIn('/users/login/', response.redirect_chain[0])
+        self.assertIn('/login/', response.redirect_chain[0])
 
     def test_create_invalid_user(self):
         response = self.client.post(reverse('new_user_reg'), TEST_INVALID_USER)
