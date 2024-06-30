@@ -46,8 +46,11 @@
         </div>
         <div class="mb-3"><label class="form-label" for="id_password1">{% trans 'Password' %}</label><input type="password"
             name="password1" autocomplete="new-password"
-            class="{% if form.username.errors or form.password1.errors %}
-                    form-control is-valid {% endif %} form-control"
+            {% if form.username.errors or form.password1.errors %}
+                class="form-control is-valid"
+            {% else %}
+                class="form-control"
+            {% endif %}
             placeholder="{% trans 'Password' %}" required aria-describedby="id_password1_helptext" id="id_password1">
             <div class="form-text">
                 <ul>
@@ -57,18 +60,14 @@
         </div>
         <div class="mb-3"><label class="form-label" for="id_password2">{% trans 'Password confirmation' %}</label>
             <input type="password" name="password2" autocomplete="new-password"
-            class="{% if form.password1.errors %}
-                      form-control is-invalid
-                   {% elif not form.errors %}
-                      form-control
-                   {% else %}
-                      form-control is-valid
-                   {% endif %}"
-            placeholder="{% trans 'Password confirmation' %}" required
             {% if form.password1.errors %}
-                aria-invalid="true"
+                class="form-control is-invalid" aria-invalid="true"
+            {% elif not form.errors %}
+                class="form-control"
+            {% else %}
+                class="form-control is-valid"
             {% endif %}
-            aria-describedby="id_password2_helptext" id="id_password2">
+            placeholder="{% trans 'Password confirmation' %}" required aria-describedby="id_password2_helptext" id="id_password2">
             {% if form.password1.errors %}
                 <div class="invalid-feedback">{{ form.password1.errors }}</div>
             {% endif %}
