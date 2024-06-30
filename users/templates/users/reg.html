@@ -46,7 +46,7 @@
         </div>
         <div class="mb-3"><label class="form-label" for="id_password1">{% trans 'Password' %}</label><input type="password"
             name="password1" autocomplete="new-password"
-            class="{% if form.username.errors %}
+            class="{% if form.username.errors or form.password1.errors %}
                     form-control is-valid {% endif %} form-control"
             placeholder="{% trans 'Password' %}" required id="id_password1">
             <div class="form-text">
