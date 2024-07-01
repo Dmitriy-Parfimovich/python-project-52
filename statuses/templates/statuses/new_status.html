@@ -14,12 +14,20 @@
     <form method="post">
         {% csrf_token %}
         <div class="mb-3"><label class="form-label" for="id_name">{% trans 'Statusname' %}</label>
-            <input type="text" name="statusname" maxlength="100" class="form-control"
+            <input type="text" name="statusname" maxlength="100"
+            {% if form.statusname.errors %}
+                class="form-control is-invalid" aria-invalid="true"
+            {% else %}
+                class="form-control"
+            {% endif %}
             placeholder="{% trans 'Statusname' %}" required id="id_name"
             {% if form.statusname.value %}
                 value="{{ form.statusname.value }}"
             {% endif %}>
         </div>
+            {% if form.statusname.errors %}
+            <div class="invalid-feedback">{% trans 'Required field.' %}</div>
+            {% endif %}
         <input class="btn btn-primary" type="submit"
         {% if form.statusname.value %}
             value="{% trans 'Change' %}"

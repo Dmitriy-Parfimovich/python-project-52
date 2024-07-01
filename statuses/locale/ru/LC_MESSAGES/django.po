@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-22 20:44+0300\n"
+"POT-Creation-Date: 2024-07-01 18:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: forms.py:23 templates/statuses/new_status.html:29
+msgid "Required field."
+msgstr "Обязательное поле."
 
 #: templates/statuses/del_status.html:7
 msgid "Delete status"
@@ -40,16 +44,16 @@ msgstr "Изменить статус"
 msgid "Create status"
 msgstr "Создать статус"
 
-#: templates/statuses/new_status.html:16 templates/statuses/new_status.html:18
+#: templates/statuses/new_status.html:16 templates/statuses/new_status.html:23
 #: templates/statuses/statuses.html:15
 msgid "Statusname"
 msgstr "Имя"
 
-#: templates/statuses/new_status.html:25
+#: templates/statuses/new_status.html:33
 msgid "Change"
 msgstr "Изменить"
 
-#: templates/statuses/new_status.html:27
+#: templates/statuses/new_status.html:35
 msgid "Create"
 msgstr "Создать"
 
@@ -69,18 +73,22 @@ msgstr "Изменить"
 msgid "Delete"
 msgstr "Удалить статус"
 
-#: views.py:29
+#: views.py:18 views.py:28
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: views.py:35
 msgid "Status successfully created"
 msgstr "Статус успешно создан"
 
-#: views.py:45
+#: views.py:51
 msgid "Status changed successfully"
 msgstr "Статус успешно изменен"
 
-#: views.py:61
+#: views.py:67
 msgid "Status deleted successfully"
 msgstr "Статус успешно удален"
 
-#: views.py:64
+#: views.py:70
 msgid "Can't delete a status because it's in use"
 msgstr "Невозможно удалить статус, потому что он используется"
