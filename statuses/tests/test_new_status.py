@@ -1,8 +1,11 @@
 from django.test import Client, TestCase
 from django.urls import reverse
 from statuses.forms import NewStatusForm
+from django.contrib.auth import get_user_model
 
 
+TEST_USER_LOGIN = 'zzzxxx'
+TEST_USER_PASSWORD = '123'
 TEST_STATUS = {'statusname': 'status3'}
 TEST_STATUS_INVALID_FORM = {'statusname': ''}
 
@@ -15,8 +18,13 @@ class TestNewStatusView(TestCase):
         # Create a test database.
         # Every test needs a client.
         self.client = Client()
+        self.user = get_user_model()
+        for user in self.user.objects.all():
+            user.set_password(user.password)
+            user.save()
 
     def test_new_status_page_template_used_and_status_code(self):
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         # Issue a GET request.
         response = self.client.get(reverse('new_status_create'))
         # Check that the response is 200 OK.

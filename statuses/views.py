@@ -12,15 +12,21 @@ from django.utils.translation import gettext as _
 class StatusesListView(View):
 
     def get(self, request, *args, **kwargs):
-        statuses = Status.objects.all().order_by('pk')
-        return render(request, 'statuses/statuses.html', context={'statuses': statuses})
+        if request.user.is_authenticated:
+            statuses = Status.objects.all().order_by('pk')
+            return render(request, 'statuses/statuses.html', context={'statuses': statuses})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
 
 class NewStatusView(View):
 
     def get(self, request, *args, **kwargs):
-        form = NewStatusForm()
-        return render(request, 'statuses/new_status.html', context={'form': form})
+        if request.user.is_authenticated:
+            form = NewStatusForm()
+            return render(request, 'statuses/new_status.html', context={'form': form})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = NewStatusForm(request.POST)
