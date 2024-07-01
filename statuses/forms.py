@@ -10,18 +10,18 @@ class NewStatusForm(forms.ModelForm):
 
     class Meta:
         model = Status
-        fields = ['statusname']
+        fields = ['name']
 
     def save(self):
         self.clean()
-        status = self.Meta.model(statusname=self.cleaned_data['statusname'])
+        status = self.Meta.model(name=self.cleaned_data['name'])
         status.save()
         return status
 
-    def clean_statusname(self):
-        if re.search(r"^\s*$", self['statusname'].value()):
-            self.errors['statusname'] = _('Required field.')
-        return self['statusname'].value().strip()
+    def clean_name(self):
+        if re.search(r"^\s*$", self['name'].value()):
+            self.errors['name'] = _('Required field.')
+        return self['name'].value().strip()
 
 
 class StatusDeleteForm(forms.ModelForm):

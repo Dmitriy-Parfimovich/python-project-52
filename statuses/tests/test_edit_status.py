@@ -8,7 +8,7 @@ TEST_USER_PASSWORD = '123'
 
 TEST_STATUS = 'status1'
 
-TEST_VALID_STATUS = {'statusname': 'status3'}
+TEST_VALID_STATUS = {'name': 'status3'}
 
 
 class TestStatusEditView(TestCase):
@@ -26,13 +26,13 @@ class TestStatusEditView(TestCase):
             user.save()
 
     def test_authorized_user_to_edit_status(self):
-        status = self.status.objects.get(statusname=TEST_STATUS)
+        status = self.status.objects.get(name=TEST_STATUS)
         self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.get(self.status.get_absolute_url_edit(status), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_status_edit(self):
-        status = self.status.objects.get(statusname=TEST_STATUS)
+        status = self.status.objects.get(name=TEST_STATUS)
         self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.post(self.status.get_absolute_url_edit(status),
                                     TEST_VALID_STATUS, follow=True)

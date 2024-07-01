@@ -4,9 +4,9 @@ from .models import Status
 
 # Register your models here.
 class MyStatusAdmin(admin.ModelAdmin):
-    list_display = ('id', 'statusname', 'time_create')
-    list_display_links = ('id', 'statusname')
-    search_fields = ('statusname', 'id')
+    list_display = ('id', 'name', 'time_create')
+    list_display_links = ('id', 'name')
+    search_fields = ('name', 'id')
     list_filter = ['time_create']
 
 

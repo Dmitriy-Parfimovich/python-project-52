@@ -68,7 +68,7 @@
         "model": "statuses.status",
         "pk": 1,
         "fields": {
-            "statusname": "status1",
+            "name": "status1",
             "time_create": "2024-01-31 00:00"
         }
     },
@@ -76,7 +76,7 @@
         "model": "statuses.status",
         "pk": 2,
         "fields": {
-            "statusname": "status2",
+            "name": "status2",
             "time_create": "2024-01-31 00:00"
         }
     },

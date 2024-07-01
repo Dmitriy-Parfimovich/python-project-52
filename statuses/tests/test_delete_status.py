@@ -26,7 +26,7 @@ class TestStatusDeleteView(TestCase):
             user.save()
 
     def test_authorized_user_to_delete_status(self):
-        status = self.status.objects.get(statusname=TEST_STATUS)
+        status = self.status.objects.get(name=TEST_STATUS)
         self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.get(self.status.get_absolute_url_delete(status), follow=True)
         self.assertEqual(response.status_code, 200)

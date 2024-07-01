@@ -20,16 +20,16 @@
                             {% for status in statuses %}
                                 {% with val=status.pk|stringformat:'i' %}
                                 {% if form.status.value == status.pk or form.status.value == val %}
-                                    <option value="{{ status.pk }}" selected>{{ status.statusname }}</option>
+                                    <option value="{{ status.pk }}" selected>{{ status.name }}</option>
                                 {% else %}
-                                    <option value="{{ status.pk }}">{{ status.statusname }}</option>
+                                    <option value="{{ status.pk }}">{{ status.name }}</option>
                                 {% endif %}
                                 {% endwith %}
                             {% endfor %}
                         {% else %}
                             <option value="" selected>---------</option>
                             {% for status in statuses %}
-                                <option value="{{ status.pk }}">{{ status.statusname }}</option>
+                                <option value="{{ status.pk }}">{{ status.name }}</option>
                             {% endfor %}
                         {% endif %}
                     </select>
@@ -110,7 +110,7 @@
             <tr>
                 <td>{{ task.pk }}</td>
                 <td><a href="{{ task.get_absolute_url }}">{{ task.taskname }}</a></td>
-                <td>{{ task.status.statusname }}</td>
+                <td>{{ task.status.name }}</td>
                 <td>{{ task.taskautor }}</td>
                 <td>{{ task.executor.username }}</td>
                 <td>{{ task.time_create|date:'d.m.Y H:i' }}</td>

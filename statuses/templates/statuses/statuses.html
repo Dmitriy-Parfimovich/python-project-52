@@ -21,7 +21,7 @@
             {% for status in statuses %}
             <tr>
                 <td>{{ status.pk }}</td>
-                <td>{{ status.statusname }}</td>
+                <td>{{ status.name }}</td>
                 <td>{{ status.time_create|date:'d.m.Y H:i' }}</td>
                 <td>
                     <a href="{{ status.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
