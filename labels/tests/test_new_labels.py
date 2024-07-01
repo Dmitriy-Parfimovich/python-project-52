@@ -1,20 +1,30 @@
 from django.test import Client, TestCase
 from django.urls import reverse
 from labels.forms import NewLabelForm
+from django.contrib.auth import get_user_model
 
 
-TEST_LABEL = {'labelname': 'label3'}
-TEST_LABEL_INVALID_FORM = {'labelname': ''}
+TEST_USER_LOGIN = 'zzzxxx'
+TEST_USER_PASSWORD = '123'
+TEST_LABEL = {'name': 'label3'}
+TEST_LABEL_INVALID_FORM = {'name': ''}
 
 
 class TestNewLabelView(TestCase):
+
+    fixtures = ['labels.json']
 
     def setUp(self):
         # Create a test database.
         # Every test needs a client.
         self.client = Client()
+        self.user = get_user_model()
+        for user in self.user.objects.all():
+            user.set_password(user.password)
+            user.save()
 
     def test_new_label_page_template_used_and_status_code(self):
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         # Issue a GET request.
         response = self.client.get(reverse('new_label_create'))
         # Check that the response is 200 OK.

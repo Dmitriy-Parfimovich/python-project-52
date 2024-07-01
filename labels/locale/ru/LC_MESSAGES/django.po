@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-06 18:56+0300\n"
+"POT-Creation-Date: 2024-07-01 21:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: forms.py:23 templates/labels/new_label.html:28
+msgid "Required field."
+msgstr "Обязательное поле."
 
 #: templates/labels/del_label.html:7
 msgid "Deleting a label"
@@ -41,7 +45,7 @@ msgid "Create a label"
 msgstr "Создать метку"
 
 #: templates/labels/labels.html:15 templates/labels/new_label.html:16
-#: templates/labels/new_label.html:18
+#: templates/labels/new_label.html:23
 msgid "Labelname"
 msgstr "Имя"
 
@@ -61,26 +65,30 @@ msgstr "Удалить"
 msgid "Changing the label"
 msgstr "Изменение метки"
 
-#: templates/labels/new_label.html:25
+#: templates/labels/new_label.html:33
 msgid "Change"
 msgstr "Изменить"
 
-#: templates/labels/new_label.html:27
+#: templates/labels/new_label.html:35
 msgid "Create"
 msgstr "Создать"
 
-#: views.py:29
+#: views.py:18 views.py:28
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: views.py:35
 msgid "Label successfully created"
 msgstr "Метка успешно создана"
 
-#: views.py:45
+#: views.py:52
 msgid "Label changed successfully"
 msgstr "Метка успешно изменена"
 
-#: views.py:58
-msgid "Can't remove the label because it's in use"
-msgstr "Невозможно удалить метку, потому что она используется"
-
-#: views.py:64
+#: views.py:68
 msgid "Label deleted successfully"
 msgstr "Метка успешно удалена"
+
+#: views.py:71
+msgid "Can't remove the label because it's in use"
+msgstr "Невозможно удалить метку, потому что она используется"

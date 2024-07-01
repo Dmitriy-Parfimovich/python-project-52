@@ -6,7 +6,7 @@
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
-    {% if form.labelname.value %}
+    {% if form.name.value and not form.name.errors %}
         <h1 class="my-4">{% trans 'Changing the label' %}</h1>
     {% else %}
         <h1 class="my-4">{% trans 'Create a label' %}</h1>
@@ -14,14 +14,22 @@
     <form method="post">
         {% csrf_token %}
         <div class="mb-3"><label class="form-label" for="id_name">{% trans 'Labelname' %}</label>
-            <input type="text" name="labelname" maxlength="100" class="form-control"
+            <input type="text" name="name" maxlength="100"
+            {% if form.name.errors %}
+                class="form-control is-invalid" aria-invalid="true"
+            {% else %}
+                class="form-control"
+            {% endif %}
             placeholder="{% trans 'Labelname' %}" required id="id_name"
-            {% if form.labelname.value %}
-                value="{{ form.labelname.value }}"
+            {% if form.name.value %}
+                value="{{ form.name.value }}"
             {% endif %}>
+            {% if form.name.errors %}
+            <div class="invalid-feedback">{% trans 'Required field.' %}</div>
+            {% endif %}
         </div>
         <input class="btn btn-primary" type="submit"
-        {% if form.labelname.value %}
+        {% if form.name.value and not form.name.errors %}
             value="{% trans 'Change' %}"
         {% else %}
             value="{% trans 'Create' %}"

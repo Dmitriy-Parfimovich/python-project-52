@@ -12,15 +12,21 @@ from django.utils.translation import gettext as _
 class LabelsListView(View):
 
     def get(self, request, *args, **kwargs):
-        labels = Label.objects.all().order_by('pk')
-        return render(request, 'labels/labels.html', context={'labels': labels})
+        if request.user.is_authenticated:
+            labels = Label.objects.all().order_by('pk')
+            return render(request, 'labels/labels.html', context={'labels': labels})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
 
 class NewLabelView(View):
 
     def get(self, request, *args, **kwargs):
-        form = NewLabelForm()
-        return render(request, 'labels/new_label.html', context={'form': form})
+        if request.user.is_authenticated:
+            form = NewLabelForm()
+            return render(request, 'labels/new_label.html', context={'form': form})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = NewLabelForm(request.POST)
@@ -28,6 +34,7 @@ class NewLabelView(View):
             form.save()
             messages.success(request, _('Label successfully created'))
             return redirect('labels_list')
+        return render(request, 'labels/new_label.html', context={'form': form})
 
 
 class LabelEditView(View):

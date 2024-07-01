@@ -108,15 +108,15 @@
             {% for label in labels %}
             {% with val=label.pk|stringformat:'i' %}
                 {% if label.pk in form.label.value or val in form.label.value %}
-                    <option value="{{ label.pk }}" selected>{{ label.labelname }}</option>
+                    <option value="{{ label.pk }}" selected>{{ label.name }}</option>
                 {% else %}
-                    <option value="{{ label.pk }}">{{ label.labelname }}</option>
+                    <option value="{{ label.pk }}">{{ label.name }}</option>
                 {% endif %}
             {% endwith %}
             {% endfor %}
             {% else %}
             {% for label in labels %}
-                <option value="{{ label.pk }}">{{ label.labelname }}</option>
+                <option value="{{ label.pk }}">{{ label.name }}</option>
             {% endfor %}
             {% endif %}
             </select>

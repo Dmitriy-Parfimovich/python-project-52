@@ -21,7 +21,7 @@
             {% for label in labels %}
             <tr>
                 <td>{{ label.pk }}</td>
-                <td>{{ label.labelname }}</td>
+                <td>{{ label.name }}</td>
                 <td>{{ label.time_create|date:'d.m.Y H:i' }}</td>
                 <td>
                     <a href="{{ label.get_absolute_url_edit }}">{% trans 'Edit' %}</a>

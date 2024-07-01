@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Create your models here.
 class Label(models.Model):
-    labelname = models.CharField(max_length=50, unique=True, verbose_name='Метка')
+    name = models.CharField(max_length=50, unique=True, verbose_name='Метка')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     def get_absolute_url_edit(self):
@@ -14,9 +14,9 @@ class Label(models.Model):
         return reverse('label_delete', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.labelname
+        return self.name
 
     class Meta:
         verbose_name = 'Метки'
         verbose_name_plural = 'Метки'
-        ordering = ['time_create', 'labelname']
+        ordering = ['time_create', 'name']

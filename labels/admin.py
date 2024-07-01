@@ -4,9 +4,9 @@ from .models import Label
 
 # Register your models here.
 class MyLabelAdmin(admin.ModelAdmin):
-    list_display = ('id', 'labelname', 'time_create')
-    list_display_links = ('id', 'labelname')
-    search_fields = ('labelname', 'id')
+    list_display = ('id', 'name', 'time_create')
+    list_display_links = ('id', 'name')
+    search_fields = ('name', 'id')
     list_filter = ['time_create']
 
 

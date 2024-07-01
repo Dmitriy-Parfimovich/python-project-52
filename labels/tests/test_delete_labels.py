@@ -26,7 +26,7 @@ class TestLabelDeleteView(TestCase):
             user.save()
 
     def test_authorized_user_to_delete_label(self):
-        label = self.label.objects.get(labelname=TEST_LABEL)
+        label = self.label.objects.get(name=TEST_LABEL)
         self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.get(self.label.get_absolute_url_delete(label), follow=True)
         self.assertEqual(response.status_code, 200)
