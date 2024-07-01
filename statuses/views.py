@@ -34,6 +34,7 @@ class NewStatusView(View):
             form.save()
             messages.success(request, _('Status successfully created'))
             return redirect('statuses_list')
+        return render(request, 'statuses/new_status.html', context={'form': form})
 
 
 class StatusEditView(View):

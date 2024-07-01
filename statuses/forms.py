@@ -21,9 +21,7 @@ class NewStatusForm(forms.ModelForm):
     def clean_statusname(self):
         if re.search(r"^\s*$", self['statusname'].value()):
             self.errors['statusname'] = _('Required field.')
-        else:
-            self['statusname'].value().strip()
-        return self['statusname'].value()
+        return self['statusname'].value().strip()
 
 
 class StatusDeleteForm(forms.ModelForm):

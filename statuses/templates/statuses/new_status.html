@@ -6,7 +6,7 @@
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
-    {% if form.statusname.value %}
+    {% if form.statusname.value and not form.statusname.errors %}
         <h1 class="my-4">{% trans 'Change of status' %}</h1>
     {% else %}
         <h1 class="my-4">{% trans 'Create status' %}</h1>
@@ -24,12 +24,12 @@
             {% if form.statusname.value %}
                 value="{{ form.statusname.value }}"
             {% endif %}>
-        </div>
             {% if form.statusname.errors %}
             <div class="invalid-feedback">{% trans 'Required field.' %}</div>
             {% endif %}
+        </div>
         <input class="btn btn-primary" type="submit"
-        {% if form.statusname.value %}
+        {% if form.statusname.value and not form.statusname.errors %}
             value="{% trans 'Change' %}"
         {% else %}
             value="{% trans 'Create' %}"
