@@ -6,7 +6,7 @@
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
-    {% if edit_flag %}
+    {% if edit_flag and not form.taskname.errors %}
     <h1 class="my-4">{% trans 'Changing the task' %}</h1>
     {% else %}
     <h1 class="my-4">{% trans 'Create the task' %}</h1>
@@ -121,7 +121,7 @@
             {% endif %}
             </select>
         </div>
-        <input class="btn btn-primary" type="submit" {% if edit_flag %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Create' %}" {% endif %}>
+        <input class="btn btn-primary" type="submit" {% if edit_flag and not form.taskname.errors %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Create' %}" {% endif %}>
     </form>
 </div>
 {% endblock maincontent %}

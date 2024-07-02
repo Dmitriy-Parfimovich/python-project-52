@@ -48,9 +48,8 @@ class UserEditView(View):
                 messages.error(request, _('You do not have permission to change\
                                           another user.'))
                 return redirect('users_list')
-        else:
-            messages.error(request, _('You are not authorized! Please log in.'))
-            return redirect('login')
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = UserRegForm(request.POST)
@@ -83,9 +82,8 @@ class UserDeleteView(View):
                 messages.error(request, _('You do not have permission\
                                           to change another user.'))
                 return redirect('users_list')
-        else:
-            messages.error(request, _('You are not authorized! Please log in.'))
-            return redirect('login')
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         user = request.user

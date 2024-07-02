@@ -44,6 +44,8 @@ class StatusEditView(View):
             status = Status.objects.get(pk=self.kwargs['pk'])
             form = NewStatusForm(instance=status)
             return render(request, 'statuses/new_status.html', context={'form': form})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = NewStatusForm(request.POST)
@@ -56,10 +58,13 @@ class StatusEditView(View):
 class StatusDeleteView(View):
 
     def get(self, request, *args, **kwargs):
-        status = Status.objects.get(pk=self.kwargs['pk'])
-        delete_form = StatusDeleteForm()
-        return render(request, 'statuses/del_status.html',
-                      context={'form': delete_form, 'status': status})
+        if request.user.is_authenticated:
+            status = Status.objects.get(pk=self.kwargs['pk'])
+            delete_form = StatusDeleteForm()
+            return render(request, 'statuses/del_status.html',
+                          context={'form': delete_form, 'status': status})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         status = Status.objects.get(pk=self.kwargs['pk'])

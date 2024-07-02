@@ -44,6 +44,8 @@ class LabelEditView(View):
             label = Label.objects.get(pk=self.kwargs['pk'])
             form = NewLabelForm(instance=label)
             return render(request, 'labels/new_label.html', context={'form': form})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = NewLabelForm(request.POST)
@@ -56,10 +58,13 @@ class LabelEditView(View):
 class LabelDeleteView(View):
 
     def get(self, request, *args, **kwargs):
-        label = Label.objects.get(pk=self.kwargs['pk'])
-        delete_form = LabelDeleteForm()
-        return render(request, 'labels/del_label.html',
-                      context={'form': delete_form, 'label': label})
+        if request.user.is_authenticated:
+            label = Label.objects.get(pk=self.kwargs['pk'])
+            delete_form = LabelDeleteForm()
+            return render(request, 'labels/del_label.html',
+                          context={'form': delete_form, 'label': label})
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         label = Label.objects.get(pk=self.kwargs['pk'])

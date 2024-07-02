@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
+import re
 from django import forms
 from tasks.models import Task
+from django.utils.translation import gettext as _
 
 
 class NewTaskForm(forms.ModelForm):
@@ -24,7 +26,9 @@ class NewTaskForm(forms.ModelForm):
         return task
 
     def clean_taskname(self):
-        return self['taskname'].value()
+        if re.search(r"^\s*$", self['taskname'].value()):
+            self.errors['taskname'] = _('Required field.')
+        return self['taskname'].value().strip()
 
 
 class TaskDeleteForm(forms.ModelForm):

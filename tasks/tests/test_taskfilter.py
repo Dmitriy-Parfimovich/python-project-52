@@ -9,7 +9,7 @@ TEST_STATUS = 1
 TEST_EXECUTOR = 1
 TEST_LABEL = 2
 TEST_USER_LOGIN = 'qqqwww'
-TEST_USER_PASSWORD = 123
+TEST_USER_PASSWORD = '123'
 SELF_TASKS_FLAG_IN_REQUEST = {'self_tasks': ['on']}
 TEST_LIST_TASKS_TEST_STATUS = ['task1', 'task3', 'task5']
 TEST_LIST_TASKS_TEST_EXECUTOR = ['task1', 'task2', 'task4']
@@ -32,6 +32,7 @@ class TestTasksListView(TestCase):
             user.save()
 
     def test_tasks_list_page_template_used_and_task_code(self):
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         # Issue a GET request.
         response = self.client.get(reverse('tasks_list'))
         # Check that the response is 200 OK.

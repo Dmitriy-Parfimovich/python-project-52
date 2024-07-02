@@ -16,28 +16,31 @@ from .filters import TaskFilter
 class TasksListView(View):
 
     def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        request_GET, self_tasks = False, False
-        if request.GET:
-            request_GET = True
-            if 'self_tasks' in request.GET:
-                tasks = tasks.filter(taskautor=request.user)
-                self_tasks = True
-        myFilter = TaskFilter(request.GET, queryset=tasks)
-        tasks = myFilter.qs.order_by('pk')
-        statuses = Status.objects.all().order_by('pk')
-        taskexecutors = User.objects.all().order_by('pk')
-        labels = Label.objects.all().order_by('pk')
-        context = {
-            'form': myFilter.form,
-            'tasks': tasks,
-            'statuses': statuses,
-            'taskexecutors': taskexecutors,
-            'labels': labels,
-            'request_GET': request_GET,
-            'self_tasks': self_tasks,
-        }
-        return render(request, 'tasks/tasks.html', context)
+        if request.user.is_authenticated:
+            tasks = Task.objects.all()
+            request_GET, self_tasks = False, False
+            if request.GET:
+                request_GET = True
+                if 'self_tasks' in request.GET:
+                    tasks = tasks.filter(taskautor=request.user)
+                    self_tasks = True
+            myFilter = TaskFilter(request.GET, queryset=tasks)
+            tasks = myFilter.qs.order_by('pk')
+            statuses = Status.objects.all().order_by('pk')
+            taskexecutors = User.objects.all().order_by('pk')
+            labels = Label.objects.all().order_by('pk')
+            context = {
+                'form': myFilter.form,
+                'tasks': tasks,
+                'statuses': statuses,
+                'taskexecutors': taskexecutors,
+                'labels': labels,
+                'request_GET': request_GET,
+                'self_tasks': self_tasks,
+            }
+            return render(request, 'tasks/tasks.html', context)
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
 
 class NewTaskView(View):
