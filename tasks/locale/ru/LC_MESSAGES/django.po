@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-06 18:52+0300\n"
+"POT-Creation-Date: 2024-07-02 19:58+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: forms.py:30 templates/tasks/new_task.html:31
+msgid "Required field."
+msgstr "Обязательное поле."
 
 #: templates/tasks/del_task.html:7
 msgid "Deleting the task"
@@ -41,7 +45,7 @@ msgid "Create the task"
 msgstr "Создать задачу"
 
 #: templates/tasks/new_task.html:17 templates/tasks/new_task.html:27
-#: templates/tasks/tasks.html:99
+#: templates/tasks/tasks.html:100
 msgid "Taskname"
 msgstr "Имя"
 
@@ -49,30 +53,30 @@ msgstr "Имя"
 msgid "The task with this name already exists"
 msgstr "Task с таким Имя уже существует"
 
-#: templates/tasks/new_task.html:33 templates/tasks/new_task.html:40
+#: templates/tasks/new_task.html:35 templates/tasks/new_task.html:42
 msgid "Description"
 msgstr "Описание"
 
-#: templates/tasks/new_task.html:43 templates/tasks/task_info.html:25
-#: templates/tasks/tasks.html:15 templates/tasks/tasks.html:100
+#: templates/tasks/new_task.html:45 templates/tasks/task_info.html:25
+#: templates/tasks/tasks.html:15 templates/tasks/tasks.html:101
 msgid "Status"
 msgstr "Статус"
 
-#: templates/tasks/new_task.html:71 templates/tasks/task_info.html:21
-#: templates/tasks/tasks.html:38 templates/tasks/tasks.html:102
+#: templates/tasks/new_task.html:73 templates/tasks/task_info.html:21
+#: templates/tasks/tasks.html:38 templates/tasks/tasks.html:103
 msgid "Executor"
 msgstr "Исполнитель"
 
-#: templates/tasks/new_task.html:99 templates/tasks/task_info.html:34
+#: templates/tasks/new_task.html:101 templates/tasks/task_info.html:34
 msgid "Labels"
 msgstr "Метки"
 
-#: templates/tasks/new_task.html:124 templates/tasks/task_info.html:44
-#: templates/tasks/tasks.html:117
+#: templates/tasks/new_task.html:126 templates/tasks/task_info.html:44
+#: templates/tasks/tasks.html:118
 msgid "Edit"
 msgstr "Изменить"
 
-#: templates/tasks/new_task.html:124
+#: templates/tasks/new_task.html:126
 msgid "Create"
 msgstr "Создать задачу"
 
@@ -80,15 +84,15 @@ msgstr "Создать задачу"
 msgid "View the task"
 msgstr "Просмотр задачи"
 
-#: templates/tasks/task_info.html:17 templates/tasks/tasks.html:101
+#: templates/tasks/task_info.html:17 templates/tasks/tasks.html:102
 msgid "Autor"
 msgstr "Автор"
 
-#: templates/tasks/task_info.html:29 templates/tasks/tasks.html:103
+#: templates/tasks/task_info.html:29 templates/tasks/tasks.html:104
 msgid "Date of creation"
 msgstr "Дата создания"
 
-#: templates/tasks/task_info.html:46 templates/tasks/tasks.html:119
+#: templates/tasks/task_info.html:46 templates/tasks/tasks.html:120
 msgid "Delete"
 msgstr "Удалить"
 
@@ -104,13 +108,17 @@ msgstr "Создать задачу"
 msgid "Label"
 msgstr "Метка"
 
-#: templates/tasks/tasks.html:88
+#: templates/tasks/tasks.html:89
 msgid "Only your tasks"
 msgstr "Только свои задачи"
 
-#: templates/tasks/tasks.html:91
+#: templates/tasks/tasks.html:92
 msgid "Show"
 msgstr "Показать"
+
+#: views.py:42
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
 #: views.py:67
 msgid "Task created successfully"

@@ -25,8 +25,10 @@
                 class="form-control"
             {% endif %}
             class="form-control" placeholder="{% trans 'Taskname' %}" required id="id_name">
-            {% if task_error or form.taskname.errors %}
+            {% if task_error %}
             <div class="invalid-feedback">{% trans 'The task with this name already exists' %}</div>
+            {% elif form.taskname.errors and not task_error %}
+            <div class="invalid-feedback">{% trans 'Required field.' %}</div>
             {% endif %}
         </div>
         <div class="mb-3">
