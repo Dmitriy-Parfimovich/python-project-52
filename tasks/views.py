@@ -46,15 +46,18 @@ class TasksListView(View):
 class NewTaskView(View):
 
     def get(self, request, *args, **kwargs):
-        form = NewTaskForm()
-        statuses = Status.objects.all().order_by('pk')
-        taskexecutors = User.objects.all().order_by('pk')
-        labels = Label.objects.all().order_by('pk')
-        return render(request, 'tasks/new_task.html', context={'form': form,
-                                                               'statuses': statuses,
-                                                               'taskexecutors': taskexecutors,
-                                                               'labels': labels,
-                                                               })
+        if request.user.is_authenticated:
+            form = NewTaskForm()
+            statuses = Status.objects.all().order_by('pk')
+            taskexecutors = User.objects.all().order_by('pk')
+            labels = Label.objects.all().order_by('pk')
+            return render(request, 'tasks/new_task.html', context={'form': form,
+                                                                   'statuses': statuses,
+                                                                   'taskexecutors': taskexecutors,
+                                                                   'labels': labels,
+                                                                   })
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = NewTaskForm(request.POST)
@@ -76,18 +79,21 @@ class NewTaskView(View):
 class TaskEditView(View):
 
     def get(self, request, *args, **kwargs):
-        edit_flag = True
-        task = Task.objects.get(pk=self.kwargs['pk'])
-        form = NewTaskForm(instance=task)
-        statuses = Status.objects.all().order_by('pk')
-        taskexecutors = User.objects.all().order_by('pk')
-        labels = Label.objects.all().order_by('pk')
-        return render(request, 'tasks/new_task.html', context={'form': form,
-                                                               'statuses': statuses,
-                                                               'taskexecutors': taskexecutors,
-                                                               'labels': labels,
-                                                               'edit_flag': edit_flag,
-                                                               })
+        if request.user.is_authenticated:
+            edit_flag = True
+            task = Task.objects.get(pk=self.kwargs['pk'])
+            form = NewTaskForm(instance=task)
+            statuses = Status.objects.all().order_by('pk')
+            taskexecutors = User.objects.all().order_by('pk')
+            labels = Label.objects.all().order_by('pk')
+            return render(request, 'tasks/new_task.html', context={'form': form,
+                                                                   'statuses': statuses,
+                                                                   'taskexecutors': taskexecutors,
+                                                                   'labels': labels,
+                                                                   'edit_flag': edit_flag,
+                                                                   })
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         form = NewTaskForm(request.POST)
@@ -125,14 +131,17 @@ class TaskEditView(View):
 class TaskDeleteView(View):
 
     def get(self, request, *args, **kwargs):
-        task = Task.objects.get(pk=self.kwargs['pk'])
-        if task.taskautor == request.user.username:
-            delete_form = TaskDeleteForm()
-            return render(request, 'tasks/del_task.html',
-                          context={'form': delete_form, 'task': task})
-        else:
-            messages.error(request, _("Only it's author can delete the task"))
-            return redirect('tasks_list')
+        if request.user.is_authenticated:
+            task = Task.objects.get(pk=self.kwargs['pk'])
+            if task.taskautor == request.user.username:
+                delete_form = TaskDeleteForm()
+                return render(request, 'tasks/del_task.html',
+                              context={'form': delete_form, 'task': task})
+            else:
+                messages.error(request, _("Only it's author can delete the task"))
+                return redirect('tasks_list')
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
 
     def post(self, request, *args, **kwargs):
         task = Task.objects.get(pk=self.kwargs['pk'])

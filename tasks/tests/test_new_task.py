@@ -1,8 +1,11 @@
 from django.test import Client, TestCase
 from django.urls import reverse
 from tasks.forms import NewTaskForm
+from django.contrib.auth import get_user_model
 
 
+TEST_USER_LOGIN = 'zzzxxx'
+TEST_USER_PASSWORD = '123'
 TEST_TASK = {'taskname': 'taskname111', 'executor': 1, 'status': 1, 'labels': [3]}
 TEST_TASK_VALID_FORM = {'taskname': 'taskname333', 'status': 1, 'labels': [1, 3]}
 TEST_TASK_INVALID_FORM1 = {'taskname': 'taskname222', 'executor': '1', 'status': ''}
@@ -17,8 +20,13 @@ class TestNewTaskView(TestCase):
         # Create a test database.
         # Every test needs a client.
         self.client = Client()
+        self.user = get_user_model()
+        for user in self.user.objects.all():
+            user.set_password(user.password)
+            user.save()
 
     def test_new_task_page_template_used_and_task_code(self):
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         # Issue a GET request.
         response = self.client.get(reverse('new_task_create'))
         # Check that the response is 200 OK.

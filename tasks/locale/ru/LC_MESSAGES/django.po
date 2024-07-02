@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-02 19:58+0300\n"
+"POT-Creation-Date: 2024-07-02 23:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,22 +116,22 @@ msgstr "Только свои задачи"
 msgid "Show"
 msgstr "Показать"
 
-#: views.py:42
+#: views.py:42 views.py:59 views.py:95 views.py:143
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: views.py:67
+#: views.py:70
 msgid "Task created successfully"
 msgstr "Задача успешно создана"
 
-#: views.py:121
+#: views.py:127
 msgid "The task was successfully modified"
 msgstr "Задача успешно изменена"
 
-#: views.py:134
+#: views.py:141
 msgid "Only it's author can delete the task"
 msgstr "Задачу может удалить только ее автор"
 
-#: views.py:140
+#: views.py:149
 msgid "The task was successfully deleted"
 msgstr "Задача успешно удалена"
