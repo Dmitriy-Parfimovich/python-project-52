@@ -7,7 +7,7 @@ TEST_USER_PASSWORD = '123'
 
 TEST_TASK = 'task1'
 
-TEST_VALID_TASK = {'taskname': 'taskname111', 'executor': 1, 'status': 1, 'labels': [1, 2, 3]}
+TEST_VALID_TASK = {'name': 'taskname111', 'executor': 1, 'status': 1, 'labels': [1, 2, 3]}
 
 
 class TestTaskEditView(TestCase):
@@ -21,12 +21,12 @@ class TestTaskEditView(TestCase):
         self.task = Task
 
     def test_authorized_user_to_edit_task(self):
-        task = self.task.objects.get(taskname=TEST_TASK)
+        task = self.task.objects.get(name=TEST_TASK)
         response = self.client.get(self.task.get_absolute_url_edit(task), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_task_edit(self):
-        task = self.task.objects.get(taskname=TEST_TASK)
+        task = self.task.objects.get(name=TEST_TASK)
         response = self.client.post(self.task.get_absolute_url_edit(task),
                                     TEST_VALID_TASK, follow=True)
         self.assertIn('/tasks/', response.redirect_chain[0])

@@ -27,7 +27,7 @@ class TestTaskDeleteView(TestCase):
             user.save()
 
     def test_authorized_user_to_delete_task(self):
-        task = self.task.objects.get(taskname=TEST_TASK)
+        task = self.task.objects.get(name=TEST_TASK)
         response = self.client.get(self.task.get_absolute_url_delete(task), follow=True)
         self.assertEqual(response.status_code, 200)
 

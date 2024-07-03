@@ -104,9 +104,9 @@ class TaskEditView(View):
         form.errors.clear()
         if form.is_valid():
             task = Task.objects.get(pk=self.kwargs['pk'])
-            if Task.objects.filter(taskname=form['taskname'].value()).exists():
-                task_to_edit_from_form = Task.objects.get(taskname=form['taskname'].value())
-                if task.taskname != task_to_edit_from_form.taskname:
+            if Task.objects.filter(name=form['name'].value()).exists():
+                task_to_edit_from_form = Task.objects.get(name=form['name'].value())
+                if task.name != task_to_edit_from_form.name:
                     task_error = True
                     return render(request,
                                   'tasks/new_task.html',
@@ -117,13 +117,13 @@ class TaskEditView(View):
                                            'edit_flag': edit_flag,
                                            'task_error': task_error,
                                            })
-            task.taskname = form['taskname'].value()
-            task.taskdescription = form.cleaned_data['taskdescription']
+            task.taskname = form['name'].value()
+            task.description = form.cleaned_data['description']
             task.executor = form.cleaned_data['executor']
             task.status = form.cleaned_data['status']
             task.save()
-            labels = form.cleaned_data['label']
-            task.label.set(labels)
+            labels = form.cleaned_data['labels']
+            task.labels.set(labels)
             messages.success(request, _('The task was successfully modified'))
             return redirect('tasks_list')
 
@@ -154,6 +154,6 @@ class TaskInfoView(View):
 
     def get(self, request, *args, **kwargs):
         task = Task.objects.get(pk=self.kwargs['pk'])
-        labels = Label.objects.filter(task__taskname=task.taskname)
+        labels = Label.objects.filter(task__name=task.name)
         return render(request, 'tasks/task_info.html', context={'task': task,
                                                                 'labels': labels})

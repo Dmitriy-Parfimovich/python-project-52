@@ -45,7 +45,7 @@ class TestTasksListView(TestCase):
         form = TaskFilter(data={'status': TEST_STATUS}, queryset=tasks)
         self.assertTrue(form.is_valid())
         result = form.qs.order_by('pk')
-        result = [result.taskname for result in result]
+        result = [result.name for result in result]
         self.assertEqual(result, TEST_LIST_TASKS_TEST_STATUS)
 
     def test_taskfilter_test_form_and_executor(self):
@@ -53,24 +53,25 @@ class TestTasksListView(TestCase):
         form = TaskFilter(data={'executor': TEST_EXECUTOR}, queryset=tasks)
         self.assertTrue(form.is_valid())
         result = form.qs.order_by('pk')
-        result = [result.taskname for result in result]
+        result = [result.name for result in result]
         self.assertEqual(result, TEST_LIST_TASKS_TEST_EXECUTOR)
 
     def test_taskfilter_test_form_and_label(self):
         tasks = Task.objects.all()
-        form = TaskFilter(data={'label': TEST_LABEL}, queryset=tasks)
+        form = TaskFilter(data={'labels': TEST_LABEL}, queryset=tasks)
+        print(form.qs, 'hhhhhhhhhhhhhhhhhhhh')
         self.assertTrue(form.is_valid())
         result = form.qs.order_by('pk')
-        result = [result.taskname for result in result]
+        result = [result.name for result in result]
         self.assertEqual(result, TEST_LIST_TASKS_TEST_LABEL)
 
     def test_taskfilter_test_form_and_status_executor_label(self):
         tasks = Task.objects.all()
         form = TaskFilter(data={'status': TEST_STATUS, 'executor': TEST_EXECUTOR,
-                                'label': TEST_LABEL}, queryset=tasks)
+                                'labels': TEST_LABEL}, queryset=tasks)
         self.assertTrue(form.is_valid())
         result = form.qs.order_by('pk')
-        result = [result.taskname for result in result]
+        result = [result.name for result in result]
         self.assertEqual(result, TEST_LIST_TASKS_TEST_STATUS_EXECUTOR_LABEL)
 
     def test_tasklist_for_valid_user(self):
@@ -78,5 +79,5 @@ class TestTasksListView(TestCase):
         response = self.client.get(reverse('tasks_list'), data=SELF_TASKS_FLAG_IN_REQUEST)
         self.assertEqual(response.status_code, 200)
         result = response.context['tasks'].order_by('pk')
-        result = [result.taskname for result in result]
+        result = [result.name for result in result]
         self.assertEqual(result, TEST_LIST_TASKS_FOR_VALID_USER)

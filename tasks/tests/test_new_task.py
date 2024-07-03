@@ -6,10 +6,10 @@ from django.contrib.auth import get_user_model
 
 TEST_USER_LOGIN = 'zzzxxx'
 TEST_USER_PASSWORD = '123'
-TEST_TASK = {'taskname': 'taskname111', 'executor': 1, 'status': 1, 'labels': [3]}
-TEST_TASK_VALID_FORM = {'taskname': 'taskname333', 'status': 1, 'labels': [1, 3]}
-TEST_TASK_INVALID_FORM1 = {'taskname': 'taskname222', 'executor': '1', 'status': ''}
-TEST_TASK_INVALID_FORM2 = {'taskname': 'taskname333'}
+TEST_TASK = {'name': 'taskname111', 'executor': 1, 'status': 1, 'labels': [3]}
+TEST_TASK_VALID_FORM = {'name': 'taskname333', 'status': 1, 'labels': [1, 3]}
+TEST_TASK_INVALID_FORM1 = {'name': 'taskname222', 'executor': '1', 'status': ''}
+TEST_TASK_INVALID_FORM2 = {'name': 'taskname333'}
 
 
 class TestNewTaskView(TestCase):

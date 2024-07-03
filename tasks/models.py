@@ -7,15 +7,15 @@ from labels.models import Label
 
 # Create your models here.
 class Task(models.Model):
-    taskname = models.CharField(max_length=50, unique=True, verbose_name='Задача')
-    taskdescription = models.TextField(blank=True, null=True, verbose_name='Описание')
+    name = models.CharField(max_length=50, unique=True, verbose_name='Задача')
+    description = models.TextField(blank=True, null=True, verbose_name='Описание')
     taskautor = models.CharField(max_length=50, verbose_name='Автор')
     executor = models.ForeignKey(User, on_delete=models.CASCADE,
                                  blank=True,
                                  null=True,
                                  verbose_name='Исполнитель')
     status = models.ForeignKey(Status, on_delete=models.CASCADE, verbose_name='Статус')
-    label = models.ManyToManyField(Label, blank=True)
+    labels = models.ManyToManyField(Label, blank=True)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     def get_absolute_url(self):
@@ -28,9 +28,9 @@ class Task(models.Model):
         return reverse('task_delete', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.taskname
+        return self.name
 
     class Meta:
         verbose_name = 'Задачи'
         verbose_name_plural = 'Задачи'
-        ordering = ['taskname']
+        ordering = ['name']
