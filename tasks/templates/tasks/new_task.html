@@ -105,7 +105,7 @@
             {% else %}
                 class="form-select"
             {% endif %}
-            id="id_label" multiple>
+            id="id_labels" multiple>
             {% if form.labels.value %}
             {% for label in labels %}
             {% with val=label.pk|stringformat:'i' %}
