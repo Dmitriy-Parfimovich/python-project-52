@@ -59,7 +59,6 @@ class TestTasksListView(TestCase):
     def test_taskfilter_test_form_and_label(self):
         tasks = Task.objects.all()
         form = TaskFilter(data={'labels': TEST_LABEL}, queryset=tasks)
-        print(form.qs, 'hhhhhhhhhhhhhhhhhhhh')
         self.assertTrue(form.is_valid())
         result = form.qs.order_by('pk')
         result = [result.name for result in result]

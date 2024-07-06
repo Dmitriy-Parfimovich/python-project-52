@@ -35,6 +35,7 @@ class TestNewTaskView(TestCase):
         self.assertTemplateUsed(response, 'tasks/new_task.html')
 
     def test_create_task(self):
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.post(reverse('new_task_create'), TEST_TASK, follow=True)
         self.assertIn('/tasks/', response.redirect_chain[0])
 

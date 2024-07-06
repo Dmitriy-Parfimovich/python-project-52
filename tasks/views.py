@@ -22,7 +22,8 @@ class TasksListView(View):
             if request.GET:
                 request_GET = True
                 if 'self_tasks' in request.GET:
-                    tasks = tasks.filter(taskautor=request.user)
+                    taskautor = f'{request.user.first_name} {request.user.last_name}'
+                    tasks = tasks.filter(taskautor=taskautor)
                     self_tasks = True
             myFilter = TaskFilter(request.GET, queryset=tasks)
             tasks = myFilter.qs.order_by('pk')
@@ -65,7 +66,8 @@ class NewTaskView(View):
         taskexecutors = User.objects.all().order_by('pk')
         labels = Label.objects.all().order_by('pk')
         if form.is_valid():
-            form.cleaned_data['taskautor'] = request.user
+            taskautor = f'{request.user.first_name} {request.user.last_name}'
+            form.cleaned_data['taskautor'] = taskautor
             form.save()
             messages.success(request, _('Task created successfully'))
             return redirect('tasks_list')
@@ -133,7 +135,7 @@ class TaskDeleteView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             task = Task.objects.get(pk=self.kwargs['pk'])
-            if task.taskautor == request.user.username:
+            if task.taskautor == f'{request.user.first_name} {request.user.last_name}':
                 delete_form = TaskDeleteForm()
                 return render(request, 'tasks/del_task.html',
                               context={'form': delete_form, 'task': task})

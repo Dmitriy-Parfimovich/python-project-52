@@ -83,16 +83,16 @@
             {% for taskexecutor in taskexecutors %}
             {% with val=taskexecutor.pk|stringformat:'i' %}
                 {% if form.executor.value == taskexecutor.pk or form.executor.value == val %}
-                    <option value="{{ taskexecutor.pk }}" selected>{{ taskexecutor.username }}</option>
+                    <option value="{{ taskexecutor.pk }}" selected>{{ taskexecutor.first_name }} {{ taskexecutor.last_name }}</option>
                 {% else %}
-                    <option value="{{ taskexecutor.pk }}">{{ taskexecutor.username }}</option>
+                    <option value="{{ taskexecutor.pk }}">{{ taskexecutor.first_name }} {{ taskexecutor.last_name }}</option>
                 {% endif %}
             {% endwith %}
             {% endfor %}
             {% else %}
             <option value="" selected>---------</option>
             {% for taskexecutor in taskexecutors %}
-                <option value="{{ taskexecutor.pk }}">{{ taskexecutor.username }}</option>
+                <option value="{{ taskexecutor.pk }}">{{ taskexecutor.first_name }} {{ taskexecutor.last_name }}</option>
             {% endfor %}
             {% endif %}
             </select>
