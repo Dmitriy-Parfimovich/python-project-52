@@ -119,7 +119,7 @@ class TaskEditView(View):
                                            'edit_flag': edit_flag,
                                            'task_error': task_error,
                                            })
-            task.taskname = form['name'].value()
+            task.name = form['name'].value()
             task.description = form.cleaned_data['description']
             task.executor = form.cleaned_data['executor']
             task.status = form.cleaned_data['status']
