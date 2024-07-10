@@ -19,16 +19,55 @@ You can see a deployed application on Render [here](https://python-project-52-qm
 ![Readme_3.JPG](./Readme_3.JPG)
 
 ## Instalation
-
+1. To install the project, please, clone the project from this repository, install poetry and install all dependencies:
 ```sh
 git clone <package>
 pip install poetry
 make install
 ```
+2. Please, define environment variables. Create .env file in the root of the project:
+```sh
+SECRET_KEY=''
+DEBUG=False (True is the debugging mode)
+RENDER_EXTERNAL_HOSTNAME='' (The external url in case the deploying on Render.com)
+POST_SERVER_ITEM_ACCESS_TOKEN='' (For the error tracking service Rollbar.com)
+```
+3. To check the project's functionality, please, run the linter and tests:
+```sh
+make lint
+make test
+```
+
+## Deploying
+To deploy the project to Render.com, please follow the steps below:
+1. Upload the project repository to your git account.
+1. Сreate an account on Render.com.
+2. Create a new PostgreSDB (click "New" at the top right of the Render.com and then "PostgreSQL", fill the "Name", "Region" and "Plan Type", click "Create Database").
+3. Create a new Web Service (click "New", "Web Service",
+enter the following details:
+```sh
+Name: fill the name
+Region: the same region as your database
+Branch: your main branch (e.g., master/main)
+Environment: Python 3
+Build command: sh build.sh
+Start command: gunicorn core.wsgi:application
+Plan Type: fill the plan type
+```
+Open the "Advanced" dropdown and add the following environment variables:
+```sh
+PYTHON_VERSION: 3.9.9
+SECRET_KEY: Click "Generate"
+DEBUG: 1
+ALLOWED_HOSTS: *
+DATABASE_URL: <your_internal_database_url>
+```
+).
+4. Manually download the project repository from your git account (click "Manual Deploy").
 
 ## Requirements
 
 - Python 3.8
 - Poetry 1.6.1
-- Django 4.2.5
-- Rollbar 0.16.3
+- Django
+- Rollbar

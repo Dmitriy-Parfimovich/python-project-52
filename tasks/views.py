@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View

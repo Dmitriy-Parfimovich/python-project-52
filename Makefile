@@ -7,9 +7,6 @@ shell:
 createsuperuser:
 	poetry run python manage.py createsuperuser
 
-requirements: poetry.lock
-	poetry export -f requirements.txt -o requirements.txt
-
 translate:
 	poetry run django-admin makemessages --ignore="static" --ignore=".env" -l ru
 
