@@ -45,3 +45,15 @@ lint:
 
 test:
 	poetry run python manage.py test
+
+test_users:
+	poetry run python manage.py test users.tests
+
+test_tasks:
+	poetry run python manage.py test tasks.tests
+
+test_statuses:
+	poetry run python manage.py test statuses.tests
+
+test_labels:
+	poetry run python manage.py test labels.tests

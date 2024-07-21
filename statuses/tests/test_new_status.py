@@ -33,6 +33,7 @@ class TestNewStatusView(TestCase):
         self.assertTemplateUsed(response, 'statuses/new_status.html')
 
     def test_create_status(self):
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.post(reverse('new_status_create'), TEST_STATUS,
                                     follow=True)
         self.assertIn('/statuses/', response.redirect_chain[0])

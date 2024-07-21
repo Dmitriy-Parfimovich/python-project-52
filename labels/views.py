@@ -1,23 +1,39 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views import View
+from django.views.generic import ListView, CreateView, UpdateView
 from labels.models import Label
 from labels.forms import NewLabelForm, LabelDeleteForm
 from django.utils.translation import gettext as _
 
 
 # Create your views here.
-class LabelsListView(View):
+#class LabelsListView(View):
 
-    def get(self, request, *args, **kwargs):
+#    def get(self, request, *args, **kwargs):
+#        if request.user.is_authenticated:
+#            labels = Label.objects.all().order_by('pk')
+#            return render(request, 'labels/labels.html', context={'labels': labels})
+#        messages.error(request, _('You are not authorized! Please log in.'))
+#        return redirect('login')
+
+
+class LabelsListView(ListView):
+
+    queryset = Label.objects.all().order_by('pk')
+    context_object_name = 'labels'
+    template_name = 'labels/labels.html'
+
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            labels = Label.objects.all().order_by('pk')
-            return render(request, 'labels/labels.html', context={'labels': labels})
-        messages.error(request, _('You are not authorized! Please log in.'))
-        return redirect('login')
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(request, _('You are not authorized! Please log in.'))
+            return redirect('login')
 
 
-class NewLabelView(View):
+"""class NewLabelView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -33,9 +49,28 @@ class NewLabelView(View):
             messages.success(request, _('Label successfully created'))
             return redirect('labels_list')
         return render(request, 'labels/new_label.html', context={'form': form})
+"""
 
 
-class LabelEditView(View):
+class NewLabelView(CreateView):
+
+    form_class = NewLabelForm
+    template_name = 'labels/new_label.html'
+    success_url = reverse_lazy('labels_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(request, _('You are not authorized! Please log in.'))
+            return redirect('login')
+    
+    def form_valid(self, form):
+        messages.success(self.request, _('Label successfully created'))
+        return super().form_valid(form)
+
+
+"""class LabelEditView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -51,6 +86,25 @@ class LabelEditView(View):
             Label.objects.filter(pk=self.kwargs['pk']).update(**form.cleaned_data)
             messages.success(request, _('Label changed successfully'))
             return redirect('labels_list')
+"""
+
+class LabelEditView(UpdateView):
+
+    model = Label
+    form_class = NewLabelForm
+    template_name = 'labels/new_label.html'
+    success_url = reverse_lazy('labels_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(request, _('You are not authorized! Please log in.'))
+            return redirect('login')
+    
+    def form_valid(self, form):
+        messages.success(self.request, _('Label changed successfully'))
+        return super().form_valid(form)
 
 
 class LabelDeleteView(View):

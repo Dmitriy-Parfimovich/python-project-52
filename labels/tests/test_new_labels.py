@@ -33,6 +33,7 @@ class TestNewLabelView(TestCase):
         self.assertTemplateUsed(response, 'labels/new_label.html')
 
     def test_create_label(self):
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.post(reverse('new_label_create'), TEST_LABEL,
                                     follow=True)
         self.assertIn('/labels/', response.redirect_chain[0])

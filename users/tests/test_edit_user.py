@@ -35,23 +35,20 @@ class TestUserEditView(TestCase):
 
     def test_authorized_user_to_edit(self):
         user = self.user.objects.get(username=TEST_USER_LOGIN)
-        response = self.client.post(reverse('login'), username=TEST_USER_LOGIN,
-                                    password=TEST_USER_PASSWORD, follow=True)
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.get(self.user.get_absolute_url_edit(user), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_edit_user(self):
         user = self.user.objects.get(username=TEST_USER_LOGIN)
-        response = self.client.post(reverse('login'), username=TEST_USER_LOGIN,
-                                    password=TEST_USER_PASSWORD, follow=True)
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.post(self.user.get_absolute_url_edit(user),
                                     TEST_VALID_USER, follow=True)
         self.assertIn('/users/', response.redirect_chain[0])
 
     def test_invalid_edit_user(self):
         user = self.user.objects.get(username=TEST_USER_LOGIN)
-        response = self.client.post(reverse('login'), username=TEST_USER_LOGIN,
-                                    password=TEST_USER_PASSWORD, follow=True)
+        response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.post(self.user.get_absolute_url_edit(user),
                                     TEST_INVALID_USER, follow=True)
         self.assertEqual(response.status_code, 200)

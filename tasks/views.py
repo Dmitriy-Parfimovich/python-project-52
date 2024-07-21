@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views import View
+from django.views.generic import ListView, CreateView
 from tasks.models import Task
 from statuses.models import Status
 from users.models import User
@@ -11,38 +13,75 @@ from .filters import TaskFilter
 
 
 # Create your views here.
-class TasksListView(View):
+#class TasksListView(View):
 
-    def get(self, request, *args, **kwargs):
+#    def get(self, request, *args, **kwargs):
+#        if request.user.is_authenticated:
+#            tasks = Task.objects.all()
+#            request_GET, self_tasks = False, False
+#            if request.GET:
+#                request_GET = True
+#                if 'self_tasks' in request.GET:
+#                    taskautor = f'{request.user.first_name} {request.user.last_name}'
+#                    tasks = tasks.filter(taskautor=taskautor)
+#                    self_tasks = True
+#            myFilter = TaskFilter(request.GET, queryset=tasks)
+#            tasks = myFilter.qs.order_by('pk')
+#            statuses = Status.objects.all().order_by('pk')
+#            taskexecutors = User.objects.all().order_by('pk')
+#            labels = Label.objects.all().order_by('pk')
+#            context = {
+#                'form': myFilter.form,
+#                'tasks': tasks,
+#                'statuses': statuses,
+#                'taskexecutors': taskexecutors,
+#                'labels': labels,
+#                'request_GET': request_GET,
+#                'self_tasks': self_tasks,
+#            }
+#            return render(request, 'tasks/tasks.html', context)
+#        messages.error(request, _('You are not authorized! Please log in.'))
+#        return redirect('login')
+
+
+class TasksListView(ListView):
+
+    queryset = Task.objects.all()
+    object_list = None
+    template_name = 'tasks/tasks.html'
+
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            tasks = Task.objects.all()
-            request_GET, self_tasks = False, False
-            if request.GET:
-                request_GET = True
-                if 'self_tasks' in request.GET:
-                    taskautor = f'{request.user.first_name} {request.user.last_name}'
-                    tasks = tasks.filter(taskautor=taskautor)
-                    self_tasks = True
-            myFilter = TaskFilter(request.GET, queryset=tasks)
-            tasks = myFilter.qs.order_by('pk')
-            statuses = Status.objects.all().order_by('pk')
-            taskexecutors = User.objects.all().order_by('pk')
-            labels = Label.objects.all().order_by('pk')
-            context = {
-                'form': myFilter.form,
-                'tasks': tasks,
-                'statuses': statuses,
-                'taskexecutors': taskexecutors,
-                'labels': labels,
-                'request_GET': request_GET,
-                'self_tasks': self_tasks,
-            }
-            return render(request, 'tasks/tasks.html', context)
-        messages.error(request, _('You are not authorized! Please log in.'))
-        return redirect('login')
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(request, _('You are not authorized! Please log in.'))
+            return redirect('login')
+
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)  
+        context['statuses'] = Status.objects.all().order_by('pk')  
+        context['taskexecutors'] = User.objects.all().order_by('pk')  
+        context['labels'] = Label.objects.all().order_by('pk')
+        context['request_GET'] = False
+        context['self_tasks'] = False
+        return context
+    
+    def get(self, request, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if request.GET:
+            context['request_GET'] = True
+            if 'self_tasks' in request.GET:
+                taskautor = f'{request.user.first_name} {request.user.last_name}'
+                self.queryset = self.queryset.filter(taskautor=taskautor)
+                context['self_tasks'] = True
+        myFilter = TaskFilter(request.GET, queryset=self.queryset)
+        tasks = myFilter.qs.order_by('pk')
+        context['form'] = myFilter.form
+        context['tasks'] = tasks
+        return render(request, self.template_name, context)
 
 
-class NewTaskView(View):
+"""class NewTaskView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -74,6 +113,34 @@ class NewTaskView(View):
                                                                'taskexecutors': taskexecutors,
                                                                'labels': labels,
                                                                })
+"""
+
+
+class NewTaskView(CreateView):
+
+    form_class = NewTaskForm
+    template_name = 'tasks/new_task.html'
+    success_url = reverse_lazy('tasks_list')
+
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)  
+        context['statuses'] = Status.objects.all().order_by('pk')  
+        context['taskexecutors'] = User.objects.all().order_by('pk')  
+        context['labels'] = Label.objects.all().order_by('pk')
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(request, _('You are not authorized! Please log in.'))
+            return redirect('login')
+    
+    def form_valid(self, form):
+        taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
+        form.cleaned_data['taskautor'] = taskautor
+        messages.success(self.request, _('Task created successfully'))
+        return super().form_valid(form)
 
 
 class TaskEditView(View):

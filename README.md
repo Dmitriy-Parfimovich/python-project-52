@@ -41,10 +41,9 @@ make test
 ## Deploying
 To deploy the project to Render.com, please follow the steps below:
 1. Upload the project repository to your git account.
-1. Сreate an account on Render.com.
-2. Create a new PostgreSDB (click "New" at the top right of the Render.com and then "PostgreSQL", fill the "Name", "Region" and "Plan Type", click "Create Database").
-3. Create a new Web Service (click "New", "Web Service",
-enter the following details:
+2. Сreate an account on Render.com.
+3. Create a new PostgreSDB. Click "New" at the top right of the Render.com and then "PostgreSQL", fill the "Name", "Region" and "Plan Type", click "Create Database".
+4. Create a new Web Service. Click "New", "Web Service", enter the following details:
 ```sh
 Name: fill the name
 Region: the same region as your database
@@ -62,8 +61,7 @@ DEBUG: 1
 ALLOWED_HOSTS: *
 DATABASE_URL: <your_internal_database_url>
 ```
-).
-4. Manually download the project repository from your git account (click "Manual Deploy").
+5. Manually download the project repository from your git account. Click "Manual Deploy".
 
 ## Requirements
 
