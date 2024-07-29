@@ -13,6 +13,7 @@ class IndexView(View):
 
 
 class LoginUserView(LoginView):
+    
     template_name = 'users/login.html'
 
     def get_success_url(self):
