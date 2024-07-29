@@ -14,7 +14,7 @@ class UserRegForm(forms.ModelForm):
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
 
-    def save(self):
+    """def save(self):
         self.clean()
         user = self.Meta.model(
             username=self.cleaned_data['username'],
@@ -23,7 +23,7 @@ class UserRegForm(forms.ModelForm):
         )
         user.set_password(self.cleaned_data['password2'])
         user.save()
-        return user
+        return user"""
 
     def clean_username(self):
         if re.search(r'[^\w\-@.+]', self['username'].value()):
