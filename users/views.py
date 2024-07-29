@@ -57,6 +57,9 @@ class NewUserRegView(CreateView):
         return context
     
     def form_valid(self, form):
+        user = form.instance
+        user.save()
+        user.set_password(form.cleaned_data['password2'])
         messages.success(self.request, _('User successfully registered'))
         return super().form_valid(form)
 
