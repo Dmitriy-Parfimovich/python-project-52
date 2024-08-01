@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views import View
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from tasks.models import Task
 from statuses.models import Status
 from users.models import User
@@ -143,7 +143,7 @@ class NewTaskView(CreateView):
         return super().form_valid(form)
 
 
-class TaskEditView(View):
+"""class TaskEditView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -192,7 +192,47 @@ class TaskEditView(View):
             labels = form.cleaned_data['labels']
             task.labels.set(labels)
             messages.success(request, _('The task was successfully modified'))
-            return redirect('tasks_list')
+            return redirect('tasks_list')"""
+
+
+class TaskEditView(UpdateView):
+
+    model = Task
+    form_class = NewTaskForm
+    template_name = 'tasks/new_task.html'
+    success_url = reverse_lazy('tasks_list')
+
+    def get_object(self):
+        queryset = super().get_queryset()
+        return queryset.get(pk=self.kwargs['pk'])
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, _('You are not authorized! Please log in.'))
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)
+        context['edit_flag'] = True
+        context['task_error'] = False
+        context['statuses'] = Status.objects.all().order_by('pk')
+        context['taskexecutors'] = User.objects.all().order_by('pk')
+        context['labels'] = Label.objects.all().order_by('pk')
+        return context
+
+    def form_valid(self, form):
+        task = form.instance
+        if Task.objects.filter(name=task.name).exists():
+            task_to_edit_from_form = Task.objects.get(name=task.name)
+            if self.get_object() != task_to_edit_from_form.name:
+                self.context['task_error'] = True
+        else:
+            task.save()
+            labels = form.cleaned_data['labels']
+            task.labels.set(labels)
+        messages.success(self.request, _('The task was successfully modified'))
+        return super().form_valid(form)
 
 
 class TaskDeleteView(View):

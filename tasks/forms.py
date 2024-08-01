@@ -10,7 +10,7 @@ class NewTaskForm(forms.ModelForm):
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
 
-    def save(self):
+    """def save(self):
         self.clean()
         task = self.Meta.model(name=self.cleaned_data['name'],
                                description=self.cleaned_data['description'],
@@ -21,7 +21,7 @@ class NewTaskForm(forms.ModelForm):
         task.save()
         labels = self.cleaned_data['labels']
         task.labels.set(labels)
-        return task
+        return task"""
 
     def clean_name(self):
         if re.search(r"^\s*$", self['name'].value()):
