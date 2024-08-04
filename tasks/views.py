@@ -68,7 +68,7 @@ class TasksListView(ListView):
         return context
     
     def get(self, request, *args, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = self.get_context_data(**kwargs)
         if request.GET:
             context['request_GET'] = True
             if 'self_tasks' in request.GET:
