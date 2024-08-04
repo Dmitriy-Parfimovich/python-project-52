@@ -138,8 +138,10 @@ class NewTaskView(CreateView):
             return redirect('login')
     
     def form_valid(self, form):
+        task = form.instance
         taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
-        form.cleaned_data['taskautor'] = taskautor
+        task.taskautor = taskautor
+        form.save()
         messages.success(self.request, _('Task created successfully'))
         return super().form_valid(form)
 
