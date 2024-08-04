@@ -6,7 +6,8 @@ from django.contrib import messages
 from django.views import View
 from users.models import User
 from tasks.models import Task
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import (ListView, CreateView,
+                                  UpdateView, DeleteView)
 from users.forms import UserRegForm, UserDeleteForm
 from django.utils.translation import gettext as _
 
@@ -137,7 +138,7 @@ class UserEditView(UpdateView):
         return super().form_valid(form)
 
 
-class UserDeleteView(View):
+"""class UserDeleteView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -153,6 +154,38 @@ class UserDeleteView(View):
         messages.error(request, _('You are not authorized! Please log in.'))
         return redirect('login')
 
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        if Task.objects.filter(executor__username=user.username).exists():
+            messages.error(request, _('Cannot delete user because it is in use'))
+        else:
+            user.delete()
+            messages.success(request, _('User deleted successfully'))
+        return redirect('users_list')"""
+
+
+class UserDeleteView(DeleteView):
+
+    model = User
+    form_class = UserDeleteForm
+    template_name = 'users/delete.html'
+    success_url = reverse_lazy('users_list')
+
+    def get_object(self):
+        queryset = super().get_queryset()
+        return queryset.get(pk=self.kwargs['pk'])
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user == self.get_object():
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                messages.error(request, _('You do not have permission\
+                                          to change another user.'))
+                return redirect('users_list')
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
+    
     def post(self, request, *args, **kwargs):
         user = request.user
         if Task.objects.filter(executor__username=user.username).exists():

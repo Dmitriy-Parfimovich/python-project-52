@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import (ListView, CreateView,
+                                  UpdateView, DeleteView)
 from labels.models import Label
 from labels.forms import NewLabelForm, LabelDeleteForm
 from django.utils.translation import gettext as _
@@ -107,7 +108,7 @@ class LabelEditView(UpdateView):
         return super().form_valid(form)
 
 
-class LabelDeleteView(View):
+"""class LabelDeleteView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -126,4 +127,31 @@ class LabelDeleteView(View):
             return redirect('labels_list')
         else:
             messages.error(request, _("Can't remove the label because it's in use"))
-            return redirect('labels_list')
+            return redirect('labels_list')"""
+
+
+class LabelDeleteView(DeleteView):
+
+    model = Label
+    form_class = LabelDeleteForm
+    template_name = 'labels/del_label.html'
+    success_url = reverse_lazy('labels_list')
+
+    def get_object(self):
+        queryset = super().get_queryset()
+        return queryset.get(pk=self.kwargs['pk'])
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
+    
+    def post(self, request, *args, **kwargs):
+        label = self.get_object()
+        if list(label.task_set.all()) == []:
+            label.delete()
+            messages.success(request, _('Label deleted successfully'))
+        else:
+            messages.error(request, _("Can't remove the label because it's in use"))
+        return redirect('labels_list')

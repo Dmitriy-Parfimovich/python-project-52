@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import (ListView, CreateView,
+                                  UpdateView, DeleteView)
 from tasks.models import Task
 from statuses.models import Status
 from users.models import User
@@ -235,7 +236,7 @@ class TaskEditView(UpdateView):
         return super().form_valid(form)
 
 
-class TaskDeleteView(View):
+"""class TaskDeleteView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -253,6 +254,33 @@ class TaskDeleteView(View):
     def post(self, request, *args, **kwargs):
         task = Task.objects.get(pk=self.kwargs['pk'])
         task.delete()
+        messages.success(request, _('The task was successfully deleted'))
+        return redirect('tasks_list')"""
+
+
+class TaskDeleteView(DeleteView):
+
+    model = Task
+    form_class = TaskDeleteForm
+    template_name = 'tasks/del_task.html'
+    success_url = reverse_lazy('tasks_list')
+
+    def get_object(self):
+        queryset = super().get_queryset()
+        return queryset.get(pk=self.kwargs['pk'])
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if self.get_object().taskautor == f'{request.user.first_name} {request.user.last_name}':
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                messages.error(request, _("Only it's author can delete the task"))
+                return redirect('tasks_list')
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
+    
+    def post(self, request, *args, **kwargs):
+        self.get_object().delete()
         messages.success(request, _('The task was successfully deleted'))
         return redirect('tasks_list')
 

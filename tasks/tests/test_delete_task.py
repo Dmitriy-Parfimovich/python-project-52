@@ -37,6 +37,7 @@ class TestTaskDeleteView(TestCase):
         self.assertTemplateUsed(response, 'tasks/del_task.html')
 
     def test_valid_delete_user_post(self):
+        self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         response = self.client.post(reverse('task_delete', kwargs={'pk': TEST_TASK_VALID_PK}),
                                     follow=True)
         self.assertIn('/tasks/', response.redirect_chain[0])

@@ -10,11 +10,11 @@ class NewLabelForm(forms.ModelForm):
         model = Label
         fields = ['name']
 
-    def save(self):
+    """def save(self):
         self.clean()
         label = self.Meta.model(name=self.cleaned_data['name'])
         label.save()
-        return label
+        return label"""
 
     def clean_name(self):
         if re.search(r"^\s*$", self['name'].value()):
