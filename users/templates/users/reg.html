@@ -4,7 +4,7 @@
 
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
-    {% if user.id and user_is_auth %}
+    {% if user.id and not user_is_auth %}
     <h1 class="my-4">{% translate "Edit user" %}</h1>
     {% else %}
     <h1 class="my-4">{% translate "Registration" %}</h1>
@@ -15,7 +15,7 @@
             <input type="text" name="first_name" maxlength="150"
             {% if form.errors %}
                 class="form-control is-valid" value="{{ form.first_name.value }}"
-            {% elif user.id and user_is_auth %}
+            {% elif user.id and not user_is_auth %}
                 class="form-control" value="{{ user.first_name }}"
             {% endif %}
             class="form-control" placeholder="{% trans 'First name' %}" required id="id_first_name"></div>
@@ -23,7 +23,7 @@
             <input type="text" name="last_name" maxlength="150"
             {% if form.errors %}
                 class="form-control is-valid" value="{{ form.last_name.value }}"
-            {% elif user.id and user_is_auth %}
+            {% elif user.id and not user_is_auth %}
                 class="form-control" value="{{ user.last_name }}"
             {% endif %}
             class="form-control" placeholder="{% trans 'Last name' %}" required id="id_last_name"></div>
@@ -35,7 +35,7 @@
             {% elif form.password1.errors and not form.username.errors %}
                 class="form-control is-valid"
                 value="{{ form.username.value }}"
-            {% elif user.id and user_is_auth %}
+            {% elif user.id and not user_is_auth %}
                 class="form-control" value="{{ user.username }}"
             {% else %}
                 class="form-control"
@@ -75,7 +75,7 @@
             {% endif %}
             <div class="form-text">{% trans 'To confirm, please enter your password again.' %}</div>
         </div>
-        <input class="btn btn-primary" type="submit" {% if user.id and user_is_auth %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Register' %}" {% endif %}>
+        <input class="btn btn-primary" type="submit" {% if user.id and not user_is_auth %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Register' %}" {% endif %}>
     </form>
 </div>
 {% endblock maincontent %}

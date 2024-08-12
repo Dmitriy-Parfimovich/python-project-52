@@ -10,11 +10,9 @@ class UserDataMixin(SingleObjectMixin):
         return queryset.get(pk=self.kwargs['pk'])"""
     
     def get_mixin_context(self, context, **kwargs):
-        kwargs['user_is_auth'] = False
-        if self.request.user.is_authenticated:
-            kwargs['user_is_auth'] = True
-        if kwargs['pk']:
-            if self.request.user == self.get_object():
-                kwargs['user'] = self.get_object()
-        context.update(kwargs)
+        context['user_is_auth'] = False
+        if kwargs['pk'] and self.request.user == self.get_object():
+                context['user'] = self.get_object()
+        elif self.request.user.is_authenticated:
+            context['user_is_auth'] = True
         return context
