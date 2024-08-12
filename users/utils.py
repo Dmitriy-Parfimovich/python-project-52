@@ -1,4 +1,6 @@
 from users.models import User
+from django.shortcuts import redirect
+from django.contrib import messages
 from django.views.generic.detail import SingleObjectMixin
 
 class UserDataMixin(SingleObjectMixin):
@@ -16,3 +18,14 @@ class UserDataMixin(SingleObjectMixin):
         elif self.request.user.is_authenticated:
             context['user_is_auth'] = True
         return context
+    
+    def mixin_dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if self.request.user != self.get_object():
+                messages.error(request, _('You do not have permission to change\
+                                          another user.'))
+                return redirect('users_list')
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            messages.error(request, _('You are not authorized! Please log in.'))
+            return redirect('login')

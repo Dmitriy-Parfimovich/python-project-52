@@ -1,5 +1,7 @@
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
+from django.http.request import HttpRequest as HttpRequest
+from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -56,7 +58,7 @@ class UserEditView(UserDataMixin, UpdateView):
         queryset = super().get_queryset()
         return queryset.get(pk=self.kwargs['pk'])"""
 
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             if self.request.user != self.get_object():
                 messages.error(request, _('You do not have permission to change\
@@ -65,8 +67,11 @@ class UserEditView(UserDataMixin, UpdateView):
             return super().dispatch(request, *args, **kwargs)
         else:
             messages.error(request, _('You are not authorized! Please log in.'))
-            return redirect('login')
+            return redirect('login')"""
     
+    def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, **kwargs)
+
     """def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
         if self.request.user == self.get_object():
@@ -100,7 +105,7 @@ class UserDeleteView(UserDataMixin, DeleteView):
         queryset = super().get_queryset()
         return queryset.get(pk=self.kwargs['pk'])"""
     
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             if request.user == self.get_object():
                 return super().dispatch(request, *args, **kwargs)
@@ -109,7 +114,10 @@ class UserDeleteView(UserDataMixin, DeleteView):
                                           to change another user.'))
                 return redirect('users_list')
         messages.error(request, _('You are not authorized! Please log in.'))
-        return redirect('login')
+        return redirect('login')"""
+    
+    def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):
         user = request.user
