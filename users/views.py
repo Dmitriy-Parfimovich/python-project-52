@@ -70,7 +70,7 @@ class UserEditView(UserDataMixin, UpdateView):
             return redirect('login')"""
     
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
+        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
 
     """def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
@@ -117,7 +117,7 @@ class UserDeleteView(UserDataMixin, DeleteView):
         return redirect('login')"""
     
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
+        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
     
     def post(self, request, *args, **kwargs):
         user = request.user
