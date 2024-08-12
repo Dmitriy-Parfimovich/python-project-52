@@ -26,6 +26,5 @@ class UserDataMixin(SingleObjectMixin):
                                           another user.'))
                 return redirect('users_list')
             return super().dispatch(request, *args, **kwargs)
-        else:
-            messages.error(request, _('You are not authorized! Please log in.'))
-            return redirect('login')
+        messages.error(request, _('You are not authorized! Please log in.'))
+        return redirect('login')
