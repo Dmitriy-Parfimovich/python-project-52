@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 21:05+0300\n"
+"POT-Creation-Date: 2024-08-13 20:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:32
+#: forms.py:30
 msgid ""
 "Please enter a correct username.                                        It "
 "can only contain letters,                                        numbers and "
@@ -29,15 +29,15 @@ msgstr ""
 "Введите правильное имя пользователя. Оно может содержать только буквы, цифры "
 "и знаки @/./+/-/_."
 
-#: forms.py:36
+#: forms.py:34
 msgid "A user with the same name already exists."
 msgstr "Пользователь с таким именем уже существует."
 
-#: forms.py:41
+#: forms.py:39
 msgid "Entered passwords do not match"
 msgstr "Введенные пароли не совпадают."
 
-#: forms.py:43
+#: forms.py:41
 msgid ""
 "The entered password is too short.                                        It "
 "must contain at least 3 characters."
@@ -67,7 +67,7 @@ msgid "Username"
 msgstr "Имя пользователя"
 
 #: templates/users/login.html:24 templates/users/login.html:31
-#: templates/users/reg.html:47 templates/users/reg.html:51
+#: templates/users/reg.html:49 templates/users/reg.html:56
 msgid "Password"
 msgstr "Пароль"
 
@@ -91,7 +91,7 @@ msgstr "Имя"
 msgid "Last name"
 msgstr "Фамилия"
 
-#: templates/users/reg.html:45
+#: templates/users/reg.html:47
 msgid ""
 "Required field. Maximum 150 characters. Only letters, numbers and symbols "
 "@/./+/-/_."
@@ -99,23 +99,23 @@ msgstr ""
 "Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
 "+/-/_."
 
-#: templates/users/reg.html:54
+#: templates/users/reg.html:59
 msgid "Your password must contain at least 3 characters."
 msgstr "Ваш пароль должен содержать как минимум 3 символа."
 
-#: templates/users/reg.html:58 templates/users/reg.html:67
+#: templates/users/reg.html:63 templates/users/reg.html:72
 msgid "Password confirmation"
 msgstr "Подтверждение пароля"
 
-#: templates/users/reg.html:75
+#: templates/users/reg.html:76
 msgid "To confirm, please enter your password again."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
-#: templates/users/reg.html:79 templates/users/users.html:29
+#: templates/users/reg.html:78 templates/users/users.html:29
 msgid "Edit"
 msgstr "Изменить"
 
-#: templates/users/reg.html:81
+#: templates/users/reg.html:78
 msgid "Register"
 msgstr "Зарегистрировать"
 
@@ -135,37 +135,36 @@ msgstr "Дата создания"
 msgid "Delete"
 msgstr "Удалить"
 
-#: views.py:30
-msgid "User successfully registered"
-msgstr "Пользователь успешно зарегистрирован"
-
-#: views.py:44
+#: utils.py:23
 msgid ""
 "You do not have permission to "
 "change                                          another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: views.py:48 views.py:83
+#: utils.py:27
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: views.py:64
+#: views.py:31
+msgid "User successfully registered"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: views.py:51
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен"
 
 #: views.py:79
-msgid ""
-"You do not have permission                                          to "
-"change another user."
-msgstr "У вас нет прав для изменения другого пользователя."
+msgid "User deleted successfully"
+msgstr "Пользователь успешно удален"
 
-#: views.py:89
+#: views.py:87
 msgid "Cannot delete user because it is in use"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: views.py:92
-msgid "User deleted successfully"
-msgstr "Пользователь успешно удален"
+#~ msgid ""
+#~ "You do not have permission                                          to "
+#~ "change another user."
+#~ msgstr "У вас нет прав для изменения другого пользователя."
 
 #~ msgid "You are logged in"
 #~ msgstr "Вы залогинены"
