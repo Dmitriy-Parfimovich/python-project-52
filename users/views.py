@@ -18,6 +18,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 class UsersListView(ListView):
+    
     queryset = User.objects.all().order_by('pk')
     context_object_name = 'users'
     template_name = 'users/users.html'
@@ -38,18 +39,15 @@ class NewUserRegView(SuccessMessageMixin, UserDataMixin, CreateView):
         user = form.instance
         user.save()
         user.set_password(form.cleaned_data['password2'])
-        # messages.success(self.request, _('User successfully registered'))
         return super().form_valid(form)
 
 
 class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
 
-    #model = User
     form_class = UserRegForm
     template_name = 'users/reg.html'
     success_url = reverse_lazy('users_list')
     success_message = _('User successfully changed')
-
     
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
@@ -66,13 +64,11 @@ class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
         user = self.get_object()
         user = form.instance
         user.save()
-        # messages.success(self.request, _('User successfully changed'))
         return super().form_valid(form)
 
 
 class UserDeleteView(SuccessMessageMixin, UserDataMixin, DeleteView):
 
-    # model = User
     form_class = UserDeleteForm
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
@@ -80,16 +76,7 @@ class UserDeleteView(SuccessMessageMixin, UserDataMixin, DeleteView):
         
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
-    
-    """def post(self, request, *args, **kwargs):
-        user = request.user
-        if Task.objects.filter(executor__username=user.username).exists():
-            messages.error(request, _('Cannot delete user because it is in use'))
-        else:
-            user.delete()
-            # messages.success(request, _('User deleted successfully'))
-        return redirect('users_list')"""
-    
+        
     def form_valid(self, form):
         user = self.get_object()
         if Task.objects.filter(executor__username=user).exists():
