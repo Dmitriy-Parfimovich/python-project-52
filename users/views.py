@@ -81,11 +81,19 @@ class UserDeleteView(SuccessMessageMixin, UserDataMixin, DeleteView):
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
     
-    def post(self, request, *args, **kwargs):
+    """def post(self, request, *args, **kwargs):
         user = request.user
         if Task.objects.filter(executor__username=user.username).exists():
             messages.error(request, _('Cannot delete user because it is in use'))
         else:
             user.delete()
             # messages.success(request, _('User deleted successfully'))
-        return redirect('users_list')
+        return redirect('users_list')"""
+    
+    def form_valid(self, form):
+        user = self.get_object()
+        if Task.objects.filter(executor__username=user).exists():
+            messages.error(self.request, _('Cannot delete user because it is in use'))
+        else:
+            user.delete()
+        return super().form_valid(form)
