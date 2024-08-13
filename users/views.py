@@ -13,6 +13,7 @@ from django.views.generic import (ListView, CreateView,
 from users.forms import UserRegForm, UserDeleteForm
 from django.utils.translation import gettext as _
 from users.utils import UserDataMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
@@ -22,18 +23,12 @@ class UsersListView(ListView):
     template_name = 'users/users.html'
 
 
-class NewUserRegView(UserDataMixin, CreateView):
+class NewUserRegView(SuccessMessageMixin, UserDataMixin, CreateView):
 
     form_class = UserRegForm
     template_name = 'users/reg.html'
     success_url = reverse_lazy('login')
-
-    """def get_context_data(self, **kwargs):  
-        context = super().get_context_data(**kwargs)  
-        context['user_is_auth'] = False
-        if self.request.user.is_authenticated:
-            context['user_is_auth'] = True
-        return context"""
+    success_message = _('User successfully registered')
     
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
@@ -43,40 +38,21 @@ class NewUserRegView(UserDataMixin, CreateView):
         user = form.instance
         user.save()
         user.set_password(form.cleaned_data['password2'])
-        messages.success(self.request, _('User successfully registered'))
+        # messages.success(self.request, _('User successfully registered'))
         return super().form_valid(form)
 
 
-class UserEditView(UserDataMixin, UpdateView):
+class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
 
     #model = User
     form_class = UserRegForm
     template_name = 'users/reg.html'
     success_url = reverse_lazy('users_list')
+    success_message = _('User successfully changed')
 
-    """def get_object(self):
-        queryset = super().get_queryset()
-        return queryset.get(pk=self.kwargs['pk'])"""
-
-    """def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            if self.request.user != self.get_object():
-                messages.error(request, _('You do not have permission to change\
-                                          another user.'))
-                return redirect('users_list')
-            return super().dispatch(request, *args, **kwargs)
-        else:
-            messages.error(request, _('You are not authorized! Please log in.'))
-            return redirect('login')"""
     
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
-
-    """def get_context_data(self, **kwargs):  
-        context = super().get_context_data(**kwargs)
-        if self.request.user == self.get_object():
-            context['user'] = self.get_object()
-        return context"""
     
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
@@ -90,32 +66,18 @@ class UserEditView(UserDataMixin, UpdateView):
         user = self.get_object()
         user = form.instance
         user.save()
-        messages.success(self.request, _('User successfully changed'))
+        # messages.success(self.request, _('User successfully changed'))
         return super().form_valid(form)
 
 
-class UserDeleteView(UserDataMixin, DeleteView):
+class UserDeleteView(SuccessMessageMixin, UserDataMixin, DeleteView):
 
     # model = User
     form_class = UserDeleteForm
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
-
-    """def get_object(self):
-        queryset = super().get_queryset()
-        return queryset.get(pk=self.kwargs['pk'])"""
-    
-    """def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            if request.user == self.get_object():
-                return super().dispatch(request, *args, **kwargs)
-            else:
-                messages.error(request, _('You do not have permission\
-                                          to change another user.'))
-                return redirect('users_list')
-        messages.error(request, _('You are not authorized! Please log in.'))
-        return redirect('login')"""
-    
+    success_message = _('User deleted successfully')
+        
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
     
@@ -125,5 +87,5 @@ class UserDeleteView(UserDataMixin, DeleteView):
             messages.error(request, _('Cannot delete user because it is in use'))
         else:
             user.delete()
-            messages.success(request, _('User deleted successfully'))
+            # messages.success(request, _('User deleted successfully'))
         return redirect('users_list')

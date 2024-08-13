@@ -4,13 +4,10 @@ from django.contrib import messages
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import gettext as _
 
+
 class UserDataMixin(SingleObjectMixin):
 
     model = User
-
-    """def get_object(self):
-        queryset = User.objects.all()
-        return queryset.get(pk=self.kwargs['pk'])"""
     
     def get_mixin_context(self, context, **kwargs):
         context['user_is_auth'] = False
