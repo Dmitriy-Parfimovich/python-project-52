@@ -93,7 +93,7 @@ class LabelDeleteView(SuccessMessageMixin, LabelDataMixin, DeleteView):
         return redirect('login')"""
     
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
+        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
     
     """def post(self, request, *args, **kwargs):
         label = self.get_object()
