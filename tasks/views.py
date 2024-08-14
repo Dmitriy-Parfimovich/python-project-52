@@ -11,21 +11,26 @@ from labels.models import Label
 from tasks.forms import NewTaskForm, TaskDeleteForm
 from django.utils.translation import gettext as _
 from .filters import TaskFilter
+from tasks.utils import TaskDataMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-class TasksListView(ListView):
+class TasksListView(TaskDataMixin, ListView):
 
     queryset = Task.objects.all()
     object_list = None
     template_name = 'tasks/tasks.html'
 
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return super().dispatch(request, *args, **kwargs)
         else:
             messages.error(request, _('You are not authorized! Please log in.'))
-            return redirect('login')
+            return redirect('login')"""
+    
+    def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)  
@@ -51,11 +56,12 @@ class TasksListView(ListView):
         return render(request, self.template_name, context)
 
 
-class NewTaskView(CreateView):
+class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
 
     form_class = NewTaskForm
     template_name = 'tasks/new_task.html'
     success_url = reverse_lazy('tasks_list')
+    success_message = _('Task created successfully')
 
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)  
@@ -64,38 +70,45 @@ class NewTaskView(CreateView):
         context['labels'] = Label.objects.all().order_by('pk')
         return context
 
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return super().dispatch(request, *args, **kwargs)
         else:
             messages.error(request, _('You are not authorized! Please log in.'))
-            return redirect('login')
+            return redirect('login')"""
+    
+    def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, **kwargs)
     
     def form_valid(self, form):
         task = form.instance
         taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
         task.taskautor = taskautor
         form.save()
-        messages.success(self.request, _('Task created successfully'))
+        # messages.success(self.request, _('Task created successfully'))
         return super().form_valid(form)
 
 
-class TaskEditView(UpdateView):
+class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
 
-    model = Task
+    # model = Task
     form_class = NewTaskForm
     template_name = 'tasks/new_task.html'
     success_url = reverse_lazy('tasks_list')
+    success_message = _('The task was successfully modified')
 
     def get_object(self):
         queryset = super().get_queryset()
         return queryset.get(pk=self.kwargs['pk'])
 
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.error(request, _('You are not authorized! Please log in.'))
             return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)"""
+    
+    def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
@@ -116,22 +129,23 @@ class TaskEditView(UpdateView):
             task.save()
             labels = form.cleaned_data['labels']
             task.labels.set(labels)
-        messages.success(self.request, _('The task was successfully modified'))
+        # messages.success(self.request, _('The task was successfully modified'))
         return super().form_valid(form)
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(SuccessMessageMixin, TaskDataMixin, DeleteView):
 
-    model = Task
+    # model = Task
     form_class = TaskDeleteForm
     template_name = 'tasks/del_task.html'
     success_url = reverse_lazy('tasks_list')
+    success_message = _('The task was successfully deleted')
 
     def get_object(self):
         queryset = super().get_queryset()
         return queryset.get(pk=self.kwargs['pk'])
     
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             if self.get_object().taskautor == f'{request.user.first_name} {request.user.last_name}':
                 return super().dispatch(request, *args, **kwargs)
@@ -139,11 +153,14 @@ class TaskDeleteView(DeleteView):
                 messages.error(request, _("Only it's author can delete the task"))
                 return redirect('tasks_list')
         messages.error(request, _('You are not authorized! Please log in.'))
-        return redirect('login')
+        return redirect('login')"""
+    
+    def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):
         self.get_object().delete()
-        messages.success(request, _('The task was successfully deleted'))
+        # messages.success(request, _('The task was successfully deleted'))
         return redirect('tasks_list')
 
 
