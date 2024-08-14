@@ -93,7 +93,7 @@ class LabelDeleteView(SuccessMessageMixin, LabelDataMixin, DeleteView):
         return redirect('login')"""
     
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
+        return self.mixin_dispatch(request, *args, **kwargs)
     
     """def post(self, request, *args, **kwargs):
         label = self.get_object()
@@ -109,5 +109,5 @@ class LabelDeleteView(SuccessMessageMixin, LabelDataMixin, DeleteView):
         if list(label.task_set.all()) == []:
             label.delete()
         else:
-            messages.error(request, _("Can't remove the label because it's in use"))
+            messages.error(self.request, _("Can't remove the label because it's in use"))
         return super().form_valid(form)
