@@ -30,19 +30,24 @@ class TasksListView(TaskDataMixin, ListView):
             return redirect('login')"""
     
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
+        return self.mixin_dispatch(request, *args, pk=None)
 
-    def get_context_data(self, **kwargs):  
+    """def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)  
         context['statuses'] = Status.objects.all().order_by('pk')  
         context['taskexecutors'] = User.objects.all().order_by('pk')  
         context['labels'] = Label.objects.all().order_by('pk')
         context['request_GET'] = False
         context['self_tasks'] = False
-        return context
+        return context"""
+    
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, **kwargs)
     
     def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
+        #context = self.get_context_data(**kwargs)
+        context = {}
         if request.GET:
             context['request_GET'] = True
             if 'self_tasks' in request.GET:
@@ -78,7 +83,7 @@ class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
             return redirect('login')"""
     
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
+        return self.mixin_dispatch(request, *args, pk=None)
     
     def form_valid(self, form):
         task = form.instance
