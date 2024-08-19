@@ -19,6 +19,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 class TasksListView(TaskDataMixin, ListView):
 
     queryset = Task.objects.all()
+    object = None
     object_list = None
     template_name = 'tasks/tasks.html'
 
@@ -46,8 +47,8 @@ class TasksListView(TaskDataMixin, ListView):
         return self.get_mixin_context(context, **kwargs)
     
     def get(self, request, *args, **kwargs):
-        #context = self.get_context_data(**kwargs)
-        context = {}
+        context = self.get_context_data(**kwargs)
+        #context = {}
         if request.GET:
             context['request_GET'] = True
             if 'self_tasks' in request.GET:
