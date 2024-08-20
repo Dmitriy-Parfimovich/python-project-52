@@ -117,7 +117,7 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)"""
     
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
+        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
     
     """def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
@@ -130,7 +130,7 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
     
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, **kwargs)
+        return self.get_mixin_context(context, pk=self.kwargs['pk'])
 
     def form_valid(self, form):
         task = form.instance
