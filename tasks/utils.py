@@ -34,6 +34,9 @@ class TaskDataMixin(SingleObjectMixin):
         context['labels'] = Label.objects.all().order_by('pk')
         context['request_GET'] = False
         context['self_tasks'] = False
+        if kwargs['pk']:
+            context['edit_flag'] = True
+            context['task_error'] = False
         return context
 
     def mixin_dispatch(self, request, *args, **kwargs):

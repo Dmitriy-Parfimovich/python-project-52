@@ -106,9 +106,9 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully modified')
 
-    def get_object(self):
+    """def get_object(self):
         queryset = super().get_queryset()
-        return queryset.get(pk=self.kwargs['pk'])
+        return queryset.get(pk=self.kwargs['pk'])"""
 
     """def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -119,14 +119,18 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, **kwargs)
     
-    def get_context_data(self, **kwargs):  
+    """def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
         context['edit_flag'] = True
         context['task_error'] = False
         context['statuses'] = Status.objects.all().order_by('pk')
         context['taskexecutors'] = User.objects.all().order_by('pk')
         context['labels'] = Label.objects.all().order_by('pk')
-        return context
+        return context"""
+    
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, **kwargs)
 
     def form_valid(self, form):
         task = form.instance
