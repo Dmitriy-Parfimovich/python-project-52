@@ -38,9 +38,7 @@ class TaskDataMixin(SingleObjectMixin):
 
     def mixin_dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            print(kwargs['pk'], 'aaaaaaaaaaaaaaaaa')
-            if kwargs['pk']:
-                if self.get_object().taskautor != f'{request.user.first_name} {request.user.last_name}':
+            if kwargs['pk'] and self.get_object().taskautor != f'{request.user.first_name} {request.user.last_name}':
                     messages.error(request, _("Only it's author can delete the task"))
                     return redirect('tasks_list')
             return super().dispatch(request, *args, **kwargs)

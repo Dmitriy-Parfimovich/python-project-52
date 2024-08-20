@@ -48,7 +48,6 @@ class TasksListView(TaskDataMixin, ListView):
     
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        #context = {}
         if request.GET:
             context['request_GET'] = True
             if 'self_tasks' in request.GET:
@@ -69,12 +68,16 @@ class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
     success_url = reverse_lazy('tasks_list')
     success_message = _('Task created successfully')
 
-    def get_context_data(self, **kwargs):  
+    """def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)  
         context['statuses'] = Status.objects.all().order_by('pk')  
         context['taskexecutors'] = User.objects.all().order_by('pk')  
         context['labels'] = Label.objects.all().order_by('pk')
-        return context
+        return context"""
+    
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, **kwargs)
 
     """def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
