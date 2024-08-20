@@ -102,6 +102,7 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
 
     # model = Task
     form_class = NewTaskForm
+    object = Nones
     template_name = 'tasks/new_task.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully modified')
