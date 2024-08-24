@@ -1,7 +1,5 @@
-from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.views import View
 from django.views.generic import (ListView, CreateView,
                                   UpdateView, DeleteView)
 from labels.models import Label
@@ -17,7 +15,7 @@ class LabelsListView(LabelDataMixin, ListView):
     queryset = Label.objects.all().order_by('pk')
     context_object_name = 'labels'
     template_name = 'labels/labels.html'
-    
+
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, **kwargs)
 
@@ -28,10 +26,10 @@ class NewLabelView(SuccessMessageMixin, LabelDataMixin, CreateView):
     template_name = 'labels/new_label.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label successfully created')
-    
+
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, **kwargs)
-    
+
     def form_valid(self, form):
         return super().form_valid(form)
 
@@ -42,10 +40,10 @@ class LabelEditView(SuccessMessageMixin, LabelDataMixin, UpdateView):
     template_name = 'labels/new_label.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label changed successfully')
-    
+
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, **kwargs)
-    
+
     def form_valid(self, form):
         return super().form_valid(form)
 
@@ -60,10 +58,10 @@ class LabelDeleteView(SuccessMessageMixin, LabelDataMixin, DeleteView):
     def get_object(self):
         queryset = super().get_queryset()
         return queryset.get(pk=self.kwargs['pk'])
-    
+
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, **kwargs)
-    
+
     def form_valid(self, form):
         label = self.get_object()
         if list(label.task_set.all()) == []:

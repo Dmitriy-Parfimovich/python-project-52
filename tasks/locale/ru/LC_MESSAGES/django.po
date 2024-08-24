@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-02 23:16+0300\n"
+"POT-Creation-Date: 2024-08-24 20:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:30 templates/tasks/new_task.html:31
+#: forms.py:28 templates/tasks/new_task.html:31
 msgid "Required field."
 msgstr "Обязательное поле."
 
@@ -116,22 +116,22 @@ msgstr "Только свои задачи"
 msgid "Show"
 msgstr "Показать"
 
-#: views.py:42 views.py:59 views.py:95 views.py:143
-msgid "You are not authorized! Please log in."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
-
-#: views.py:70
-msgid "Task created successfully"
-msgstr "Задача успешно создана"
-
-#: views.py:127
-msgid "The task was successfully modified"
-msgstr "Задача успешно изменена"
-
-#: views.py:141
+#: utils.py:30
 msgid "Only it's author can delete the task"
 msgstr "Задачу может удалить только ее автор"
 
-#: views.py:149
+#: utils.py:33
+msgid "You are not authorized! Please log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: views.py:50
+msgid "Task created successfully"
+msgstr "Задача успешно создана"
+
+#: views.py:73
+msgid "The task was successfully modified"
+msgstr "Задача успешно изменена"
+
+#: views.py:100
 msgid "The task was successfully deleted"
 msgstr "Задача успешно удалена"

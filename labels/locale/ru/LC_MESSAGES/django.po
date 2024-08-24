@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 21:51+0300\n"
+"POT-Creation-Date: 2024-08-24 20:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:23 templates/labels/new_label.html:28
+#: forms.py:21 templates/labels/new_label.html:28
 msgid "Required field."
 msgstr "Обязательное поле."
 
@@ -73,22 +73,22 @@ msgstr "Изменить"
 msgid "Create"
 msgstr "Создать"
 
-#: views.py:18 views.py:28
+#: utils.py:14
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: views.py:35
+#: views.py:28
 msgid "Label successfully created"
 msgstr "Метка успешно создана"
 
-#: views.py:52
+#: views.py:42
 msgid "Label changed successfully"
 msgstr "Метка успешно изменена"
 
-#: views.py:68
+#: views.py:56
 msgid "Label deleted successfully"
 msgstr "Метка успешно удалена"
 
-#: views.py:71
+#: views.py:70
 msgid "Can't remove the label because it's in use"
 msgstr "Невозможно удалить метку, потому что она используется"

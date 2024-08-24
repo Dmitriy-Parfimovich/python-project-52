@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 18:50+0300\n"
+"POT-Creation-Date: 2024-08-24 20:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:23 templates/statuses/new_status.html:29
+#: forms.py:21 templates/statuses/new_status.html:28
 msgid "Required field."
 msgstr "Обязательное поле."
 
@@ -73,22 +73,22 @@ msgstr "Изменить"
 msgid "Delete"
 msgstr "Удалить статус"
 
-#: views.py:18 views.py:28
+#: utils.py:14
 msgid "You are not authorized! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: views.py:35
+#: views.py:28
 msgid "Status successfully created"
 msgstr "Статус успешно создан"
 
-#: views.py:51
+#: views.py:42
 msgid "Status changed successfully"
 msgstr "Статус успешно изменен"
 
-#: views.py:67
+#: views.py:59
 msgid "Status deleted successfully"
 msgstr "Статус успешно удален"
 
-#: views.py:70
+#: views.py:69
 msgid "Can't delete a status because it's in use"
 msgstr "Невозможно удалить статус, потому что он используется"

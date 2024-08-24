@@ -1,7 +1,6 @@
 from labels.models import Label
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import gettext as _
 
 
