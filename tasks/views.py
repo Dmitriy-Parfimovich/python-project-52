@@ -172,10 +172,14 @@ class TaskDeleteView(SuccessMessageMixin, TaskDataMixin, DeleteView):
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, **kwargs)
     
-    def post(self, request, *args, **kwargs):
+    """def post(self, request, *args, **kwargs):
         self.get_object().delete()
         # messages.success(request, _('The task was successfully deleted'))
-        return redirect('tasks_list')
+        return redirect('tasks_list')"""
+ 
+    def form_valid(self, form):
+        self.get_object().delete()
+        return super().form_valid(form)
 
 
 class TaskInfoView(View):
