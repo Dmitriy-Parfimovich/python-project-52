@@ -77,7 +77,7 @@ class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
     
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, **kwargs)
+        return self.get_mixin_context(context, pk=None)
 
     """def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
