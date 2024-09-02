@@ -1,5 +1,5 @@
 import re
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.contrib.auth import get_user_model
 from users.models import User
@@ -46,15 +46,17 @@ from django.utils.translation import gettext as _
 
 class UserRegForm(UserCreationForm):
 
-    """password1 = forms.CharField(max_length=20)
-    password2 = forms.CharField(max_length=20)"""
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
 
     class Meta:
-        model = get_user_model()
+        model = User
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
 
-    """def clean(self):
-        print(self.errors, 'llllflglglglglglglglglg')"""
+
+class UserEditForm(UserChangeForm):
+
+
     
     def clean_username(self):
         if re.search(r'[^\w\-@.+]', self['username'].value()):

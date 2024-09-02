@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "tasks.apps.TasksConfig",
     "labels.apps.LabelsConfig",
     "django_filters",
+    "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -139,6 +141,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'users.User'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 # AUTHENTICATION_BACKENDS = ('project.path.to.MyBackend',

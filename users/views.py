@@ -6,7 +6,7 @@ from users.models import User
 from tasks.models import Task
 from django.views.generic import (ListView, CreateView,
                                   UpdateView, DeleteView)
-from users.forms import UserRegForm, UserDeleteForm
+from users.forms import UserRegForm, UserEditForm, UserDeleteForm
 from django.utils.translation import gettext as _
 from users.utils import UserDataMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -20,16 +20,16 @@ class UsersListView(ListView):
     template_name = 'users/users.html'
 
 
-class NewUserRegView(SuccessMessageMixin, UserDataMixin, CreateView):
+class NewUserRegView(SuccessMessageMixin, CreateView):
 
     form_class = UserRegForm
     template_name = 'users/reg.html'
     success_url = reverse_lazy('login')
     success_message = _('User successfully registered')
 
-    def get_context_data(self, **kwargs):
+    """def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, pk=None)
+        return self.get_mixin_context(context, pk=None)"""
 
     def form_valid(self, form):
         user = form.instance
@@ -40,7 +40,7 @@ class NewUserRegView(SuccessMessageMixin, UserDataMixin, CreateView):
 
 class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
 
-    form_class = UserRegForm
+    form_class = UserEditForm
     template_name = 'users/reg.html'
     success_url = reverse_lazy('users_list')
     success_message = _('User successfully changed')
