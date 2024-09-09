@@ -54,26 +54,28 @@ class UserRegForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
 
 
-class UserEditForm(UserChangeForm):
+class UserEditForm(UserCreationForm):
 
-
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
     
-    def clean_username(self):
+    """def clean_username(self):
         if re.search(r'[^\w\-@.+]', self['username'].value()):
             self.errors['username'] = _('Please enter a correct username.\
                                         It can only contain letters,\
                                         numbers and symbols @/./+/-/_.')
         elif User.objects.filter(username=self['username'].value()).exists():
             self.errors['username'] = _('A user with the same name already exists.')
-        return self['username'].value()
+        return self['username'].value()"""
 
-    def clean_password1(self):
+    """def clean_password1(self):
         if self['password1'].value() != self['password2'].value():
             self.errors['password1'] = _('Entered passwords do not match')
         elif len(self['password1'].value()) <= 2:
             self.errors['password1'] = _('The entered password is too short.\
                                         It must contain at least 3 characters.')
-        return self['password2'].value()
+        return self['password2'].value()"""
 
 
 class UserDeleteForm(forms.ModelForm):

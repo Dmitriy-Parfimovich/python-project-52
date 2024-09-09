@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 
 # Create your models here.
 class User(AbstractUser, PermissionsMixin):
+    
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     REQUIRED_FIELDS = []
