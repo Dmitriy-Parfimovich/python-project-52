@@ -46,8 +46,8 @@ from django.utils.translation import gettext as _
 
 class UserRegForm(UserCreationForm):
 
-    first_name = forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
+    #first_name = forms.CharField(max_length=50)
+    #last_name = forms.CharField(max_length=50)
 
     class Meta:
         model = User
