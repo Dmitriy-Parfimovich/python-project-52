@@ -41,7 +41,7 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
 class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
 
     form_class = UserEditForm
-    template_name = 'users/reg.html'
+    template_name = 'users/update.html'
     success_url = reverse_lazy('users_list')
     success_message = _('User successfully changed')
 

@@ -6,11 +6,11 @@
 {% bootstrap_messages %}
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate "Registration" %}</h1>
+    <h1 class="my-4">{% translate "Edit user" %}</h1>
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input class="btn btn-primary" type="submit" value="{% trans 'Register' %}">
+        <input class="btn btn-primary" type="submit" value="{% trans 'Edit' %}">
     </form>
 </div>
 {% endblock maincontent %}
