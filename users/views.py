@@ -27,10 +27,6 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('login')
     success_message = _('User successfully registered')
 
-    """def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, pk=None)"""
-
     def form_valid(self, form):
         user = form.instance
         user.save()
@@ -40,7 +36,7 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
 
 class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
 
-    form_class = UserEditForm
+    form_class = UserRegForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('users_list')
     success_message = _('User successfully changed')
