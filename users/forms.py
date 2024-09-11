@@ -13,13 +13,6 @@ class UserRegForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
 
 
-"""class UserEditForm(UserCreationForm):
-
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'username', 'password1', 'password2']"""
-
-
 class UserDeleteForm(forms.ModelForm):
 
     class Meta:
