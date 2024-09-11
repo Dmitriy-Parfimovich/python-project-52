@@ -6,7 +6,7 @@ from users.models import User
 from tasks.models import Task
 from django.views.generic import (ListView, CreateView,
                                   UpdateView, DeleteView)
-from users.forms import UserRegForm, UserEditForm, UserDeleteForm
+from users.forms import UserRegForm, UserDeleteForm
 from django.utils.translation import gettext as _
 from users.utils import UserDataMixin
 from django.contrib.messages.views import SuccessMessageMixin
