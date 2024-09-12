@@ -15,6 +15,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 # Create your views here.
 class TasksListView(TaskDataMixin, ListView):
 
+    form_class = NewTaskForm
     queryset = Task.objects.all()
     object = None
     object_list = None

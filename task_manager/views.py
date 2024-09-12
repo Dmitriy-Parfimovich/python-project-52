@@ -20,11 +20,6 @@ class LoginUserView(LoginView):
         messages.add_message(self.request, messages.SUCCESS, _('You are logged in'))
         return reverse_lazy('home')
 
-    """def form_invalid(self, form):
-        form.add_error(None, _('Please enter the correct username and password.\
-                               Both fields can be case sensitive.'))
-        return self.render_to_response(self.get_context_data(form=form))"""
-
 
 class LoginOutView(LogoutView):
 
