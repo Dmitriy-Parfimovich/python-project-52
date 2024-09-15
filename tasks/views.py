@@ -8,18 +8,26 @@ from labels.models import Label
 from tasks.forms import NewTaskForm, TaskDeleteForm
 from django.utils.translation import gettext as _
 from .filters import TaskFilter
+from django_filters.views import FilterView
 from tasks.utils import TaskDataMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-class TasksListView(TaskDataMixin, ListView):
+class TasksListView(TaskDataMixin, FilterView):
+  
+    filterset_class = TaskFilter
+    template_name = 'tasks/tasks.html'
+    object = None
+    context_object_name = 'tasks'
+    filterset_fields = ['executor', 'status', 'label']
 
-    form_class = NewTaskForm
+    """form_class = NewTaskForm
     queryset = Task.objects.all()
     object = None
     object_list = None
     template_name = 'tasks/tasks.html'
+    filterset_class = TaskFilter
 
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=None)
@@ -40,7 +48,7 @@ class TasksListView(TaskDataMixin, ListView):
         tasks = myFilter.qs.order_by('pk')
         context['form'] = myFilter.form
         context['tasks'] = tasks
-        return render(request, self.template_name, context)
+        return render(request, self.template_name, context)"""
 
 
 class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
