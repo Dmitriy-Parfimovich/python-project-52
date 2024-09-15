@@ -25,7 +25,7 @@ class TaskFilter(django_filters.FilterSet):
     )
     self_tasks = django_filters.BooleanFilter(
         field_name='taskautor',
-        label=_('Only your own tasks'),
+        label=_('Only your tasks'),
         label_suffix='',
         method='filter_self_tasks',
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
