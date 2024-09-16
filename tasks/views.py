@@ -15,12 +15,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 class TasksListView(TaskDataMixin, FilterView):
-  
+
     filterset_class = TaskFilter
     template_name = 'tasks/tasks.html'
     object = None
     context_object_name = 'tasks'
-    filterset_fields = ['executor', 'status', 'label']
+    filterset_fields = ['executor', 'status', 'labels']
 
     """form_class = NewTaskForm
     queryset = Task.objects.all()

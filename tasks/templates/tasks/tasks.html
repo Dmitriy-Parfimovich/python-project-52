@@ -13,7 +13,7 @@
         <div class="card-body bg-light">
             <form class="form-inline center" method="get">
                 {% csrf_token %}
-                {{ filter.form.as_p }}
+                {% bootstrap_form filter.form %}
                 <input class="btn btn-primary" type="submit" value="{% trans 'Show' %}">
             </form>
         </div>

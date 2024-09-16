@@ -33,7 +33,6 @@ class TaskFilter(django_filters.FilterSet):
 
     def filter_self_tasks(self, queryset, name, value):
         if value:
-            # user_id = self.request.user.id
             taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
             return queryset.filter(taskautor=taskautor)
         return queryset
