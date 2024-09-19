@@ -7,7 +7,7 @@ from labels.models import Label
 
 # Create your models here.
 class Task(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name='Задача')
+    name = models.CharField(max_length=50, unique=True, verbose_name='Имя')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     taskautor = models.CharField(max_length=50, verbose_name='Автор')
     executor = models.ForeignKey(User, on_delete=models.CASCADE,
