@@ -18,7 +18,7 @@ class User(AbstractUser, PermissionsMixin):
         return reverse('user_delete', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.username
+        return f'{self.first_name} {self.last_name}'
 
     class Meta:
         verbose_name = 'Пользователи'

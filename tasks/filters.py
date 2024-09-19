@@ -17,14 +17,6 @@ from django.utils.translation import gettext as _
         fields = ['status', 'executor', 'labels']"""
 
 class TaskFilter(django_filters.FilterSet):
-
-    executor = django_filters.ModelChoiceFilter(
-        queryset=Task.objects.all(),
-        label=_('Executor'),
-        label_suffix='',
-        method='executor_for_select',
-        widget=forms.Select(attrs={'class': 'form-select'}),
-    )
     
     labels = django_filters.ModelChoiceFilter(
         queryset=Label.objects.all(),
@@ -40,10 +32,6 @@ class TaskFilter(django_filters.FilterSet):
         method='filter_self_tasks',
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
-
-    def executor_for_select(self, queryset, name, value):
-        print(queryset, 'ggggggggggggggggggggggggggggggggggggggggggggg')
-        return queryset
     
     def filter_self_tasks(self, queryset, name, value):
         if value:
