@@ -1,8 +1,9 @@
 {% extends 'task_manager/index.html' %}
-
-{% load django_bootstrap5 %}
 {% load i18n %}
-
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
@@ -13,116 +14,7 @@
     {% endif %}
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3">
-            <label class="form-label" for="id_name">{% trans 'Taskname' %}</label>
-            <input type="text" name="name" maxlength="150"
-            {% if task_error or form.name.errors %}
-                class="form-control is-invalid"
-                value="{{ form.name.value }}"
-            {% elif form.name.value %}
-                class="form-control" value="{{ form.name.value }}"
-            {% else %}
-                class="form-control"
-            {% endif %}
-            class="form-control" placeholder="{% trans 'Taskname' %}" required id="id_name">
-            {% if task_error %}
-            <div class="invalid-feedback">{% trans 'The task with this name already exists' %}</div>
-            {% elif form.name.errors and not task_error %}
-            <div class="invalid-feedback">{% trans 'Required field.' %}</div>
-            {% endif %}
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="id_description">{% trans 'Description' %}</label>
-            <textarea name="description" cols="40" rows="10"
-            {% if task_error or form.name.errors %}
-                class="form-control is-valid"
-            {% else %}
-                class="form-control"
-            {% endif %}
-            placeholder="{% trans 'Description' %}" id="id_description">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="id_status">{% trans 'Status' %}</label>
-            <select name="status"
-            {% if task_error or form.name.errors %}
-                class="form-select is-valid"
-            {% else %}
-                class="form-select"
-            {% endif %}
-            required id="id_status">
-            {% if form.status.value %}
-            <option value="">---------</option>
-            {% for status in statuses %}
-            {% with val=status.pk|stringformat:'i' %}
-                {% if form.status.value == status.pk or form.status.value == val %}
-                    <option value="{{ status.pk }}" selected>{{ status.name }}</option>
-                {% else %}
-                    <option value="{{ status.pk }}">{{ status.name }}</option>
-                {% endif %}
-            {% endwith %}
-            {% endfor %}
-            {% else %}
-            <option value="" selected>---------</option>
-            {% for status in statuses %}
-                <option value="{{ status.pk }}">{{ status.name }}</option>
-            {% endfor %}
-            {% endif %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="id_executor">{% trans 'Executor' %}</label>
-            <select name="executor"
-            {% if task_error or form.name.errors %}
-                class="form-select is-valid"
-            {% else %}
-                class="form-select"
-            {% endif %}
-            id="id_executor">
-            {% if form.executor.value %}
-            <option value="">---------</option>
-            {% for taskexecutor in taskexecutors %}
-            {% with val=taskexecutor.pk|stringformat:'i' %}
-                {% if form.executor.value == taskexecutor.pk or form.executor.value == val %}
-                    <option value="{{ taskexecutor.pk }}" selected>{{ taskexecutor.first_name }} {{ taskexecutor.last_name }}</option>
-                {% else %}
-                    <option value="{{ taskexecutor.pk }}">{{ taskexecutor.first_name }} {{ taskexecutor.last_name }}</option>
-                {% endif %}
-            {% endwith %}
-            {% endfor %}
-            {% else %}
-            <option value="" selected>---------</option>
-            {% for taskexecutor in taskexecutors %}
-                <option value="{{ taskexecutor.pk }}">{{ taskexecutor.first_name }} {{ taskexecutor.last_name }}</option>
-            {% endfor %}
-            {% endif %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="id_labels">{% trans 'Labels' %}</label>
-            <select name="labels"
-            {% if task_error or form.name.errors %}
-                class="form-select is-valid"
-            {% else %}
-                class="form-select"
-            {% endif %}
-            id="id_labels" multiple>
-            {% if form.labels.value %}
-            {% for label in labels %}
-            {% with val=label.pk|stringformat:'i' %}
-                {% if label.pk in form.labels.value or val in form.labels.value %}
-                    <option value="{{ label.pk }}" selected>{{ label.name }}</option>
-                {% else %}
-                    <option value="{{ label.pk }}">{{ label.name }}</option>
-                {% endif %}
-            {% endwith %}
-            {% endfor %}
-            {% else %}
-            {% for label in labels %}
-                <option value="{{ label.pk }}">{{ label.name }}</option>
-            {% endfor %}
-            {% endif %}
-            </select>
-        </div>
+        {% bootstrap_form form %}
         <input class="btn btn-primary" type="submit" {% if edit_flag and not form.name.errors %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Create' %}" {% endif %}>
     </form>
 </div>

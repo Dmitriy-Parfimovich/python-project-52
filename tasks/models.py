@@ -33,4 +33,4 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Задачи'
         verbose_name_plural = 'Задачи'
-        ordering = ['name']
+        ordering = ['pk']

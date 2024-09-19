@@ -88,7 +88,7 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, pk=self.kwargs['pk'])
 
-    def form_valid(self, form):
+    """def form_valid(self, form):
         task = form.instance
         if Task.objects.filter(name=task.name).exists():
             task_to_edit_from_form = Task.objects.get(name=task.name)
@@ -98,7 +98,7 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
             task.save()
             labels = form.cleaned_data['labels']
             task.labels.set(labels)
-        return super().form_valid(form)
+        return super().form_valid(form)"""
 
 
 class TaskDeleteView(SuccessMessageMixin, TaskDataMixin, DeleteView):
