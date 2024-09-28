@@ -10,12 +10,6 @@ class NewStatusForm(forms.ModelForm):
         model = Status
         fields = ['name']
 
-    """def save(self):
-        self.clean()
-        status = self.Meta.model(name=self.cleaned_data['name'])
-        status.save()
-        return status"""
-
     def clean_name(self):
         if re.search(r"^\s*$", self['name'].value()):
             self.errors['name'] = _('Required field.')

@@ -1,7 +1,4 @@
 from tasks.models import Task
-from users.models import User
-from statuses.models import Status
-from labels.models import Label
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.views.generic.detail import SingleObjectMixin
@@ -13,14 +10,8 @@ class TaskDataMixin(SingleObjectMixin):
     model = Task
 
     def get_mixin_context(self, context, **kwargs):
-        """context['statuses'] = Status.objects.all().order_by('pk')
-        context['taskexecutors'] = User.objects.all().order_by('pk')
-        context['labels'] = Label.objects.all().order_by('pk')
-        context['request_GET'] = False
-        context['self_tasks'] = False"""
         if kwargs['pk']:
             context['edit_flag'] = True
-            """context['task_error'] = False"""
         return context
 
     def mixin_dispatch(self, request, *args, **kwargs):

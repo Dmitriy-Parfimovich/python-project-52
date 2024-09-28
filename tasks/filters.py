@@ -1,14 +1,12 @@
 import django_filters
 from .models import Task
 from labels.models import Label
-from users.models import User
 from django import forms
-from django_filters import CharFilter
 from django.utils.translation import gettext as _
 
 
 class TaskFilter(django_filters.FilterSet):
-    
+
     labels = django_filters.ModelChoiceFilter(
         queryset=Label.objects.all(),
         label=_('Label'),
@@ -23,7 +21,7 @@ class TaskFilter(django_filters.FilterSet):
         method='filter_self_tasks',
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     )
-    
+
     def filter_self_tasks(self, queryset, name, value):
         if value:
             taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
