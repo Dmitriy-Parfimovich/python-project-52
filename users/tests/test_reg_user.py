@@ -5,17 +5,17 @@ from django.contrib.auth import get_user_model
 
 
 TEST_VALID_USER = {'first_name': 'qqq', 'last_name': 'www',
-                   'username': 'qqqwww', 'password1': '123',
-                   'password2': '123'}
+                   'username': 'qqqwww', 'password1': '1q2w3e4r5t6y7',
+                   'password2': '1q2w3e4r5t6y7'}
 TEST_INVALID_USER = {'first_name': 'qqq', 'last_name': 'www',
-                     'username': '////', 'password1': '123',
-                     'password2': '123'}
+                     'username': '////', 'password1': '1q2w3e4r5t6y7',
+                     'password2': '1q2w3e4r5t6y7'}
 TEST_VALID_FORM_DATA = {'first_name': 'aaa', 'last_name': 'sss',
-                        'username': 'aaasss', 'password1': '123',
-                        'password2': '123'}
+                        'username': 'aaasss', 'password1': '1q2w3e4r5t6y7',
+                        'password2': '1q2w3e4r5t6y7'}
 TEST_INVALID_FORM_DATA_1 = {'first_name': 'aaa', 'last_name': 'sss',
-                            'username': 'aaasss', 'password1': '123',
-                            'password2': '321'}
+                            'username': 'aaasss', 'password1': '1q2w3e4r5t6y7',
+                            'password2': '7y6t5r4e3w2q1'}
 TEST_INVALID_FORM_DATA_2 = {'first_name': 'aaa', 'last_name': 'sss',
                             'username': 'aaasss', 'password1': '12',
                             'password2': '12'}

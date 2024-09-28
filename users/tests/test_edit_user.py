@@ -6,11 +6,11 @@ TEST_USER_LOGIN = 'zzzxxx'
 TEST_USER_PASSWORD = '123'
 
 TEST_VALID_USER = {'first_name': 'zzz', 'last_name': 'xxx',
-                   'username': 'mmmmmm', 'password1': '123',
-                   'password2': '123'}
+                   'username': 'mmmmmm', 'password1': '1q2w3e4r5t6y7',
+                   'password2': '1q2w3e4r5t6y7'}
 TEST_INVALID_USER = {'first_name': 'zzz', 'last_name': 'xxx',
-                     'username': '//////', 'password1': '123',
-                     'password2': '123'}
+                     'username': '//////', 'password1': '1q2w3e4r5t6y7',
+                     'password2': '1q2w3e4r5t6y7'}
 
 
 class TestUserEditView(TestCase):
