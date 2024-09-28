@@ -1,5 +1,4 @@
 import re
-from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from tasks.models import Task
 from django.utils.translation import gettext as _

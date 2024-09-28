@@ -1,5 +1,4 @@
 from django.db import models
-from django.urls import reverse
 from users.models import User
 from statuses.models import Status
 from labels.models import Label
@@ -17,15 +16,6 @@ class Task(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, verbose_name='Статус')
     labels = models.ManyToManyField(Label, blank=True, verbose_name='Метки')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-
-    """def get_absolute_url(self):
-        return reverse('task_info', kwargs={'pk': self.pk})
-
-    def get_absolute_url_edit(self):
-        return reverse('task_edit', kwargs={'pk': self.pk})
-
-    def get_absolute_url_delete(self):
-        return reverse('task_delete', kwargs={'pk': self.pk})"""
 
     def __str__(self):
         return self.name

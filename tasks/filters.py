@@ -7,15 +7,6 @@ from django_filters import CharFilter
 from django.utils.translation import gettext as _
 
 
-"""class TaskFilter(django_filters.FilterSet):
-    status = CharFilter(field_name='status', lookup_expr='exact')
-    executor = CharFilter(field_name='executor', lookup_expr='exact')
-    labels = CharFilter(field_name='labels', lookup_expr='exact')
-
-    class Meta:
-        model = Task
-        fields = ['status', 'executor', 'labels']"""
-
 class TaskFilter(django_filters.FilterSet):
     
     labels = django_filters.ModelChoiceFilter(
@@ -42,8 +33,3 @@ class TaskFilter(django_filters.FilterSet):
     class Meta:
         model = Task
         fields = ['status', 'executor', 'labels', 'self_tasks']
-
-
-    """class Meta:
-        model = Task
-        fields = ['status', 'executor', 'labels']"""

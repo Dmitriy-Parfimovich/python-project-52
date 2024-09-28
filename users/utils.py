@@ -8,7 +8,7 @@ from django.utils.translation import gettext as _
 class UserDataMixin(SingleObjectMixin):
 
     model = User
-    
+
     def get_mixin_context(self, context, **kwargs):
         if kwargs['pk'] and self.request.user == self.get_object():
             context['user'] = self.get_object()

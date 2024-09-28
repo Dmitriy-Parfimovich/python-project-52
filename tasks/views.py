@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import (ListView, CreateView,
-                                  UpdateView, DeleteView)
+from django.views.generic import (CreateView,
+                                  UpdateView,
+                                  DeleteView)
 from tasks.models import Task
 from labels.models import Label
 from tasks.forms import NewTaskForm, TaskDeleteForm
@@ -21,34 +22,6 @@ class TasksListView(TaskDataMixin, FilterView):
     object = None
     context_object_name = 'tasks'
     filterset_fields = ['executor', 'status', 'labels']
-
-    """form_class = NewTaskForm
-    queryset = Task.objects.all()
-    object = None
-    object_list = None
-    template_name = 'tasks/tasks.html'
-    filterset_class = TaskFilter
-
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=None)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        if request.GET:
-            context['request_GET'] = True
-            if 'self_tasks' in request.GET:
-                taskautor = f'{request.user.first_name} {request.user.last_name}'
-                self.queryset = self.queryset.filter(taskautor=taskautor)
-                context['self_tasks'] = True
-        myFilter = TaskFilter(request.GET, queryset=self.queryset)
-        tasks = myFilter.qs.order_by('pk')
-        context['form'] = myFilter.form
-        context['tasks'] = tasks
-        return render(request, self.template_name, context)"""
 
 
 class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
@@ -87,18 +60,6 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, pk=self.kwargs['pk'])
-
-    """def form_valid(self, form):
-        task = form.instance
-        if Task.objects.filter(name=task.name).exists():
-            task_to_edit_from_form = Task.objects.get(name=task.name)
-            if self.get_object() != task_to_edit_from_form.name:
-                self.context['task_error'] = True
-        else:
-            task.save()
-            labels = form.cleaned_data['labels']
-            task.labels.set(labels)
-        return super().form_valid(form)"""
 
 
 class TaskDeleteView(SuccessMessageMixin, TaskDataMixin, DeleteView):

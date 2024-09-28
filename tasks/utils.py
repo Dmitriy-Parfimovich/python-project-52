@@ -13,14 +13,14 @@ class TaskDataMixin(SingleObjectMixin):
     model = Task
 
     def get_mixin_context(self, context, **kwargs):
-        context['statuses'] = Status.objects.all().order_by('pk')
+        """context['statuses'] = Status.objects.all().order_by('pk')
         context['taskexecutors'] = User.objects.all().order_by('pk')
         context['labels'] = Label.objects.all().order_by('pk')
         context['request_GET'] = False
-        context['self_tasks'] = False
+        context['self_tasks'] = False"""
         if kwargs['pk']:
             context['edit_flag'] = True
-            context['task_error'] = False
+            """context['task_error'] = False"""
         return context
 
     def mixin_dispatch(self, request, *args, **kwargs):
