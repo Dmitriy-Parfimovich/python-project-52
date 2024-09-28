@@ -26,9 +26,9 @@
                 <td>{{ user.first_name }} {{ user.last_name }}</td>
                 <td>{{ user.time_create|date:'d.m.Y H:i' }}</td>
                 <td>
-                    <a href="{% url 'user_edit' %}">{% trans 'Edit' %}</a>
+                    <a href="{% url 'user_edit' user.id %}">{% trans 'Edit' %}</a>
                     <br>
-                    <a href="{% url 'user_delete' %}">{% trans 'Delete' %}</a>
+                    <a href="{% url 'user_delete' user.id %}">{% trans 'Delete' %}</a>
                 </td>
             </tr>
             {% endfor %}
