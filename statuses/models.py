@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Create your models here.
 class Status(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name='Статус')
+    name = models.CharField(max_length=50, unique=True, verbose_name='Имя')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     def get_absolute_url_edit(self):
