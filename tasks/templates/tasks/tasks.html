@@ -34,15 +34,15 @@
             {% for task in tasks %}
             <tr>
                 <td>{{ task.pk }}</td>
-                <td><a href="{{ task.get_absolute_url }}">{{ task.name }}</a></td>
+                <td><a href="{% url 'task_info' user.id %}">{{ task.name }}</a></td>
                 <td>{{ task.status.name }}</td>
                 <td>{{ task.taskautor }}</td>
                 <td>{{ task.executor.first_name }} {{ task.executor.last_name }}</td>
                 <td>{{ task.time_create|date:'d.m.Y H:i' }}</td>
                 <td>
-                    <a href="{{ task.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
+                    <a href="{% url 'task_edit' task.id %}">{% trans 'Edit' %}</a>
                     <br>
-                    <a href="{{ task.get_absolute_url_delete }}">{% trans 'Delete' %}</a>
+                    <a href="{% url 'task_delete' task.id %}">{% trans 'Delete' %}</a>
                 </td>
             </tr>
             {% endfor %}

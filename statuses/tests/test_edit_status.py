@@ -1,10 +1,11 @@
 from django.test import Client, TestCase
 from django.contrib.auth import get_user_model
 from statuses.models import Status
+from django.urls import reverse
 
 
 TEST_USER_LOGIN = 'zzzxxx'
-TEST_USER_PASSWORD = '123'
+TEST_USER_PASSWORD = '1q2w3e4r5t6y7'
 
 TEST_STATUS = 'status1'
 
@@ -28,12 +29,12 @@ class TestStatusEditView(TestCase):
     def test_authorized_user_to_edit_status(self):
         status = self.status.objects.get(name=TEST_STATUS)
         self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
-        response = self.client.get(self.status.get_absolute_url_edit(status), follow=True)
+        response = self.client.get(reverse('status_edit', args=[status.id]), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_status_edit(self):
         status = self.status.objects.get(name=TEST_STATUS)
         self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
-        response = self.client.post(self.status.get_absolute_url_edit(status),
+        response = self.client.post(reverse('status_edit', args=[status.id]),
                                     TEST_VALID_STATUS, follow=True)
         self.assertIn('/statuses/', response.redirect_chain[0])

@@ -6,7 +6,7 @@ from tasks.models import Task
 
 TEST_TASK = 'task2'
 TEST_USER_LOGIN = 'zzzxxx'
-TEST_USER_PASSWORD = '123'
+TEST_USER_PASSWORD = '1q2w3e4r5t6y7'
 TEST_TASK_VALID_PK = 2
 TEST_TASK_INVALID_PK = 1
 
@@ -28,7 +28,7 @@ class TestTaskDeleteView(TestCase):
 
     def test_authorized_user_to_delete_task(self):
         task = self.task.objects.get(name=TEST_TASK)
-        response = self.client.get(self.task.get_absolute_url_delete(task), follow=True)
+        response = self.client.get(reverse('task_delete', args=[task.id]), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_delete_user_get(self):

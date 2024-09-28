@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 
 TEST_USER_LOGIN = 'zzzxxx'
-TEST_USER_PASSWORD = '123'
+TEST_USER_PASSWORD = '1q2w3e4r5t6y7'
 TEST_STATUS = {'name': 'status3'}
 TEST_STATUS_INVALID_FORM = {'name': ''}
 

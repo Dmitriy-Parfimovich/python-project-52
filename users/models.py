@@ -11,11 +11,11 @@ class User(AbstractUser, PermissionsMixin):
     REQUIRED_FIELDS = []
     USERNAME_FIELD = 'username'
 
-    def get_absolute_url_edit(self):
+    """def get_absolute_url_edit(self):
         return reverse('user_edit', kwargs={'pk': self.pk})
 
     def get_absolute_url_delete(self):
-        return reverse('user_delete', kwargs={'pk': self.pk})
+        return reverse('user_delete', kwargs={'pk': self.pk})"""
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

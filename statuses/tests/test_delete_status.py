@@ -6,7 +6,7 @@ from statuses.models import Status
 
 TEST_STATUS = 'status2'
 TEST_USER_LOGIN = 'zzzxxx'
-TEST_USER_PASSWORD = '123'
+TEST_USER_PASSWORD = '1q2w3e4r5t6y7'
 TEST_STATUS_PK = 2
 
 
@@ -28,7 +28,7 @@ class TestStatusDeleteView(TestCase):
     def test_authorized_user_to_delete_status(self):
         status = self.status.objects.get(name=TEST_STATUS)
         self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
-        response = self.client.get(self.status.get_absolute_url_delete(status), follow=True)
+        response = self.client.get(reverse('status_delete', args=[status.id]), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_delete_user(self):

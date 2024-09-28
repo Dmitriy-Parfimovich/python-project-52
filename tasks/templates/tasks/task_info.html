@@ -41,9 +41,9 @@
                 </div>
                 <div class="row p-1">
                     <div class="col">
-                        <a href="{{ task.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
+                        <a href="{% url 'task_edit' task.id %}">{% trans 'Edit' %}</a>
                         <br>
-                        <a href="{{ task.get_absolute_url_delete }}">{% trans 'Delete' %}</a>
+                        <a href="{% url 'task_delete' task.id %}">{% trans 'Delete' %}</a>
                     </div>
                 </div>
             </div>

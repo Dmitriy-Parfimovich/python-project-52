@@ -1,10 +1,11 @@
 from django.test import Client, TestCase
 from tasks.models import Task
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 
 TEST_USER_LOGIN = 'zzzxxx'
-TEST_USER_PASSWORD = '123'
+TEST_USER_PASSWORD = '1q2w3e4r5t6y7'
 
 TEST_TASK = 'task1'
 
@@ -27,12 +28,12 @@ class TestTaskEditView(TestCase):
 
     def test_authorized_user_to_edit_task(self):
         task = self.task.objects.get(name=TEST_TASK)
-        response = self.client.get(self.task.get_absolute_url_edit(task), follow=True)
+        response = self.client.get(reverse('task_info', args=[task.id]), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_task_edit(self):
         response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)
         task = self.task.objects.get(name=TEST_TASK)
-        response = self.client.post(self.task.get_absolute_url_edit(task),
+        response = self.client.post(reverse('task_edit', args=[task.id]),
                                     TEST_VALID_TASK, follow=True)
         self.assertIn('/tasks/', response.redirect_chain[0])

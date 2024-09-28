@@ -24,9 +24,9 @@
                 <td>{{ label.name }}</td>
                 <td>{{ label.time_create|date:'d.m.Y H:i' }}</td>
                 <td>
-                    <a href="{{ label.get_absolute_url_edit }}">{% trans 'Edit' %}</a>
+                    <a href="{% url 'label_edit' label.id %}">{% trans 'Edit' %}</a>
                     <br>
-                    <a href="{{ label.get_absolute_url_delete }}">{% trans 'Delete' %}</a>
+                    <a href="{% url 'label_delete' label.id %}">{% trans 'Delete' %}</a>
                 </td>
             </tr>
             {% endfor %}
