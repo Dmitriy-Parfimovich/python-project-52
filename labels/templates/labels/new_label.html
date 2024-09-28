@@ -1,8 +1,9 @@
 {% extends 'task_manager/index.html' %}
-
-{% load django_bootstrap5 %}
 {% load i18n %}
-
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
@@ -13,21 +14,7 @@
     {% endif %}
     <form method="post">
         {% csrf_token %}
-        <div class="mb-3"><label class="form-label" for="id_name">{% trans 'Labelname' %}</label>
-            <input type="text" name="name" maxlength="100"
-            {% if form.name.errors %}
-                class="form-control is-invalid" aria-invalid="true"
-            {% else %}
-                class="form-control"
-            {% endif %}
-            placeholder="{% trans 'Labelname' %}" required id="id_name"
-            {% if form.name.value %}
-                value="{{ form.name.value }}"
-            {% endif %}>
-            {% if form.name.errors %}
-            <div class="invalid-feedback">{% trans 'Required field.' %}</div>
-            {% endif %}
-        </div>
+        {% bootstrap_form form %}
         <input class="btn btn-primary" type="submit"
         {% if form.name.value and not form.name.errors %}
             value="{% trans 'Change' %}"
