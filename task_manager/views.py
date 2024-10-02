@@ -17,11 +17,11 @@ class LoginUserView(SuccessMessageMixin, LoginView):
 
     template_name = 'users/login.html'
     success_message = _('You are logged in')
-    success_url = reverse_lazy('home')
+    # success_url = reverse_lazy('home')
 
-    """def get_success_url(self):
-        messages.add_message(self.request, messages.SUCCESS, _('You are logged in'))
-        return reverse_lazy('home')"""
+    def get_success_url(self):
+        # messages.add_message(self.request, messages.SUCCESS, _('You are logged in'))
+        return reverse_lazy('home')
 
 
 class LoginOutView(LogoutView):
