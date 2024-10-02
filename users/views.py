@@ -8,12 +8,15 @@ from users.forms import UserRegForm, UserDeleteForm
 from django.utils.translation import gettext as _
 from users.utils import UserDataMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.list import MultipleObjectMixin
 
 
 # Create your views here.
-class UsersListView(ListView):
+class UsersListView(ListView, MultipleObjectMixin):
 
-    queryset = User.objects.all().order_by('pk')
+    # queryset = User.objects.all().order_by('pk')
+    model = User
+    ordering = 'pk'
     context_object_name = 'users'
     template_name = 'users/users.html'
 
