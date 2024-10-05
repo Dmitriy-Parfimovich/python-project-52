@@ -40,8 +40,9 @@ class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
 
     def form_valid(self, form):
         task = form.instance
-        taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
-        task.taskautor = taskautor
+        """taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
+        task.taskautor = taskautor"""
+        task.taskautor = self.request.user.get_full_name()
         form.save()
         return super().form_valid(form)
 
