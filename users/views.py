@@ -14,7 +14,6 @@ from django.views.generic.list import MultipleObjectMixin
 # Create your views here.
 class UsersListView(ListView, MultipleObjectMixin):
 
-    # queryset = User.objects.all().order_by('pk')
     model = User
     ordering = 'pk'
     context_object_name = 'users'
@@ -28,11 +27,11 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('login')
     success_message = _('User successfully registered')
 
-    def form_valid(self, form):
+    """def form_valid(self, form):
         user = form.instance
         user.save()
         user.set_password(form.cleaned_data['password2'])
-        return super().form_valid(form)
+        return super().form_valid(form)"""
 
 
 class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):

@@ -38,12 +38,12 @@ class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
     def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=None)
 
-    def form_valid(self, form):
+    """def form_valid(self, form):
         task = form.instance
         taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
         task.taskautor = taskautor
         form.save()
-        return super().form_valid(form)
+        return super().form_valid(form)"""
 
 
 class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
