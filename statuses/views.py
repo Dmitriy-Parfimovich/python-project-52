@@ -5,12 +5,12 @@ from django.views.generic import (ListView, CreateView,
 from statuses.models import Status
 from statuses.forms import NewStatusForm, StatusDeleteForm
 from django.utils.translation import gettext as _
-from statuses.utils import StatusDataMixin
+from statuses.utils import Mixins
 from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-class StatusesListView(StatusDataMixin, ListView):
+class StatusesListView(Mixins, ListView):
 
     queryset = Status.objects.all().order_by('pk')
     context_object_name = 'statuses'
@@ -20,7 +20,7 @@ class StatusesListView(StatusDataMixin, ListView):
         return self.mixin_dispatch(request, *args, **kwargs)
 
 
-class NewStatusView(SuccessMessageMixin, StatusDataMixin, CreateView):
+class NewStatusView(SuccessMessageMixin, Mixins, CreateView):
 
     form_class = NewStatusForm
     template_name = 'statuses/new_status.html'
@@ -34,7 +34,7 @@ class NewStatusView(SuccessMessageMixin, StatusDataMixin, CreateView):
         return super().form_valid(form)
 
 
-class StatusEditView(SuccessMessageMixin, StatusDataMixin, UpdateView):
+class StatusEditView(SuccessMessageMixin, Mixins, UpdateView):
 
     form_class = NewStatusForm
     template_name = 'statuses/new_status.html'
@@ -51,7 +51,7 @@ class StatusEditView(SuccessMessageMixin, StatusDataMixin, UpdateView):
         return super().form_valid(form)
 
 
-class StatusDeleteView(SuccessMessageMixin, StatusDataMixin, DeleteView):
+class StatusDeleteView(SuccessMessageMixin, Mixins, DeleteView):
 
     form_class = StatusDeleteForm
     template_name = 'statuses/del_status.html'

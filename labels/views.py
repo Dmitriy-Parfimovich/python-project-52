@@ -5,12 +5,12 @@ from django.views.generic import (ListView, CreateView,
 from labels.models import Label
 from labels.forms import NewLabelForm, LabelDeleteForm
 from django.utils.translation import gettext as _
-from labels.utils import LabelDataMixin
+from labels.utils import Mixins
 from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-class LabelsListView(LabelDataMixin, ListView):
+class LabelsListView(Mixins, ListView):
 
     queryset = Label.objects.all().order_by('pk')
     context_object_name = 'labels'
@@ -20,7 +20,7 @@ class LabelsListView(LabelDataMixin, ListView):
         return self.mixin_dispatch(request, *args, **kwargs)
 
 
-class NewLabelView(SuccessMessageMixin, LabelDataMixin, CreateView):
+class NewLabelView(SuccessMessageMixin, Mixins, CreateView):
 
     form_class = NewLabelForm
     template_name = 'labels/new_label.html'
@@ -34,7 +34,7 @@ class NewLabelView(SuccessMessageMixin, LabelDataMixin, CreateView):
         return super().form_valid(form)
 
 
-class LabelEditView(SuccessMessageMixin, LabelDataMixin, UpdateView):
+class LabelEditView(SuccessMessageMixin, Mixins, UpdateView):
 
     form_class = NewLabelForm
     template_name = 'labels/new_label.html'
@@ -48,7 +48,7 @@ class LabelEditView(SuccessMessageMixin, LabelDataMixin, UpdateView):
         return super().form_valid(form)
 
 
-class LabelDeleteView(SuccessMessageMixin, LabelDataMixin, DeleteView):
+class LabelDeleteView(SuccessMessageMixin, Mixins, DeleteView):
 
     form_class = LabelDeleteForm
     template_name = 'labels/del_label.html'

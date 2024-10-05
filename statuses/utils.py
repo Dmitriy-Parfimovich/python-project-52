@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 
 
-class StatusDataMixin():
+class Mixins():
 
     model = Status
 

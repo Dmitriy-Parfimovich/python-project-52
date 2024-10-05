@@ -5,7 +5,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import gettext as _
 
 
-class TaskDataMixin(SingleObjectMixin):
+class Mixins(SingleObjectMixin):
 
     model = Task
 

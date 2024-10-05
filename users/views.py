@@ -6,7 +6,7 @@ from django.views.generic import (ListView, CreateView,
                                   UpdateView, DeleteView)
 from users.forms import UserRegForm, UserDeleteForm
 from django.utils.translation import gettext as _
-from users.utils import UserDataMixin
+from users.utils import Mixins
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.list import MultipleObjectMixin
 
@@ -34,7 +34,7 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)"""
 
 
-class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
+class UserEditView(SuccessMessageMixin, Mixins, UpdateView):
 
     form_class = UserRegForm
     template_name = 'users/update.html'
@@ -59,7 +59,7 @@ class UserEditView(SuccessMessageMixin, UserDataMixin, UpdateView):
         return super().form_valid(form)
 
 
-class UserDeleteView(SuccessMessageMixin, UserDataMixin, DeleteView):
+class UserDeleteView(SuccessMessageMixin, Mixins, DeleteView):
 
     form_class = UserDeleteForm
     template_name = 'users/delete.html'

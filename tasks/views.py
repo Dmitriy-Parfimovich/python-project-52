@@ -10,12 +10,12 @@ from tasks.forms import NewTaskForm, TaskDeleteForm
 from django.utils.translation import gettext as _
 from .filters import TaskFilter
 from django_filters.views import FilterView
-from tasks.utils import TaskDataMixin
+from tasks.utils import Mixins
 from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
-class TasksListView(TaskDataMixin, FilterView):
+class TasksListView(Mixins, FilterView):
 
     filterset_class = TaskFilter
     template_name = 'tasks/tasks.html'
@@ -24,7 +24,7 @@ class TasksListView(TaskDataMixin, FilterView):
     filterset_fields = ['executor', 'status', 'labels']
 
 
-class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
+class NewTaskView(SuccessMessageMixin, Mixins, CreateView):
 
     form_class = NewTaskForm
     template_name = 'tasks/new_task.html'
@@ -47,7 +47,7 @@ class NewTaskView(SuccessMessageMixin, TaskDataMixin, CreateView):
         return super().form_valid(form)
 
 
-class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
+class TaskEditView(SuccessMessageMixin, Mixins, UpdateView):
 
     form_class = NewTaskForm
     object = None
@@ -63,7 +63,7 @@ class TaskEditView(SuccessMessageMixin, TaskDataMixin, UpdateView):
         return self.get_mixin_context(context, pk=self.kwargs['pk'])
 
 
-class TaskDeleteView(SuccessMessageMixin, TaskDataMixin, DeleteView):
+class TaskDeleteView(SuccessMessageMixin, Mixins, DeleteView):
 
     form_class = TaskDeleteForm
     template_name = 'tasks/del_task.html'
