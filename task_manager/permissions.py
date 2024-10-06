@@ -13,9 +13,8 @@ class LoginRequiredMixinWithMessage(LoginRequiredMixin):
     def mixin_dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.add_message(request, messages.ERROR, self.login_required_message)
-            return reverse_lazy('login')
         if request.user != self.get_object():
             messages.error(request, _('You do not have permission to change\
                                        another user.'))
             return redirect('users_list')
-        #return super().dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
