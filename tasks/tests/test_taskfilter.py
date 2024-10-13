@@ -15,7 +15,7 @@ TEST_LIST_TASKS_TEST_STATUS = ['task1', 'task3', 'task5']
 TEST_LIST_TASKS_TEST_EXECUTOR = ['task1', 'task2', 'task4']
 TEST_LIST_TASKS_TEST_LABEL = ['task1', 'task2', 'task3', 'task5']
 TEST_LIST_TASKS_TEST_STATUS_EXECUTOR_LABEL = ['task1']
-TEST_LIST_TASKS_FOR_VALID_USER = ['task1']
+TEST_LIST_TASKS_FOR_VALID_USER = ['task3', 'task4', 'task5']
 
 
 class TestTasksListView(TestCase):

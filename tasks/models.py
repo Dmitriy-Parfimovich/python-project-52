@@ -8,10 +8,12 @@ from labels.models import Label
 class Task(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name='Имя')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
-    taskautor = models.CharField(max_length=50, verbose_name='Автор')
+    """author = models.CharField(max_length=50, verbose_name='Автор')"""
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               blank=True, null=False, related_name="tasks_as_author",
+                               verbose_name='Автор')
     executor = models.ForeignKey(User, on_delete=models.CASCADE,
-                                 blank=True,
-                                 null=True,
+                                 blank=True, null=True, related_name="tasks_as_executor",
                                  verbose_name='Исполнитель')
     status = models.ForeignKey(Status, on_delete=models.CASCADE, verbose_name='Статус')
     labels = models.ManyToManyField(Label, blank=True, verbose_name='Метки')

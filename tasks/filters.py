@@ -15,7 +15,7 @@ class TaskFilter(django_filters.FilterSet):
     )
 
     self_tasks = django_filters.BooleanFilter(
-        field_name='taskautor',
+        field_name='author',
         label=_('Only your tasks'),
         label_suffix='',
         method='filter_self_tasks',
@@ -24,8 +24,10 @@ class TaskFilter(django_filters.FilterSet):
 
     def filter_self_tasks(self, queryset, name, value):
         if value:
-            taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
-            return queryset.filter(taskautor=taskautor)
+            """taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
+            return queryset.filter(taskautor=taskautor)"""
+            author = self.request.user
+            return queryset.filter(author=author)
         return queryset
 
     class Meta:

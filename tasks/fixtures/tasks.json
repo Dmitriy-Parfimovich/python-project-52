@@ -5,7 +5,7 @@
         "fields": {
             "name": "task1",
             "description": "gggggggggggg",
-            "taskautor": "qqq www",
+            "author": 2,
             "executor": 1,
             "status": 1,
             "labels": [1, 2],
@@ -18,7 +18,7 @@
         "fields": {
             "name": "task2",
             "description": "gggggggggggg",
-            "taskautor": "zzz xxx",
+            "author": 2,
             "executor": 1,
             "status": 2,
             "labels": [2],
@@ -31,7 +31,7 @@
         "fields": {
             "name": "task3",
             "description": "sssssssss",
-            "taskautor": "aaa sss",
+            "author": 1,
             "executor": 2,
             "status": 1,
             "labels": [1, 2, 3],
@@ -44,7 +44,7 @@
         "fields": {
             "name": "task4",
             "description": "dddddddd",
-            "taskautor": "ddd fff",
+            "author": 1,
             "executor": 1,
             "status": 2,
             "labels": [1, 3],
@@ -57,7 +57,7 @@
         "fields": {
             "name": "task5",
             "description": "wwwwwwww",
-            "taskautor": "www eee",
+            "author": 1,
             "executor": 2,
             "status": 1,
             "labels": [2, 3],

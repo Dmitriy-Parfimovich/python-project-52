@@ -42,7 +42,8 @@ class NewTaskView(SuccessMessageMixin, Mixins, CreateView):
         task = form.instance
         """taskautor = f'{self.request.user.first_name} {self.request.user.last_name}'
         task.taskautor = taskautor"""
-        task.taskautor = self.request.user.get_full_name()
+        """task.taskautor = self.request.user.get_full_name()"""
+        task.author = self.request.user
         form.save()
         return super().form_valid(form)
 

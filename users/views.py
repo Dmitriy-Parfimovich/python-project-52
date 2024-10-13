@@ -7,7 +7,7 @@ from django.views.generic import (ListView, CreateView,
 from users.forms import UserRegForm, UserDeleteForm
 from django.utils.translation import gettext as _
 from users.utils import Mixins
-from task_manager.permissions import LoginRequiredMixinWithMessage
+from task_manager.permissions import LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.list import MultipleObjectMixin
 
@@ -35,7 +35,7 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)"""
 
 
-class UserEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Mixins, UpdateView):
+class UserEditView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage, SuccessMessageMixin, Mixins, UpdateView):
 
     form_class = UserRegForm
     template_name = 'users/update.html'
@@ -50,9 +50,9 @@ class UserEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Mixins, U
         return self.get_mixin_context(context, pk=self.kwargs['pk'])
 
     def form_valid(self, form):
-        tasks_of_old_user = Task.objects.filter(taskautor=self.get_object())
+        tasks_of_old_user = Task.objects.filter(author=self.get_object())
         for task in tasks_of_old_user:
-            task.taskautor = str(self.get_object())
+            task.author = str(self.get_object())
             task.save()
         user = self.get_object()
         user = form.instance
@@ -60,7 +60,7 @@ class UserEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Mixins, U
         return super().form_valid(form)
 
 
-class UserDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Mixins, DeleteView):
+class UserDeleteView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage, SuccessMessageMixin, Mixins, DeleteView):
 
     form_class = UserDeleteForm
     template_name = 'users/delete.html'
