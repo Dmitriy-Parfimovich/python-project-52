@@ -44,9 +44,6 @@ class UserEditView(LoginRequiredMixinWithMessage,
         for task in tasks_of_old_user:
             task.author = str(self.get_object())
             task.save()
-        """user = self.get_object()
-        user = form.instance
-        user.save()"""
         return super().form_valid(form)
 
 
@@ -64,6 +61,6 @@ class UserDeleteView(LoginRequiredMixinWithMessage,
         user = self.get_object()
         if Task.objects.filter(executor__username=user).exists():
             messages.error(self.request, _('Cannot delete user because it is in use'))
-        else:
-            user.delete()
+        """else:
+            user.delete()"""
         return super().form_valid(form)
