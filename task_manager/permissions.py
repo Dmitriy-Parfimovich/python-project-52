@@ -28,5 +28,5 @@ class UserTestPassesMixinWithMessage(UserPassesTestMixin):
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func():
             messages.add_message(request, messages.ERROR, self.permission_denied_message)
-            return redirect(reverse_lazy('login'))
+            return redirect(reverse_lazy('users_list'))
         return super().dispatch(request, *args, **kwargs)
