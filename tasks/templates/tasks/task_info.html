@@ -31,9 +31,11 @@
                     <div class="col">
                         <h6>{% trans 'Labels' %}:</h6>
                         <ul>
-                            {% for label in labels %}
-                                <li>{{ label }}</li>
+                            {% if task.labels %}
+                            {% for label in task.labels.all %}
+                                <li>{{ label.name }}</li>
                             {% endfor %}
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
