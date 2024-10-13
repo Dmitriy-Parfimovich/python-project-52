@@ -67,8 +67,8 @@ class UserDeleteView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessa
     success_url = reverse_lazy('users_list')
     success_message = _('User deleted successfully')
 
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
+    """def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])"""
 
     def form_valid(self, form):
         user = self.get_object()
