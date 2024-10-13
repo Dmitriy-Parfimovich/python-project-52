@@ -61,6 +61,4 @@ class UserDeleteView(LoginRequiredMixinWithMessage,
         user = self.get_object()
         if Task.objects.filter(executor__username=user).exists():
             messages.error(self.request, _('Cannot delete user because it is in use'))
-        """else:
-            user.delete()"""
         return super().form_valid(form)
