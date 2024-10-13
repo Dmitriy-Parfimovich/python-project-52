@@ -16,8 +16,8 @@ class NewLabelForm(forms.ModelForm):
         return self['name'].value().strip()
 
 
-class LabelDeleteForm(forms.ModelForm):
+"""class LabelDeleteForm(forms.ModelForm):
 
     class Meta:
         model = Label
-        fields = []
+        fields = []"""
