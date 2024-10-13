@@ -12,6 +12,7 @@ from .filters import TaskFilter
 from django_filters.views import FilterView
 from tasks.utils import Mixins
 from django.contrib.messages.views import SuccessMessageMixin
+from task_manager.permissions import LoginRequiredMixinWithMessage
 
 
 # Create your views here.
@@ -24,7 +25,7 @@ class TasksListView(Mixins, FilterView):
     filterset_fields = ['executor', 'status', 'labels']
 
 
-class NewTaskView(SuccessMessageMixin, Mixins, CreateView):
+class NewTaskView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Mixins, CreateView):
 
     form_class = NewTaskForm
     template_name = 'tasks/new_task.html'
@@ -35,8 +36,8 @@ class NewTaskView(SuccessMessageMixin, Mixins, CreateView):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, pk=None)
 
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=None)
+    """def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, pk=None)"""
 
     def form_valid(self, form):
         task = form.instance
@@ -56,15 +57,15 @@ class TaskEditView(SuccessMessageMixin, Mixins, UpdateView):
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully modified')
 
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
+    """def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])"""
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, pk=self.kwargs['pk'])
 
 
-class TaskDeleteView(SuccessMessageMixin, Mixins, DeleteView):
+class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Mixins, DeleteView):
 
     form_class = TaskDeleteForm
     template_name = 'tasks/del_task.html'
@@ -75,8 +76,8 @@ class TaskDeleteView(SuccessMessageMixin, Mixins, DeleteView):
         queryset = super().get_queryset()
         return queryset.get(pk=self.kwargs['pk'])
 
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
+    """def dispatch(self, request, *args, **kwargs):
+        return self.mixin_dispatch(request, *args, **kwargs)"""
 
     def form_valid(self, form):
         self.get_object().delete()

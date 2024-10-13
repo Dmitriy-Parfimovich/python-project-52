@@ -10,10 +10,20 @@ class LoginRequiredMixinWithMessage(LoginRequiredMixin):
     login_url = reverse_lazy('login')
     login_required_message = _('You are not authorized! Please log in.')
 
+    """def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.add_message(request, messages.ERROR, self.login_required_message)
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)"""
+    
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.add_message(request, messages.ERROR, self.login_required_message)
             return self.handle_no_permission()
+        else:
+            if kwargs['pk'] and self.get_object().author != request.user:
+                messages.error(request, _("Only it's author can delete the task"))
+                return redirect('tasks_list')
         return super().dispatch(request, *args, **kwargs)
 
 
