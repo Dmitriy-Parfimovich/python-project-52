@@ -41,14 +41,6 @@ class LabelDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Delete
     success_url = reverse_lazy('labels_list')
     success_message = _('Label deleted successfully')
 
-    """def form_valid(self, form):
-        label = self.get_object()
-        if list(label.task_set.all()) == []:
-            label.delete()
-        else:
-            messages.error(self.request, _("Can't remove the label because it's in use"))
-        return super().form_valid(form)"""
-
     def form_valid(self, form):
         label = self.get_object()
         if list(label.task_set.all()) != []:

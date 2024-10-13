@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.contrib import messages
+# from django.contrib import messages
 from django.views.generic import (ListView, CreateView,
                                   UpdateView, DeleteView)
 from statuses.models import Status
@@ -40,11 +40,10 @@ class StatusDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Delet
     template_name = 'statuses/del_status.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status deleted successfully')
+    error_message = _("Can't delete a status because it's in use")
 
-    def form_valid(self, form):
+    """def form_valid(self, form):
         status = self.get_object()
-        if list(status.task_set.all()) == []:
-            status.delete()
-        else:
+        if list(status.task_set.all()) != []:
             messages.error(self.request, _("Can't delete a status because it's in use"))
-        return super().form_valid(form)
+        return super().form_valid(form)"""
