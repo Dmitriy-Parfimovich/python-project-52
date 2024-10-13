@@ -56,6 +56,7 @@ class NewTaskView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateView
 
 class TaskEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateView):
 
+    model = Task
     form_class = NewTaskForm
     object = None
     template_name = 'tasks/update_task.html'
@@ -72,6 +73,7 @@ class TaskEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateVie
 
 class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
 
+    model = Task
     form_class = TaskDeleteForm
     template_name = 'tasks/del_task.html'
     success_url = reverse_lazy('tasks_list')
