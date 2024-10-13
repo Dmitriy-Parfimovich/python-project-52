@@ -16,8 +16,8 @@ class NewStatusForm(forms.ModelForm):
         return self['name'].value().strip()
 
 
-class StatusDeleteForm(forms.ModelForm):
+"""class StatusDeleteForm(forms.ModelForm):
 
     class Meta:
         model = Status
-        fields = []
+        fields = []"""

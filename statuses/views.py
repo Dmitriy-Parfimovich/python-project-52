@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.views.generic import (ListView, CreateView,
                                   UpdateView, DeleteView)
 from statuses.models import Status
-from statuses.forms import NewStatusForm, StatusDeleteForm
+from statuses.forms import NewStatusForm
 from django.utils.translation import gettext as _
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.permissions import LoginRequiredMixinWithMessage
@@ -33,17 +33,11 @@ class StatusEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateV
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status changed successfully')
 
-    """def form_valid(self, form):
-        status = self.get_object()
-        status.name = form.cleaned_data['name']
-        status.save()
-        return super().form_valid(form)"""
-
 
 class StatusDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
 
     model = Status
-    form_class = StatusDeleteForm
+    # form_class = StatusDeleteForm
     template_name = 'statuses/del_status.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status deleted successfully')
