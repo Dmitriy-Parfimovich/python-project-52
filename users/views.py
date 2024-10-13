@@ -39,10 +39,6 @@ class UserEditView(LoginRequiredMixinWithMessage,
     success_url = reverse_lazy('users_list')
     success_message = _('User successfully changed')
 
-    """def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, pk=self.kwargs['pk'])"""
-
     def form_valid(self, form):
         tasks_of_old_user = Task.objects.filter(author=self.get_object())
         for task in tasks_of_old_user:
