@@ -44,9 +44,9 @@ class UserEditView(LoginRequiredMixinWithMessage,
         for task in tasks_of_old_user:
             task.author = str(self.get_object())
             task.save()
-        user = self.get_object()
+        """user = self.get_object()
         user = form.instance
-        user.save()
+        user.save()"""
         return super().form_valid(form)
 
 
