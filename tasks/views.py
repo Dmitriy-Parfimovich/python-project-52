@@ -1,22 +1,17 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import (CreateView,
                                   UpdateView,
                                   DeleteView)
 from tasks.models import Task
-from labels.models import Label
 from tasks.forms import NewTaskForm
 from django.utils.translation import gettext as _
 from .filters import TaskFilter
 from django_filters.views import FilterView
-from tasks.utils import Mixins
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.permissions import LoginRequiredMixinWithMessage
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
-
 
 
 # Create your views here.
@@ -36,19 +31,6 @@ class NewTaskView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateView
     success_url = reverse_lazy('tasks_list')
     success_message = _('Task created successfully')
 
-    """def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, pk=None)
-
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=None)"""
-
-    """def form_valid(self, form):
-        task = form.instance
-        task.author = self.request.user
-        form.save()
-        return super().form_valid(form)"""
-    
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -63,13 +45,6 @@ class TaskEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateVie
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully modified')
 
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, pk=self.kwargs['pk'])"""
-
 
 class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
 
@@ -77,7 +52,7 @@ class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteV
     template_name = 'tasks/del_task.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully deleted')
-    
+
     def dispatch(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
         task_author = Task.objects.get(id=task_id).author

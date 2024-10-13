@@ -1,6 +1,5 @@
 from users.models import User
 from django.views.generic.detail import SingleObjectMixin
-from django.utils.translation import gettext as _
 
 
 class Mixins(SingleObjectMixin):

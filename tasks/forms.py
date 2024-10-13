@@ -14,10 +14,3 @@ class NewTaskForm(forms.ModelForm):
         if re.search(r"^\s*$", self['name'].value()):
             self.errors['name'] = _('Required field.')
         return self['name'].value().strip()
-
-
-"""class TaskDeleteForm(forms.ModelForm):
-
-    class Meta:
-        model = Task
-        fields = []"""

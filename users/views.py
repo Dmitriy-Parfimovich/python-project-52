@@ -29,7 +29,11 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
     success_message = _('User successfully registered')
 
 
-class UserEditView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage, SuccessMessageMixin, Mixins, UpdateView):
+class UserEditView(LoginRequiredMixinWithMessage,
+                   UserTestPassesMixinWithMessage,
+                   SuccessMessageMixin,
+                   Mixins,
+                   UpdateView):
 
     form_class = UserRegForm
     template_name = 'users/update.html'
@@ -51,10 +55,13 @@ class UserEditView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage
         return super().form_valid(form)
 
 
-class UserDeleteView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage, SuccessMessageMixin, Mixins, DeleteView):
+class UserDeleteView(LoginRequiredMixinWithMessage,
+                     UserTestPassesMixinWithMessage,
+                     SuccessMessageMixin,
+                     Mixins,
+                     DeleteView):
 
     model = User
-    # form_class = UserDeleteForm
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
     success_message = _('User deleted successfully')

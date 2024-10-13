@@ -6,7 +6,7 @@ from django.contrib import messages
 
 
 class LoginRequiredMixinWithMessage(LoginRequiredMixin):
-    
+
     login_url = reverse_lazy('login')
     login_required_message = _('You are not authorized! Please log in.')
 
@@ -21,7 +21,7 @@ class UserTestPassesMixinWithMessage(UserPassesTestMixin):
 
     message = _("You don't have permission to change another user.")
     permission_denied_message = message
-    
+
     def test_func(self):
         return self.request.user.id == self.kwargs.get("pk")
 
