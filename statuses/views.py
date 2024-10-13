@@ -38,6 +38,7 @@ class NewStatusView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateVi
 
 class StatusEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateView):
 
+    model = Status
     form_class = NewStatusForm
     template_name = 'statuses/new_status.html'
     success_url = reverse_lazy('statuses_list')
@@ -55,6 +56,7 @@ class StatusEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateV
 
 class StatusDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
 
+    model = Status
     form_class = StatusDeleteForm
     template_name = 'statuses/del_status.html'
     success_url = reverse_lazy('statuses_list')
