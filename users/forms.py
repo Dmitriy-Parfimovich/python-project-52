@@ -10,8 +10,8 @@ class UserRegForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'username', 'password1', 'password2']
 
 
-class UserDeleteForm(forms.ModelForm):
+"""class UserDeleteForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = []
+        fields = []"""

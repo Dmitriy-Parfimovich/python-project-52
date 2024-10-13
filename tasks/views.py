@@ -74,21 +74,9 @@ class TaskEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateVie
 class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
 
     model = Task
-    # form_class = TaskDeleteForm
     template_name = 'tasks/del_task.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully deleted')
-
-    """def get_object(self):
-        queryset = super().get_queryset()
-        return queryset.get(pk=self.kwargs['pk'])
-
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        self.get_object().delete()
-        return super().form_valid(form)"""
     
     def dispatch(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
@@ -105,9 +93,3 @@ class TaskInfoView(LoginRequiredMixinWithMessage, DetailView):
     template_name = 'tasks/task_info.html'
     login_url = reverse_lazy('login')
     context_object_name = 'task'
-
-    """def get(self, request, *args, **kwargs):
-        task = Task.objects.get(pk=self.kwargs['pk'])
-        labels = Label.objects.filter(task__name=task.name)
-        return render(request, 'tasks/task_info.html', context={'task': task,
-                                                                'labels': labels})"""

@@ -28,12 +28,6 @@ class NewUserRegView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('login')
     success_message = _('User successfully registered')
 
-    """def form_valid(self, form):
-        user = form.instance
-        user.save()
-        user.set_password(form.cleaned_data['password2'])
-        return super().form_valid(form)"""
-
 
 class UserEditView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage, SuccessMessageMixin, Mixins, UpdateView):
 
@@ -41,9 +35,6 @@ class UserEditView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage
     template_name = 'users/update.html'
     success_url = reverse_lazy('users_list')
     success_message = _('User successfully changed')
-
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])"""
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -62,13 +53,11 @@ class UserEditView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage
 
 class UserDeleteView(LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage, SuccessMessageMixin, Mixins, DeleteView):
 
-    form_class = UserDeleteForm
+    model = User
+    # form_class = UserDeleteForm
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
     success_message = _('User deleted successfully')
-
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])"""
 
     def form_valid(self, form):
         user = self.get_object()
