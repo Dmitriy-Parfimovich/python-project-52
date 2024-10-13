@@ -6,15 +6,11 @@
 {% block maincontent %}
 <div class="container wrapper flex-grow-1">
     {% bootstrap_messages %}
-    {% if edit_flag and not form.name.errors %}
     <h1 class="my-4">{% trans 'Changing the task' %}</h1>
-    {% else %}
-    <h1 class="my-4">{% trans 'Create the task' %}</h1>
-    {% endif %}
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input class="btn btn-primary" type="submit" {% if edit_flag and not form.name.errors %} value="{% trans 'Edit' %}" {% else %} value="{% trans 'Create' %}" {% endif %}>
+        <input class="btn btn-primary" type="submit" value="{% trans 'Edit' %}">
     </form>
 </div>
 {% endblock maincontent %}
