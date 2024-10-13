@@ -14,10 +14,3 @@ class NewLabelForm(forms.ModelForm):
         if re.search(r"^\s*$", self['name'].value()):
             self.errors['name'] = _('Required field.')
         return self['name'].value().strip()
-
-
-"""class LabelDeleteForm(forms.ModelForm):
-
-    class Meta:
-        model = Label
-        fields = []"""

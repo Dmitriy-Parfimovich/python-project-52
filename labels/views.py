@@ -16,9 +16,6 @@ class LabelsListView(LoginRequiredMixinWithMessage, ListView):
     context_object_name = 'labels'
     template_name = 'labels/labels.html'
 
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)"""
-
 
 class NewLabelView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateView):
 
@@ -26,12 +23,6 @@ class NewLabelView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateVie
     template_name = 'labels/new_label.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label successfully created')
-
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        return super().form_valid(form)"""
 
 
 class LabelEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateView):
@@ -42,12 +33,6 @@ class LabelEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateVi
     success_url = reverse_lazy('labels_list')
     success_message = _('Label changed successfully')
 
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        return super().form_valid(form)"""
-
 
 class LabelDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
 
@@ -55,13 +40,6 @@ class LabelDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Delete
     template_name = 'labels/del_label.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label deleted successfully')
-
-    """def get_object(self):
-        queryset = super().get_queryset()
-        return queryset.get(pk=self.kwargs['pk'])
-
-    def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)"""
 
     def form_valid(self, form):
         label = self.get_object()
