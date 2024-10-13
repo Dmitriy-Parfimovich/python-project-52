@@ -6,7 +6,7 @@ from django.views.generic import (CreateView,
                                   DeleteView)
 from tasks.models import Task
 from labels.models import Label
-from tasks.forms import NewTaskForm, TaskDeleteForm
+from tasks.forms import NewTaskForm
 from django.utils.translation import gettext as _
 from .filters import TaskFilter
 from django_filters.views import FilterView
@@ -74,7 +74,7 @@ class TaskEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateVie
 class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
 
     model = Task
-    form_class = TaskDeleteForm
+    # form_class = TaskDeleteForm
     template_name = 'tasks/del_task.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully deleted')
@@ -90,11 +90,11 @@ class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteV
         self.get_object().delete()
         return super().form_valid(form)"""
     
-    def post(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
         task_author = Task.objects.get(id=task_id).author
-        if request.user.id == task_author.id:
-            return super().post(self, request, *args, **kwargs)
+        if request.user == task_author:
+            return super().dispatch(request, *args, **kwargs)
         messages.add_message(request, messages.ERROR, _("Only it's author can delete the task"))
         return redirect(reverse_lazy('tasks_list'))
 

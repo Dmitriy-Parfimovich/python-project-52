@@ -16,8 +16,8 @@ class NewTaskForm(forms.ModelForm):
         return self['name'].value().strip()
 
 
-class TaskDeleteForm(forms.ModelForm):
+"""class TaskDeleteForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = []
+        fields = []"""
