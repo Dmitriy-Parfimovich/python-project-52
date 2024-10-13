@@ -33,6 +33,7 @@ class UserEditView(LoginRequiredMixinWithMessage,
                    SuccessMessageMixin,
                    UpdateView):
 
+    model = User
     form_class = UserRegForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('users_list')
