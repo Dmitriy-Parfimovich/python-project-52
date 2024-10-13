@@ -5,7 +5,6 @@ from django.views.generic import (ListView, CreateView,
 from statuses.models import Status
 from statuses.forms import NewStatusForm, StatusDeleteForm
 from django.utils.translation import gettext as _
-# from statuses.utils import Mixins
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.permissions import LoginRequiredMixinWithMessage
 
@@ -14,12 +13,8 @@ from task_manager.permissions import LoginRequiredMixinWithMessage
 class StatusesListView(LoginRequiredMixinWithMessage, ListView):
 
     model = Status
-    # queryset = Status.objects.all().order_by('pk')
     context_object_name = 'statuses'
     template_name = 'statuses/statuses.html'
-
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)"""
 
 
 class NewStatusView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateView):
@@ -28,12 +23,6 @@ class NewStatusView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateVi
     template_name = 'statuses/new_status.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status successfully created')
-
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        return super().form_valid(form)"""
 
 
 class StatusEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateView):
@@ -44,14 +33,11 @@ class StatusEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateV
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status changed successfully')
 
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)"""
-
-    def form_valid(self, form):
+    """def form_valid(self, form):
         status = self.get_object()
         status.name = form.cleaned_data['name']
         status.save()
-        return super().form_valid(form)
+        return super().form_valid(form)"""
 
 
 class StatusDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
@@ -61,9 +47,6 @@ class StatusDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, Delet
     template_name = 'statuses/del_status.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status deleted successfully')
-
-    """def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, **kwargs)"""
 
     def form_valid(self, form):
         status = self.get_object()
