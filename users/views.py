@@ -4,7 +4,7 @@ from users.models import User
 from tasks.models import Task
 from django.views.generic import (ListView, CreateView,
                                   UpdateView, DeleteView)
-from users.forms import UserRegForm, UserDeleteForm
+from users.forms import UserRegForm
 from django.utils.translation import gettext as _
 from users.utils import Mixins
 from task_manager.permissions import LoginRequiredMixinWithMessage, UserTestPassesMixinWithMessage
