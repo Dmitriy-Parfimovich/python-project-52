@@ -36,12 +36,12 @@ class NewTaskView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateView
     success_url = reverse_lazy('tasks_list')
     success_message = _('Task created successfully')
 
-    def get_context_data(self, **kwargs):
+    """def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, pk=None)
 
     def dispatch(self, request, *args, **kwargs):
-        return self.mixin_dispatch(request, *args, pk=None)
+        return self.mixin_dispatch(request, *args, pk=None)"""
 
     """def form_valid(self, form):
         task = form.instance
@@ -62,12 +62,12 @@ class TaskEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateVie
     success_url = reverse_lazy('tasks_list')
     success_message = _('The task was successfully modified')
 
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         return self.mixin_dispatch(request, *args, pk=self.kwargs['pk'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context, pk=self.kwargs['pk'])
+        return self.get_mixin_context(context, pk=self.kwargs['pk'])"""
 
 
 class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteView):
@@ -94,7 +94,7 @@ class TaskDeleteView(LoginRequiredMixinWithMessage, SuccessMessageMixin, DeleteV
         if request.user.id == task_author.id:
             return super().post(self, request, *args, **kwargs)
         messages.add_message(request, messages.ERROR, _("Only it's author can delete the task"))
-        return redirect(reverse_lazy('tasks_index'))
+        return redirect(reverse_lazy('tasks_list'))
 
 
 class TaskInfoView(LoginRequiredMixinWithMessage, DetailView):
