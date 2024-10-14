@@ -26,7 +26,7 @@ class TestUserDeleteView(TestCase):
     def test_not_authorized_user_to_delete(self):
         user = self.user.objects.get(username=TEST_USER_LOGIN_1)
         response = self.client.get(reverse('user_delete', args=[user.id]), follow=True)
-        self.assertIn('/login/', response.redirect_chain[0])
+        self.assertIn('/login/?next=/users/1/delete/', response.redirect_chain[0])
 
     def test_authorized_user_to_delete(self):
         user = self.user.objects.get(username=TEST_USER_LOGIN_1)

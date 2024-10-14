@@ -30,7 +30,7 @@ class TestNewStatusView(TestCase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
         # Check that the template is OK.
-        self.assertTemplateUsed(response, 'statuses/new_status.html')
+        self.assertTemplateUsed(response, 'statuses/create_status.html')
 
     def test_create_status(self):
         response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)

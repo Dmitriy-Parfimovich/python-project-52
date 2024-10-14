@@ -32,7 +32,7 @@ class TestNewTaskView(TestCase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
         # Check that the template is OK.
-        self.assertTemplateUsed(response, 'tasks/new_task.html')
+        self.assertTemplateUsed(response, 'tasks/create_task.html')
 
     def test_create_task(self):
         response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)

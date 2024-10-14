@@ -30,7 +30,7 @@ class TestNewLabelView(TestCase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
         # Check that the template is OK.
-        self.assertTemplateUsed(response, 'labels/new_label.html')
+        self.assertTemplateUsed(response, 'labels/create_label.html')
 
     def test_create_label(self):
         response = self.client.login(username=TEST_USER_LOGIN, password=TEST_USER_PASSWORD)

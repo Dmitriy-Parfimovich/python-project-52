@@ -1,16 +1,8 @@
-{% extends 'task_manager/index.html' %}
+{% extends 'task_manager/gen_create.html' %}
 {% load i18n %}
 {% load django_bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-{% block maincontent %}
-<div class="container wrapper flex-grow-1">
-    {% bootstrap_messages %}
-    <h1 class="my-4">{% translate "Login" %}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input class="btn btn-primary" type="submit" value="{% trans 'Sing in' %}">
-    </form>
-</div>
-{% endblock maincontent %}
+{% bootstrap_messages %}
+{% block body_title %}{% translate "Login" %}{% endblock %}
+{% block button_value %}{% trans 'Sing in' %}{% endblock %}

@@ -20,7 +20,7 @@ class LabelsListView(LoginRequiredMixinWithMessage, ListView):
 class NewLabelView(LoginRequiredMixinWithMessage, SuccessMessageMixin, CreateView):
 
     form_class = NewLabelForm
-    template_name = 'labels/new_label.html'
+    template_name = 'labels/create_label.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label successfully created')
 
@@ -29,7 +29,7 @@ class LabelEditView(LoginRequiredMixinWithMessage, SuccessMessageMixin, UpdateVi
 
     model = Label
     form_class = NewLabelForm
-    template_name = 'labels/new_label.html'
+    template_name = 'labels/edit_label.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label changed successfully')
 
