@@ -1,0 +1,25 @@
+{% extends 'task_manager/index.html' %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    {% bootstrap_messages %}
+    {% if form.name.value and not form.name.errors %}
+        <h1 class="my-4">{% trans 'Changing the label' %}</h1>
+    {% else %}
+        <h1 class="my-4">{% trans 'Create a label' %}</h1>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input class="btn btn-primary" type="submit"
+        {% if form.name.value and not form.name.errors %}
+            value="{% trans 'Change' %}"
+        {% else %}
+            value="{% trans 'Create' %}"
+        {% endif %}>
+    </form>
+</div>
+{% endblock maincontent %}
