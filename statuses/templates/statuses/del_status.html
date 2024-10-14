@@ -1,12 +1,5 @@
-{% extends 'task_manager/index.html' %}
+{% extends 'task_manager/gen_delete.html' %}
 {% load i18n %}
-{% block maincontent %}
-<div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate "Delete status" %}</h1>
-    <p>{% trans 'Are you sure you want to delete' %} {{ status.name }} ?</p>
-    <form method="post">
-        {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value="{% trans 'Yes, delete' %}">
-    </form>
-</div>
-{% endblock maincontent %}
+{% block body_title %}{% translate 'Delete status' %}{% endblock %}
+{% block body_subtitle %}{% translate 'Are you sure you want to delete' %} {{ status.name }}?{% endblock %}
+{% block button_value %}{% translate 'Yes, delete' %}{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'task_manager/index.html' %}
+{% load i18n %}
+{% block maincontent %}
+<div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% block body_title %}{% endblock %}</h1>
+    <p>{% block body_subtitle %}{% endblock %}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="{% block button_value %}{% endblock %}">
+    </form>
+</div>
+{% endblock %}
